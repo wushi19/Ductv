@@ -1,0 +1,8 @@
+hi
+how to install library:
+    Requirememts.txt
+        Library Name and Version
+    Create a virtual enviornment 
+        run code on evirornment
+            pip free
+            (Look at Amazon's tutorial)
