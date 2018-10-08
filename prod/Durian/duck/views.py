@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from django.contrib.auth.models import User
-from .models import Profile, Time, Event, Invite, Calendar, Task
-from .serializers import ProfileSerializer, TimeSerializer, EventSerializer, InviteSerializer, CalendarSerializer, TaskSerializer, UserSerializer
+from .models import Profile, Event, Invite, Calendar, Task
+from .serializers import ProfileSerializer, EventSerializer, InviteSerializer, CalendarSerializer, TaskSerializer, UserSerializer
 
 class UserView(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -11,10 +11,6 @@ class UserView(viewsets.ModelViewSet):
 class ProfileView(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-
-class TimeView(viewsets.ModelViewSet):
-    queryset = Time.objects.all()
-    serializer_class = TimeSerializer
 
 class EventView(viewsets.ModelViewSet):
     queryset = Event.objects.all()

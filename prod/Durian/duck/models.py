@@ -1,4 +1,5 @@
 from django.db import models
+import django.utils
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -24,14 +25,6 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-class Time(models.Model):
-    date = models.DateField()
-    time = models.TimeField()
-    timezone = models.CharField(max_length=3)
-
-    def __str__(self):
-        return self.time
-
 class Calendar(models.Model):
     timezone = models.CharField(max_length=3)
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
@@ -43,12 +36,16 @@ class Calendar(models.Model):
 
 
 class Event(models.Model):
-    created = models.DateTimeField(default=datetime.now())
-    updated = models.DateTimeField(default=datetime.now())
+    created = models.DateTimeField(default=django.utils.timezone.now)
+    updated = models.DateTimeField(default=django.utils.timezone.now)
     header = models.CharField(max_length=80)
     description = models.TextField(null=True, blank=True)
-    start = models.OneToOneField(Time, on_delete=models.CASCADE, related_name='start')
-    end = models.OneToOneField(Time, on_delete=models.CASCADE, null=True, blank=True, related_name='end')
+    startdate = models.DateField(null=True)
+    starttime = models.TimeField(null=True)
+    enddate = models.DateField(null=True, blank=True)
+    endtime = models.TimeField(null=True, blank=True)
+    timezone = models.CharField(default='EST', max_length=3)
+    recurring = models.BooleanField(default=False)
     private = models.BooleanField(default=True)
     calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE)
     location = models.TextField(blank=True, null=True)
@@ -69,9 +66,9 @@ class Invite(models.Model):
 class Task(models.Model):
     header = models.CharField(max_length=80)
     description = models.TextField(null=True, blank=True)
-    priority = models.IntegerField(default=5)
-    duration = models.IntegerField(default=30)
-    people = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    priority = models.IntegerField(default=5, blank=True)
+    duration = models.IntegerField(default=30, blank=True)
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     due = models.DateTimeField(blank=True, null=True)
     location = models.TextField(blank=True, null=True)
 
