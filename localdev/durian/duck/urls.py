@@ -11,5 +11,6 @@ router.register('task', views.TaskView)
 router.register('user', views.UserView)
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('sync', views.sync),
 ]

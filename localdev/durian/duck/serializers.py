@@ -16,7 +16,7 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
 class EventSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Event
-        fields = ('id', 'url', 'header', 'description', 'starttime', 'startdate', 'endtime', 'enddate', 'recurring', 'private', 'calendar', 'created', 'updated')
+        fields = ('id', 'url', 'header', 'description', 'startTime', 'endtime', 'recurring', 'private', 'calendar', 'created', 'updated', 'location')
 
 class InviteSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

@@ -25,10 +25,9 @@ name = 'Lunch with Dr.Dornold'
 location = 'COX Hall'
 description = 'Talk about the TA\'s new haircut!!!'
 #time is store in RFC3339 format
-startTime = '2018-10-01T13:00:00-04:00' #'-04:00' is UTC offset for 
-endTime = '2018-10-01T14:00:00-04:00'
+startTime = '2018-10-13T13:00:00-04:00' #'-04:00' is UTC offset for
+endTime = '2018-10-13T14:00:00-04:00'
 timeZone = 'America/New_York'
-attendee = 'alvinjychoi@gmail.com'
 
 event = {
 'summary': name,
@@ -42,9 +41,6 @@ event = {
     'dateTime': endTime,
     'timeZone': endTime,
 },
-'attendees': [
-    {'email': attendee},
-],
 }
 start = event['start'].get('dateTime', event['start'].get('date'))
 print(start, event['summary'])
