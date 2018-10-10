@@ -26,6 +26,7 @@ class EventView(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         store = file.Storage('token.json')  #this gives us access to user's calendar
         creds = store.get()
+        print(creds)
         service = build('calendar', 'v3', http=creds.authorize(Http()))
 
         data = request.data
