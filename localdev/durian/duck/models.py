@@ -30,6 +30,8 @@ class Calendar(models.Model):
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     header = models.CharField(max_length=80)
     description = models.TextField(null=True, blank=True)
+    googleID = models.TextField(null=True, blank=True)
+
 
     def __str__(self):
         return self.header
@@ -47,6 +49,7 @@ class Event(models.Model):
     private = models.BooleanField(default=True)
     calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE)
     location = models.TextField(blank=True, null=True)
+    googleID = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.header

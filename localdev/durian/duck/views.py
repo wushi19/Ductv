@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from datetime import datetime, timezone
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -7,9 +8,47 @@ from .models import Profile, Event, Invite, Calendar, Task
 from .serializers import ProfileSerializer, EventSerializer, InviteSerializer, CalendarSerializer, TaskSerializer, UserSerializer
 
 from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 from httplib2 import Http
 from oauth2client import file, client, tools
 import datetime
+
+def getService():
+    store = file.Storage('token.json')  #this gives us access to user's calendar
+    creds = store.get()
+    service = build('calendar', 'v3', http=creds.authorize(Http()))
+    return service
+
+def googlePackage(request):
+    data = request.data
+    name = data['header']
+    location = data['location']
+    description = data['description']
+    startTime = data['startTime']
+    endTime = data['endtime']
+    timeZone = 'America/New_York'
+    attendee = 'ssono4013@gmail.com'
+    id = data['googleID']
+    print(startTime)
+
+    event = {
+    'summary': name,
+    'location': location,
+    'description': description,
+    'id': id,
+    'start': {
+        'timeZone': timeZone,
+        'dateTime': startTime,
+    },
+    'end': {
+        'timeZone': timeZone,
+        'dateTime': endTime,
+    },
+    'attendees': [
+        {'email': attendee},
+    ],
+    }
+    return event
 
 class UserView(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -24,31 +63,30 @@ class EventView(viewsets.ModelViewSet):
     serializer_class = EventSerializer
 
     def create(self, request, *args, **kwargs):
-        store = file.Storage('token.json')  #this gives us access to user's calendar
-        creds = store.get()
-        print(creds)
-        service = build('calendar', 'v3', http=creds.authorize(Http()))
+        service = getService()
 
         data = request.data
         name = data['header']
         location = data['location']
         description = data['description']
-        startTime = data['startTime'] +":00-04:00"
-        endTime = data['endtime'] +":00-04:00"
+        startTime = data['startTime'] + ":00-04:00"
+        endTime = data['endtime'] + ":00-04:00"
         timeZone = 'America/New_York'
         attendee = 'ssono4013@gmail.com'
+        id = data['googleID']
 
         event = {
         'summary': name,
         'location': location,
         'description': description,
+        'id': id,
         'start': {
-            'dateTime': startTime,
             'timeZone': timeZone,
+            'dateTime': startTime,
         },
         'end': {
+            'timeZone': timeZone,
             'dateTime': endTime,
-            'timeZone': endTime,
         },
         'attendees': [
             {'email': attendee},
@@ -57,11 +95,46 @@ class EventView(viewsets.ModelViewSet):
         start = event['start'].get('dateTime', event['start'].get('date'))
         event = service.events().insert(calendarId='primary', body=event).execute()
 
+        request.data._mutable = True
+        request.data['googleID'] = event['id']
+        request.data._mutable = False
+
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def destroy(self, request, *args, **kwargs):
+        service = getService()
+        instance = self.get_object()
+        if instance.googleID:
+            try:
+                service.events().delete(calendarId='primary', eventId=instance.googleID).execute()
+            except HttpError:
+                pass
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def update(self, request, *args, **kwargs):
+        service = getService()
+        print(request.data)
+        event = googlePackage(request)
+        updated_event = service.events().update(calendarId='primary', eventId=event['id'], body=event).execute()
+
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        if getattr(instance, '_prefetched_objects_cache', None):
+            # If 'prefetch_related' has been applied to a queryset, we need to
+            # forcibly invalidate the prefetch cache on the instance.
+            instance._prefetched_objects_cache = {}
+
+
+        return Response(serializer.data)
 
 class InviteView(viewsets.ModelViewSet):
     queryset = Invite.objects.all()

@@ -16,7 +16,7 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
 class EventSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Event
-        fields = ('id', 'url', 'header', 'description', 'startTime', 'endtime', 'recurring', 'private', 'calendar', 'created', 'updated', 'location')
+        fields = ('id', 'url', 'header', 'description', 'startTime', 'endtime', 'recurring', 'private', 'calendar', 'created', 'updated', 'location', 'googleID')
 
 class InviteSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -26,7 +26,7 @@ class InviteSerializer(serializers.HyperlinkedModelSerializer):
 class CalendarSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Calendar
-        fields = ('id', 'url', 'header', 'owner', 'timezone', 'description')
+        fields = ('id', 'url', 'header', 'owner', 'timezone', 'description', 'googleID')
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
