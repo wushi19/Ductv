@@ -1,2 +1,2 @@
-go to project directory and run : 'npm install'
-install dependencies and run: 'react-native run-ios'
+Replace App.js from your own file <br>
+Download the rest of the file into your project directory
