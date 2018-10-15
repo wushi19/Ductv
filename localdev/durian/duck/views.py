@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from datetime import datetime, timezone
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
@@ -13,6 +13,8 @@ from httplib2 import Http
 from oauth2client import file, client, tools
 import datetime
 
+#TODO time, recurrence
+
 def getService():
     store = file.Storage('token.json')  #this gives us access to user's calendar
     creds = store.get()
@@ -25,7 +27,7 @@ def googlePackage(request):
     location = data['location']
     description = data['description']
     startTime = data['startTime']
-    endTime = data['endtime']
+    endTime = data['endTime']
     timeZone = 'America/New_York'
     attendee = 'ssono4013@gmail.com'
     id = data['googleID']
@@ -70,7 +72,7 @@ class EventView(viewsets.ModelViewSet):
         location = data['location']
         description = data['description']
         startTime = data['startTime'] + ":00-04:00"
-        endTime = data['endtime'] + ":00-04:00"
+        endTime = data['endTime'] + ":00-04:00"
         timeZone = 'America/New_York'
         attendee = 'ssono4013@gmail.com'
         id = data['googleID']
@@ -118,7 +120,6 @@ class EventView(viewsets.ModelViewSet):
 
     def update(self, request, *args, **kwargs):
         service = getService()
-        print(request.data)
         event = googlePackage(request)
         updated_event = service.events().update(calendarId='primary', eventId=event['id'], body=event).execute()
 
@@ -148,5 +149,67 @@ class TaskView(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
+def newEvent(e):
+    try:
+        start = e['start']['dateTime']
+        end = e['end']['dateTime']
+    except KeyError:
+        start = e['start']['date']
+        end = e['end']['date']
+    nevent = Event(created = datetime.datetime.utcnow(),
+        updated = datetime.datetime.utcnow(),
+        header = e['summary'],
+        description = e['description'],
+        startTime = start,
+        endTime = end,
+        timezone = 'EST',
+        recurring = False,
+        private = False,
+        calendar = Calendar.objects.get(header='primary'),
+        location = e['location'],
+        googleID = e['id'])
+    nevent.save()
+
+def updateEvent(updatingEvent, e):
+    try:
+        start = e['start']['dateTime']
+        end = e['end']['dateTime']
+    except KeyError:
+        start = e['start']['date']
+        end = e['end']['date']
+    updatingEvent.created = datetime.datetime.utcnow()
+    updatingEvent.updated = datetime.datetime.utcnow()
+    updatingEvent.header = e['summary']
+    updatingEvent.description = e['description']
+    updatingEvent.startTime = start
+    updatingEvent.endTime = end
+    updatingEvent.timezone = 'EST'
+    updatingEvent.recurring = False
+    updatingEvent.private = False
+    updatingEvent.calendar = Calendar.objects.get(header='primary')
+    updatingEvent.location = e['location']
+    updatingEvent.googleID = e['id']
+    updatingEvent.save()
+    return updatingEvent
+
+
+
+
 def sync(request):
-    pass
+    service = getService()
+    #calendarList = Calendars
+    #for cal in calendarlist
+    page_token = None
+    while True:
+      googEvents = service.events().list(calendarId='primary', pageToken=page_token).execute()
+      page_token = googEvents.get('nextPageToken')
+      if not page_token:
+        break
+    for e in googEvents['items']:
+        print(e)
+        try:
+            editingEvent = Event.objects.get(googleID=e['id'])
+            updateEvent(editingEvent, e)
+        except Event.DoesNotExist:
+            newEvent(e)
+    return HttpResponse('syncing')

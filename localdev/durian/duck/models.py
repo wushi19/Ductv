@@ -36,6 +36,9 @@ class Calendar(models.Model):
     def __str__(self):
         return self.header
 
+# class EventManager(models.Manager):
+#     def create_event(self, created, updated, header, description, startTime, endTime, timezone, recurring, private, calendar, location, googleID)
+
 
 class Event(models.Model):
     created = models.DateTimeField(default=django.utils.timezone.now)
@@ -43,7 +46,7 @@ class Event(models.Model):
     header = models.CharField(max_length=80)
     description = models.TextField(null=True, blank=True)
     startTime = models.DateTimeField(null=True)
-    endtime = models.DateTimeField(null=True, blank=True)
+    endTime = models.DateTimeField(null=True, blank=True)
     timezone = models.CharField(default='EST', max_length=3)
     recurring = models.BooleanField(default=False)
     private = models.BooleanField(default=True)
