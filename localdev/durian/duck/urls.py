@@ -13,4 +13,6 @@ router.register('user', views.UserView)
 urlpatterns = [
     path('', include(router.urls)),
     path('sync', views.sync),
+    path('auth1/', views.auth1),
+    path('magic/', views.magic),
 ]

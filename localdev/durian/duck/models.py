@@ -6,9 +6,10 @@ from django.dispatch import receiver
 from datetime import timedelta, time, datetime, date
 
 # Create your models here.
+
 class Profile(models.Model):
     email = models.EmailField(blank=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
     #user.profile.stuff
@@ -47,7 +48,7 @@ class Event(models.Model):
     description = models.TextField(null=True, blank=True)
     startTime = models.DateTimeField(null=True)
     endTime = models.DateTimeField(null=True, blank=True)
-    timezone = models.CharField(default='EST', max_length=3)
+    timezone = models.CharField(default='EST', max_length=100)
     recurring = models.BooleanField(default=False)
     private = models.BooleanField(default=True)
     calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE)

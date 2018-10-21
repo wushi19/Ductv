@@ -1,19 +1,41 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from datetime import datetime, timezone
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.contrib.auth.models import User
-from .models import Profile, Event, Invite, Calendar, Task
+from .models import Profile, Event, Invite, Calendar, Task#, FlowModel, CredentialsModel
 from .serializers import ProfileSerializer, EventSerializer, InviteSerializer, CalendarSerializer, TaskSerializer, UserSerializer
+
 
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from httplib2 import Http
+from oauth2client.client import OAuth2WebServerFlow
 from oauth2client import file, client, tools
 import datetime
 
-#TODO time, recurrence
+#TODO time, recurrence, auth
+SCOPES = 'https://www.googleapis.com/auth/calendar'
+
+def magic(request): #for testing web oauth2
+    code = request.GET.get('code')
+    credentials = flow.step2_exchange(code)
+    return HttpResponse(str(code))
+
+def auth1(request):#for testing weboauth2
+    client_id = "1057673539100-9ihlr9o0afv13focvsa1gvu0ve56luek.apps.googleusercontent.com"
+    client_secret = 'z77z0dJ0A0HfIHr1CJR1SpeK'
+    redirect_uri='https://www.google.com'
+    flow = OAuth2WebServerFlow(client_id="",
+        client_secret='',
+        scope='https://www.googleapis.com/auth/calendar',
+        redirect_uri=redirect_uri)
+
+    auth_uri = flow.step1_get_authorize_url()
+    return redirect(auth_uri)
+    #return HttpResponse(u)
+
 
 def getService():
     store = file.Storage('token.json')  #this gives us access to user's calendar
@@ -28,7 +50,7 @@ def googlePackage(request):
     description = data['description']
     startTime = data['startTime']
     endTime = data['endTime']
-    timeZone = 'America/New_York'
+    timeZone = data['timezone']
     attendee = 'ssono4013@gmail.com'
     id = data['googleID']
     print(startTime)
@@ -73,7 +95,7 @@ class EventView(viewsets.ModelViewSet):
         description = data['description']
         startTime = data['startTime'] + ":00-04:00"
         endTime = data['endTime'] + ":00-04:00"
-        timeZone = 'America/New_York'
+        timeZone = data['timezone']
         attendee = 'ssono4013@gmail.com'
         id = data['googleID']
 
