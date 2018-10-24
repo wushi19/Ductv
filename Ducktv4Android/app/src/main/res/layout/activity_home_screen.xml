@@ -8,6 +8,7 @@
     android:fitsSystemWindows="true">
 
     <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
+    <!-- if broken use @+id/content_frame -->
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"

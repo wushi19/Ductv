@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
@@ -48,6 +49,18 @@ public class HomeScreen extends AppCompatActivity {
 
                         // Add code here to update the UI based on the item selected
                         // For example, swap UI fragments here
+                        int id = menuItem.getItemId();
+                        Fragment fragment = null;
+
+                        if (id == R.id.nav_calendar){
+                            //fragment = new HomeScreen();
+                        } else if (id == R.id.nav_tasks){
+
+                        } else if (id == R.id.nav_friends){
+
+                        } else if (id == R.id.nav_settings){
+
+                        }
 
                         return true;
                     }
