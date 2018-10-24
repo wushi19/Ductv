@@ -53,7 +53,7 @@ public class HomeScreen extends AppCompatActivity {
                         Fragment fragment = null;
 
                         if (id == R.id.nav_calendar){
-                            //fragment = new HomeScreen();
+                            //fragment = new LoginScreen();
                         } else if (id == R.id.nav_tasks){
 
                         } else if (id == R.id.nav_friends){
