@@ -1,0 +1,17 @@
+https://stackoverflow.com/questions/44446523/unable-to-load-script-from-assets-index-android-bundle-on-windows
+
+1. Make Folder android/app/src/main/assets
+2. From woof, run:
+	react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+
+3. Delete node_modules folder
+
+https://stackoverflow.com/questions/38024203/proper-mechanism-to-downgrade-react-native
+
+4. Downgrade react native to 57.2:
+	npm install react-native@0.57.2
+5. Remove unwanted packages:
+	npm prune
+6. Install necessary packages
+	npm i
+7. Launch app from android studio
