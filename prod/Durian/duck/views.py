@@ -23,44 +23,44 @@ class EventView(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
-    def create(self, request, *args, **kwargs):
-        store = file.Storage('token.json')  #this gives us access to user's calendar
-        creds = store.get()
-        service = build('calendar', 'v3', http=creds.authorize(Http()))
-
-        data = request.data
-        name = data['header']
-        location = data['location']
-        description = data['description']
-        startTime = data['startTime'] +":00-04:00"
-        endTime = data['endtime'] +":00-04:00"
-        timeZone = 'America/New_York'
-        attendee = 'ssono4013@gmail.com'
-
-        event = {
-        'summary': name,
-        'location': location,
-        'description': description,
-        'start': {
-            'dateTime': startTime,
-            'timeZone': timeZone,
-        },
-        'end': {
-            'dateTime': endTime,
-            'timeZone': endTime,
-        },
-        'attendees': [
-            {'email': attendee},
-        ],
-        }
-        start = event['start'].get('dateTime', event['start'].get('date'))
-        event = service.events().insert(calendarId='primary', body=event).execute()
-
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    # def create(self, request, *args, **kwargs):
+    #     store = file.Storage('token.json')  #this gives us access to user's calendar
+    #     creds = store.get()
+    #     service = build('calendar', 'v3', http=creds.authorize(Http()))
+    #
+    #     data = request.data
+    #     name = data['header']
+    #     location = data['location']
+    #     description = data['description']
+    #     startTime = data['startTime'] +":00-04:00"
+    #     endTime = data['endtime'] +":00-04:00"
+    #     timeZone = 'America/New_York'
+    #     attendee = 'ssono4013@gmail.com'
+    #
+    #     event = {
+    #     'summary': name,
+    #     'location': location,
+    #     'description': description,
+    #     'start': {
+    #         'dateTime': startTime,
+    #         'timeZone': timeZone,
+    #     },
+    #     'end': {
+    #         'dateTime': endTime,
+    #         'timeZone': endTime,
+    #     },
+    #     'attendees': [
+    #         {'email': attendee},
+    #     ],
+    #     }
+    #     start = event['start'].get('dateTime', event['start'].get('date'))
+    #     event = service.events().insert(calendarId='primary', body=event).execute()
+    #
+    #     serializer = self.get_serializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     self.perform_create(serializer)
+    #     headers = self.get_success_headers(serializer.data)
+    #     return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 class InviteView(viewsets.ModelViewSet):
     queryset = Invite.objects.all()
