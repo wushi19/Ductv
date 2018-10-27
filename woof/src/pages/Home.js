@@ -24,6 +24,9 @@ export default class Home extends React.Component {
   enterTask(){
     Actions.enterTask()
   }
+  taskdjangotest(){
+    Actions.taskdjangotest()
+  }
 
   render() {
     return (
@@ -38,6 +41,11 @@ export default class Home extends React.Component {
           <TouchableOpacity onPress={this.enterTask}>
             <Text style={styles.calendarbutton} >
               Entering Task
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.taskdjangotest}>
+            <Text style={styles.calendarbutton} >
+              Task Django Test
             </Text>
           </TouchableOpacity>
         </View>

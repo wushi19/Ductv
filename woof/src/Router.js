@@ -6,6 +6,7 @@ import signUp from './pages/signUp';
 import home from './pages/Home';
 import calendar from './pages/Calendar';
 import enterTask from './pages/EnterTaskScreen';
+import taskdjangotest from './component/TaskClass';
 
 export default class Routes extends Component {
 	render() {
@@ -40,6 +41,11 @@ export default class Routes extends Component {
 						key="enterTask"
 						component={enterTask}
 						title="enterTask"
+					/>
+					<Scene
+						key="taskdjangotest"
+						component={taskdjangotest}
+						title="taskdjangotest"
 					/>
 				</Stack>
 			</Router>
