@@ -1,7 +1,23 @@
 import React from 'react';
 import {Text, View, Button, Alert, StyleSheet} from 'react-native';
 
-export default class App extends React.Component {
+export default class TaskClass extends React.Component {
+
+    constructor(props){
+        super(props);
+
+        this.state = {
+
+            header: 'TestClassTask',
+            description: '',
+            priority: null,
+            duration: null,
+            due: null,
+            owner: 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/profile/2/'
+
+        }
+    };
+
     json_funtion = () => {
         fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/')
         .then(response => response.json())
@@ -11,14 +27,16 @@ export default class App extends React.Component {
             var url = json_array.url;           //get url
             var header = json_array.header;     //get header
             var priority = json_array.priority.toString();  //get priority                 
-            var duration = json_array.duration.toString();
-            var due = json_array.due.toString();
-            var owner = json_array.owner;
+            var duration = json_array.duration.toString();  //get duration
+            var due = json_array.due.toString();            //get duedate
+            var owner = json_array.owner;                   //get owner
         })
         .catch(error => console.log(error));
     }
 
-    
+    json_uploadfun = () => {
+
+    }
 
     render() {
         return(
