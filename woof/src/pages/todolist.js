@@ -24,7 +24,7 @@ export default class todolist extends React.Component {
     return (
       <ImageBackground source={bkgimage} style={styles.container}>
         <StatusBar barStyle="light-content" />
-        <Text style={styles.appTitle}>Minimalist Todo App</Text>
+        <Text style={styles.appTitle}>Todo List</Text>
         <View style={styles.card}>
           <TextInput
             style={styles.input}
