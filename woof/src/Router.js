@@ -7,7 +7,7 @@ import home from './pages/Home';
 import calendar from './pages/Calendar';
 import enterTask from './pages/EnterTaskScreen';
 import taskdjangotest from './component/TaskClass';
-import todolist from './pages/todolist';
+import todolist from './component/todolist';
 
 export default class Routes extends Component {
 	render() {
