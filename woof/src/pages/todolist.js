@@ -1,12 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default class App extends React.Component {
   render() {
     return (
-        <View style={styles.container}>
+        <LinearGradient style={styles.container} colors={['#DA4453', '#89216B']}>
           <StatusBar barStyle="light-content" />
-        </View>
+          <Text>Open up App.js to start working on your app!</Text>
+        </LinearGradient>
     );
   }
 }
@@ -14,7 +16,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#9C559C',
       alignItems: 'center',
       justifyContent: 'center'
     }
