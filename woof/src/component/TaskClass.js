@@ -30,12 +30,13 @@ export default class TaskClass extends React.Component {
             var duration = json_array.duration.toString();  //get duration
             var due = json_array.due.toString();            //get duedate
             var owner = json_array.owner;                   //get owner
+            Alert.alert(header);
         })
         .catch(error => console.log(error));
     }
 
     json_uploadfun = () => {
-
+        var postURL = 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/'
     }
 
     render() {

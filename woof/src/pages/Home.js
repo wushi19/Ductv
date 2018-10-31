@@ -28,6 +28,10 @@ export default class Home extends React.Component {
     Actions.taskdjangotest()
   }
 
+  todolist(){
+    Actions.todolist()
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -46,6 +50,11 @@ export default class Home extends React.Component {
           <TouchableOpacity onPress={this.taskdjangotest}>
             <Text style={styles.calendarbutton} >
               Task Django Test
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.todolist}>
+            <Text style={styles.calendarbutton} >
+              To Do list
             </Text>
           </TouchableOpacity>
         </View>

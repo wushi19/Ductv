@@ -37,22 +37,62 @@ export default class signUp extends React.Component {
       email: "",
       password: "",
       confirmPassword: "",
+      errors: [],
     }
   }
 
-  handleSubmit = () => {
-    const { username, email, password, confirmPassword } = this.state;
-    // perform all neccassary validations
-    if (username == '' || password == '' || email == '') {
-      alert("Username and Password cannot be empty")
-    }
-    else {
-      if (password !== confirmPassword) {
-        alert("Password don't match")
-      } else {
-          Actions.home()
+  async handleSubmit() {
+
+    async function getMoviesFromApi() {
+      try {
+        let response = await fetch(
+          'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/?format=api'
+        );
+        let responseJson = await response.json();
+        return responseJson.users;
+      } catch (error) {
+        console.error(error);
       }
     }
+    // try{
+
+    //   let response = await fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/?format=api', {
+    //     method: 'POST',
+    //     headers: {
+    //       Accept: 'application/json',
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //       user: {
+    //         username: this.state.username,
+    //         email: this.state.email,
+
+    //         // password: this.state.password,
+    //         // password_confirmation: this.state.password_confirmation,
+
+    //       }
+    //     })
+    //   });
+
+    //   let res = await response.text();
+    //   console.log();
+
+    // } catch(errors){
+
+    // }
+
+    // const { username, email, password, confirmPassword } = this.state;
+    // // perform all neccassary validations
+    // if (username == '' || password == '' || email == '') {
+    //   alert("Username and Password cannot be empty")
+    // }
+    // else {
+    //   if (password !== confirmPassword) {
+    //     alert("Password don't match")
+    //   } else {
+    //       Actions.home()
+    //   }
+    // }
   }
 
   render() {
@@ -69,7 +109,7 @@ export default class signUp extends React.Component {
             placeholder={'Username'}
             placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
             underLineColorAndroid='transparent'
-            onChangeText={(username) => this.setState({ username })}
+            onChangeText={(val) => this.setState({username: val})}
             value={this.state.username}
           />
         </View>
@@ -80,7 +120,7 @@ export default class signUp extends React.Component {
             placeholder={'Email address'}
             placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
             underLineColorAndroid='transparent'
-            onChangeText={(email) => this.setState({ email })}
+            onChangeText={(val) => this.setState({email: val})}
             value={this.state.email}
           />
         </View>
@@ -92,7 +132,7 @@ export default class signUp extends React.Component {
             secureTextEntry={true}
             placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
             underLineColorAndroid='transparent'
-            onChangeText={(password) => this.setState({ password })}
+            onChangeText={(val) => this.setState({password: val })}
             value={this.state.password}
           />
         </View>
@@ -103,7 +143,7 @@ export default class signUp extends React.Component {
             secureTextEntry={true}
             placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
             underLineColorAndroid='transparent'
-            onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
+            onChangeText={(val) => this.setState({confirmPassword: val })}
             value={this.state.confirmPassword}
           />
         </View>
@@ -114,7 +154,7 @@ export default class signUp extends React.Component {
             title="Sign me up!"
             fontSize='16'
             //onPress={this.userLogin.bind(this)}
-            onPress={this.handleSubmit}
+            onPress={this.handleSubmit.bind(this)}
           />
         </TouchableOpacity>
 
