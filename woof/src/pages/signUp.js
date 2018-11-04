@@ -48,6 +48,23 @@ Alert.alert("You did it. I am so proud.");
 });
 }
 
+const saveUserId = async userId => {
+  try {
+    await AsyncStorage.setItem('userId', userId);
+  } catch (error) {
+    // Error retrieving data
+    console.log(error.message);
+  }
+};
+
+const saveProfId = async profileId => {
+  try {
+    await AsyncStorage.setItem('profileId', profileId);
+  } catch (error) {
+    // Error retrieving data
+    console.log(error.message);
+  }
+};
 
 export default class signUp extends React.Component {
 
@@ -70,7 +87,12 @@ export default class signUp extends React.Component {
       if (password !== confirmPassword) {
         alert("Password don't match")
       } else {
-          createUser(this.username, this.email)
+          //userObject = createUser(this.username, this.email)
+
+          var profileId = '1'
+          var userId = '1'
+          saveProfId(profileId)
+          saveUserId(userId)
           //create user and profile
           //store id's for one or both so we can access the users stuff
           Actions.home()
