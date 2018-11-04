@@ -6,7 +6,7 @@ import signUp from './pages/signUp';
 import home from './pages/Home';
 import calendar from './pages/Calendar';
 import enterTask from './pages/EnterTaskScreen';
-import taskdjangotest from './component/TaskClass';
+import taskdjangotest from './pages/TaskClass';
 
 export default class Routes extends Component {
 	render() {
