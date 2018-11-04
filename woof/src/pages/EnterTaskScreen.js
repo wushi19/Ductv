@@ -25,15 +25,7 @@ export default class EnterTaskScreen extends React.Component {
     title: 'EnterTaskScreen',
   };
 
-  constructor(props) {
-    super(props);
-    this.setDate = this.setDate.bind(this);
-    this.state = {
-      chosenDate: new Date(),
-      date: new Date(),
-      showDatePicker: false
-    }
-  }
+  
 
 
   setDate(newDate) {
@@ -41,11 +33,7 @@ export default class EnterTaskScreen extends React.Component {
   }
 
   render() {
-    var showDatePicker = this.state.showDatePicker ?
-      <DatePickerIOS
-        style={{ height: 150 }}
-        date={this.state.date} onDateChange={(date) => this.setState({ date })}
-        mode="date" /> : <View />
+      
     return (
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <Text style={styles.getStartedText}>WHAT NEEDS TO GET DONE?</Text>
@@ -65,11 +53,7 @@ export default class EnterTaskScreen extends React.Component {
             multiline={true}
           />
         </View>
-        <TouchableOpacity
-          onPress={() => this.setState({ showDatePicker: !this.state.showDatePicker })}>
-          <Text style={styles.input}>Start Date: {moment(this.state.date).format('DD/MM/YYYY')}</Text>
-        </TouchableOpacity>
-        {showDatePicker}
+        
 
         <View style={styles.addButtonContainer}>
           <Button
