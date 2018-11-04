@@ -69,7 +69,6 @@ Alert.alert("You did it. I am so proud.");
   render() {
     return (
       <View style={styles.container}>
-        <Text>I''m home</Text>
 
         <View>
         <TouchableOpacity onPress={this.tasktest}>
