@@ -90,6 +90,26 @@ export default class signUp extends React.Component {
     }
   }
 
+  createUser = (username, email) => {
+    fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        email: email,
+      }),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        Alert.alert("You did it. User is created.");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   // async storeEmail(email){
   //   key = "email"
   //   if (email) {
@@ -97,7 +117,7 @@ export default class signUp extends React.Component {
   //     getEmail();
   //     return
   //   }
-  //   else 
+  //   else
   //     console.log('not set, stringify failed:', key, email)
   // }
 
@@ -140,7 +160,23 @@ export default class signUp extends React.Component {
       alert("Username cannot be empty")
     }
     else {
-      newUser(username, email)
+      fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          email: email,
+        }),
+      })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          Alert.alert("You did it. User is created.");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
 
       //userObject = createUser(this.username, this.email)
       // var profileId = '2'
@@ -161,29 +197,9 @@ export default class signUp extends React.Component {
       // }).catch((error) => {
       //     // this callback is executed when your Promise is rejected
       //     console.log('Promise is rejected with error: ' + error);
-      // }); 
+      // });
       // Alert.alert(uid)
     }
-  }
-
-  createUser = (username, email) => {
-    fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: username,
-        email: email,
-      }),
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        Alert.alert("You did it. User is created.");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
   }
 
   render() {
