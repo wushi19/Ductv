@@ -108,28 +108,28 @@ export default class signUp extends React.Component {
           />
         </View>
 
-        // <View style={styles.inputContainer}>
-        //   <TextInput
-        //     style={styles.input}
-        //     placeholder={'Password'}
-        //     secureTextEntry={true}
-        //     placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
-        //     underLineColorAndroid='transparent'
-        //     onChangeText={(password) => this.setState({ password })}
-        //     value={this.state.password}
-        //   />
-        // </View>
-        // <View style={styles.inputContainer}>
-        //   <TextInput
-        //     style={styles.input}
-        //     placeholder={'Confirm Password'}
-        //     secureTextEntry={true}
-        //     placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
-        //     underLineColorAndroid='transparent'
-        //     onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
-        //     value={this.state.confirmPassword}
-        //   />
-        // </View>
+       {/* <View style={styles.inputContainer}>
+         <TextInput
+             style={styles.input}
+             placeholder={'Password'}
+             secureTextEntry={true}
+             placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+             underLineColorAndroid='transparent'
+             onChangeText={(password) => this.setState({ password })}
+             value={this.state.password}
+           />
+         </View>
+         <View style={styles.inputContainer}>
+           <TextInput
+             style={styles.input}
+             placeholder={'Confirm Password'}
+             secureTextEntry={true}
+             placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+             underLineColorAndroid='transparent'
+             onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
+             value={this.state.confirmPassword}
+           />
+         </View> */}
 
         <TouchableOpacity style={styles.btnLogin}>
           <Button
