@@ -43,7 +43,6 @@ export default class TaskClass extends React.Component {
         return(
             <View style={styles.container}>
                 <Text>Test for React Native + Django</Text>
-                <Text>{this.owner != null ? "No data yet" : "HELLO, YOUR ID IS: {this.owner}"}</Text>
                 <Button title="Go" onPress={this.json_funtion} />
             </View>
         );
@@ -57,4 +56,3 @@ const styles = StyleSheet.create({
       backgroundColor: '#F5FCFF',
     },
 });
-  
