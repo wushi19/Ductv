@@ -28,6 +28,26 @@ import logo from '../images/homelogo.png'
 
 const { width: WIDTH } = Dimensions.get('window');
 
+createUser = (username, email) =>{
+  fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    username: username,
+    email: email,
+  }),
+})
+.then((response) => response.json())
+.then((responseJson) => {
+Alert.alert("You did it. I am so proud.");
+})
+.catch((error) => {
+  console.error(error);
+});
+}
+
 
 export default class signUp extends React.Component {
 
@@ -37,21 +57,20 @@ export default class signUp extends React.Component {
     this.state = {
       username: "",
       email: "",
-      password: "",
-      confirmPassword: "",
     }
   }
 
   handleSubmit = () => {
-    const { username, email, password, confirmPassword } = this.state;
-    // perform all neccassary validations
-    if (username == '' || password == '' || email == '') {
-      alert("Username and Password cannot be empty")
+    const { username, email} = this.state;
+    // perform all necessary validations
+    if (username == '') {
+      alert("Username cannot be empty")
     }
     else {
       if (password !== confirmPassword) {
         alert("Password don't match")
       } else {
+          createUser(this.username, this.email)
           //create user and profile
           //store id's for one or both so we can access the users stuff
           Actions.home()
@@ -89,28 +108,28 @@ export default class signUp extends React.Component {
           />
         </View>
 
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder={'Password'}
-            secureTextEntry={true}
-            placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
-            underLineColorAndroid='transparent'
-            onChangeText={(password) => this.setState({ password })}
-            value={this.state.password}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder={'Confirm Password'}
-            secureTextEntry={true}
-            placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
-            underLineColorAndroid='transparent'
-            onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
-            value={this.state.confirmPassword}
-          />
-        </View>
+        // <View style={styles.inputContainer}>
+        //   <TextInput
+        //     style={styles.input}
+        //     placeholder={'Password'}
+        //     secureTextEntry={true}
+        //     placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+        //     underLineColorAndroid='transparent'
+        //     onChangeText={(password) => this.setState({ password })}
+        //     value={this.state.password}
+        //   />
+        // </View>
+        // <View style={styles.inputContainer}>
+        //   <TextInput
+        //     style={styles.input}
+        //     placeholder={'Confirm Password'}
+        //     secureTextEntry={true}
+        //     placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+        //     underLineColorAndroid='transparent'
+        //     onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
+        //     value={this.state.confirmPassword}
+        //   />
+        // </View>
 
         <TouchableOpacity style={styles.btnLogin}>
           <Button
