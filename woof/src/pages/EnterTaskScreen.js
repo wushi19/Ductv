@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Alert,
   Component,
   Image,
   Platform,
@@ -24,7 +25,27 @@ export default class EnterTaskScreen extends React.Component {
   static navigationOptions = {
     title: 'EnterTaskScreen',
   };
-
+ 
+    tasktest = () =>{
+        fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          header: 'Post Task 3',
+          description: 'AAAAAAAAAAAAAAAAAAAAA',
+          owner: 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/profile/1/',
+        }),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+    Alert.alert("You did it. I am so proud.");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    }
   
 
 
@@ -57,7 +78,7 @@ export default class EnterTaskScreen extends React.Component {
 
         <View style={styles.addButtonContainer}>
           <Button
-            onPress={() => alert("Task Added!")}
+            onPress={this.tasktest}
             title="ADD TASK"
             color="#000000"
           />
