@@ -172,7 +172,7 @@ export default class signUp extends React.Component {
       })
         .then((response) => response.json())
         .then((responseJson) => {
-          Alert.alert("You did it. User is created.");
+          Actions.home()
         })
         .catch((error) => {
           console.error(error);
