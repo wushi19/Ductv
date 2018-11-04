@@ -9,15 +9,15 @@
 import React, { Component } from 'react';
 import {
     AsyncStorage,
-    StyleSheet, 
-    Text, 
-    View, 
-    ImageBackground, 
-    Image, 
-    Dimensions, 
-    TextInput, 
+    StyleSheet,
+    Text,
+    View,
+    ImageBackground,
+    Image,
+    Dimensions,
+    TextInput,
     TouchableOpacity,
-    Button, 
+    Button,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
@@ -31,7 +31,7 @@ export default class Login extends React.Component {
 
     constructor(){
         super();
-    
+
         this.state = {
           username: "",
           password: "",
@@ -41,7 +41,7 @@ export default class Login extends React.Component {
     signUp() {
 		Actions.signUp()
     }
-    home() { 
+    home() {
         Actions.home()
     }
 
