@@ -1,33 +1,30 @@
 import React from 'react';
-import {Text, View, Button, Alert, StyleSheet} from 'react-native';
+import {Text, View, Button, Alert, StyleSheet, AsyncStorage} from 'react-native';
 
-const getUserId = async () => {
+  const getuserId = async () => {
     let userId = '';
     try {
       userId = await AsyncStorage.getItem('userId') || 'none';
     } catch (error) {
       // Error retrieving data
+      Alert.alert("here");
       console.log(error.message);
     }
     return userId;
   }
 
-  const getProfId = async () => {
-      let userId = '';
+
+    const getProfId = async () => {
+      let profileId = '';
       try {
-        userId = await AsyncStorage.getItem('profileId') || 'none';
+        profileId = await AsyncStorage.getItem('profileId') || 'none';
       } catch (error) {
         // Error retrieving data
         console.log(error.message);
       }
-      return userId;
+      return profileId;
     }
 
-  new_funtion = () => {
-    pid = getProfId()
-    uid = getUserId()
-    Alert(pid + " - " + uid)
-  }
 
 export default class TaskClass extends React.Component {
 
@@ -39,18 +36,13 @@ export default class TaskClass extends React.Component {
             header: 'TestClassTask',
             description: '',
             priority: null,
+            userId: getuserId(),
             duration: null,
             due: null,
             owner: 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/profile/2/'
 
         }
     };
-
-    new_funtion = () => {
-      var pid = getProfId()
-      var uid = getUserId()
-      Alert(pid + " - " + uid)
-    }
 
     json_funtion = () => {
         fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/')
@@ -71,6 +63,10 @@ export default class TaskClass extends React.Component {
 
     json_uploadfun = () => {
 
+    }
+
+    new_funtion = () => {
+      Alert.alert(userId);
     }
 
     render() {

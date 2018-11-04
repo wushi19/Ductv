@@ -27,44 +27,57 @@ import bgImage from '../images/homebkg.jpg'
 import logo from '../images/homelogo.png'
 
 const { width: WIDTH } = Dimensions.get('window');
+const EMAIL = 'soe.mailbox@gmial.com';
 
-createUser = (username, email) =>{
-  fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    username: username,
-    email: email,
-  }),
-})
-.then((response) => response.json())
-.then((responseJson) => {
-Alert.alert("You did it. I am so proud.");
-})
-.catch((error) => {
-  console.error(error);
-});
-}
+// createUser = (username, email) =>{
+//   fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/', {
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+//   body: JSON.stringify({
+//     username: username,
+//     email: email,
+//   }),
+// })
+// .then((response) => response.json())
+// .then((responseJson) => {
+// Alert.alert("You did it. I am so proud.");
+// })
+// .catch((error) => {
+//   console.error(error);
+// });
+// }
 
-const saveUserId = async userId => {
-  try {
-    await AsyncStorage.setItem('userId', userId);
-  } catch (error) {
-    // Error retrieving data
-    console.log(error.message);
-  }
-};
 
-const saveProfId = async profileId => {
-  try {
-    await AsyncStorage.setItem('profileId', profileId);
-  } catch (error) {
-    // Error retrieving data
-    console.log(error.message);
-  }
-};
+// const saveUserId = async userId => {
+//   try {
+//     await AsyncStorage.setItem('userId', userId);
+//   } catch (error) {
+//     // Error retrieving data
+//     console.log(error.message);
+//   }
+// };
+
+// const saveProfId = async profileId => {
+//   try {
+//     await AsyncStorage.setItem('profileId', profileId);
+//   } catch (error) {
+//     // Error retrieving data
+//     console.log(error.message);
+//   }
+// };
+
+// const getuserId = async () => {
+//   let userId = '';
+//   try {
+//     userId = await AsyncStorage.getItem('userId') || 'none';
+//   } catch (error) {
+//     // Error retrieving data
+//     console.log(error.message);
+//   }
+//   return userId;
+// }
 
 export default class signUp extends React.Component {
 
@@ -77,27 +90,100 @@ export default class signUp extends React.Component {
     }
   }
 
+  // async storeEmail(email){
+  //   key = "email"
+  //   if (email) {
+  //     AsyncStorage.setItem(key, email)
+  //     getEmail();
+  //     return
+  //   }
+  //   else 
+  //     console.log('not set, stringify failed:', key, email)
+  // }
+
+  // async getEmail(){
+  //   try{
+  //     let email = await AsyncStorage.getItem("email");
+  //     console.log("email is "+ email);
+
+  //   }catch(error){
+  //     console.log("something went wrong")
+  //   }
+  // }
+
+  // async storeItem(key, item) {
+  //   try {
+  //       //we want to wait for the Promise returned by AsyncStorage.setItem()
+  //       //to be resolved to the actual value before returning the value
+  //       var jsonOfItem = await AsyncStorage.setItem(key, JSON.stringify(item));
+  //       return jsonOfItem;
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // }
+
+  // async retrieveItem(key) {
+  //   try {
+  //     const retrievedItem =  await AsyncStorage.getItem(key);
+  //     const item = JSON.parse(retrievedItem);
+  //     return item;
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  //   return
+  // }
+
   handleSubmit = () => {
-    const { username, email} = this.state;
+    const { username, email } = this.state;
     // perform all necessary validations
     if (username == '') {
       alert("Username cannot be empty")
     }
     else {
-      if (password !== confirmPassword) {
-        alert("Password don't match")
-      } else {
-          //userObject = createUser(this.username, this.email)
+      newUser(username, email)
 
-          var profileId = '1'
-          var userId = '1'
-          saveProfId(profileId)
-          saveUserId(userId)
-          //create user and profile
-          //store id's for one or both so we can access the users stuff
-          Actions.home()
-      }
+      //userObject = createUser(this.username, this.email)
+      // var profileId = '2'
+      // var userId = '1'
+      // this.storeEmail(email)
+      // this.storeItem("userId", userId)
+      // this.storeItem("profileId", profileId)
+
+      // AsyncStorage.getItem(userId)
+      // .then((value) => {
+      //   const data = JSON.parse(value);
+      //   console.log('profileID is ', data.name);
+      // });
+
+      // var uid = this.retrieveItem("userId").then((uid) => {
+      //     // this callback is executed when your Promise is resolved
+      //     //return uid
+      // }).catch((error) => {
+      //     // this callback is executed when your Promise is rejected
+      //     console.log('Promise is rejected with error: ' + error);
+      // }); 
+      // Alert.alert(uid)
     }
+  }
+
+  createUser = (username, email) => {
+    fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        email: email,
+      }),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        Alert.alert("You did it. User is created.");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   render() {
@@ -130,7 +216,7 @@ export default class signUp extends React.Component {
           />
         </View>
 
-       {/* <View style={styles.inputContainer}>
+        {/* <View style={styles.inputContainer}>
          <TextInput
              style={styles.input}
              placeholder={'Password'}
