@@ -27,7 +27,7 @@ class Profile(models.Model):
 
 class Calendar(models.Model):
     timezone = models.CharField(max_length=3)
-    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='calendars')
     header = models.CharField(max_length=80)
     description = models.TextField(null=True, blank=True)
 
@@ -45,7 +45,7 @@ class Event(models.Model):
     timezone = models.CharField(default='EST', max_length=3)
     recurring = models.BooleanField(default=False)
     private = models.BooleanField(default=True)
-    calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE)
+    calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE, related_name='events')
     location = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -66,7 +66,7 @@ class Task(models.Model):
     description = models.TextField(null=True, blank=True)
     priority = models.IntegerField(default=5, blank=True)
     duration = models.IntegerField(default=30, blank=True)
-    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='tasks')
     due = models.DateTimeField(blank=True, null=True)
     location = models.TextField(blank=True, null=True)
 

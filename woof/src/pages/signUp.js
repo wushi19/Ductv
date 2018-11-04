@@ -18,6 +18,8 @@ import {
   TextInput,
   TouchableOpacity,
   Button,
+  Alert,
+
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
@@ -50,6 +52,8 @@ export default class signUp extends React.Component {
       if (password !== confirmPassword) {
         alert("Password don't match")
       } else {
+          //create user and profile
+          //store id's for one or both so we can access the users stuff
           Actions.home()
       }
     }
