@@ -30,6 +30,10 @@ export default class Home extends React.Component {
   taskdjangotest(){
     Actions.taskdjangotest()
   }
+  
+  testAsyncStorage(){
+    Actions.testAsyncStorage()
+  }
 
 
   tasktest = () =>{
@@ -90,6 +94,11 @@ Alert.alert("You did it. I am so proud.");
           <TouchableOpacity onPress={this.taskdjangotest}>
             <Text style={styles.calendarbutton} >
               Task Django Test
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.testAsyncStorage}>
+            <Text style={styles.calendarbutton} >
+              Test AsyncStorage
             </Text>
           </TouchableOpacity>
         </View>
