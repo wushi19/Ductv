@@ -18,6 +18,7 @@ import {
     TextInput,
     TouchableOpacity,
     Button,
+    Alert,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
@@ -33,16 +34,34 @@ export default class Login extends React.Component {
         super();
 
         this.state = {
-          username: "",
-          password: "",
+          email: ""
         }
     }
 
     signUp() {
 		Actions.signUp()
     }
-    home() {
-        Actions.home()
+
+    validHome = () => {
+      const { email } = this.state;
+      response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/')
+        .then(function(response) {
+          return response.json()
+        })
+        .then(function(myJson){
+          users =JSON.stringify(myJson);
+          users = JSON.parse(users);
+          loggedInUser = null;
+          for(var i = 0; i<users.length;i++){
+            if (users[i].email == email){
+              loggedInUser = users[i];
+            }
+          }
+          //Alert.alert()
+          if (loggedInUser != null){
+            Actions.home()
+          } else { Alert.alert("Invalid Email")}
+      });
     }
 
     render() {
@@ -56,23 +75,12 @@ export default class Login extends React.Component {
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.input}
-                        placeholder={'Username'}
+                        placeholder={'Email'}
+                        // secureTextEntry={true}
                         placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                         underLineColorAndroid='transparent'
-                        onChangeText={(username) => this.setState({username})}
-                        value={this.state.username}
-                    />
-                </View>
-
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder={'Password'}
-                        secureTextEntry={true}
-                        placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
-                        underLineColorAndroid='transparent'
-                        onChangeText={(password) => this.setState({password})}
-                        value={this.state.password}
+                        onChangeText={(email) => this.setState({ email })}
+                        value={this.state.email}
                     />
                 </View>
 
@@ -82,7 +90,7 @@ export default class Login extends React.Component {
                     title= "Login"
                     fontSize = '16'
                     //onPress={this.userLogin.bind(this)}
-                    onPress={this.home}
+                    onPress={this.validHome}
                     />
                 </TouchableOpacity>
 
