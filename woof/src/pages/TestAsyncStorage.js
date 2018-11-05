@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {
+  StyleSheet, 
+  Text, 
+  View,
+  AsyncStorage,
+} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
 export default class Validate extends React.Component {
