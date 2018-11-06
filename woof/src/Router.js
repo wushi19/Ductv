@@ -6,7 +6,8 @@ import signUp from './pages/signUp';
 import home from './pages/Home';
 import calendar from './pages/Calendar';
 import enterTask from './pages/EnterTaskScreen';
-import taskdjangotest from './component/TaskClass';
+import taskdjangotest from './pages/TaskClass';
+import testAsyncStorage from './pages/TestAsyncStorage';
 
 export default class Routes extends Component {
 	render() {
@@ -46,6 +47,11 @@ export default class Routes extends Component {
 						key="taskdjangotest"
 						component={taskdjangotest}
 						title="taskdjangotest"
+					/>
+					<Scene
+						key="testAsyncStorage"
+						component={testAsyncStorage}
+						title="testAsyncStorage"
 					/>
 				</Stack>
 			</Router>
