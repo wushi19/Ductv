@@ -34,8 +34,8 @@ export default class TaskClass extends React.Component {
         this.state = {
 
             data: null,
-            header: 'TestClassTask',
-            description: '',
+            header: null,
+            description: null,
             priority: null,
             userId: null,
             duration: null,
@@ -75,7 +75,10 @@ export default class TaskClass extends React.Component {
                         var json_array = data[number];           //get the first obj from django
                         // var id = json_array.id.toString();  //get the id
                         // var url = json_array.url;           //get url
-                        var header = json_array.header;     //get header
+                        header = json_array.header;             //get header
+                        description = json_array.description;
+                        priority = json_array.priority;
+                        due = json_array.due;
                         Alert.alert(header);
             })
             .catch(function (error) {
@@ -93,10 +96,6 @@ export default class TaskClass extends React.Component {
         data = this.getEvent(9)
 
         return (
-            /*<View style={styles.container}>
-                <Text>Test for React Native + Django</Text>
-                <Button title="Go" onPress={this.json_funtion} />
-            </View>*/
             <View style={styles.container}>
                 <StatusBar barStyle="light-content" />
             </View>
