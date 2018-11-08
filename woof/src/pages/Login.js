@@ -84,20 +84,20 @@ export default class Login extends React.Component {
                     />
                 </View>
 
-                <TouchableOpacity style={styles.btnLogin}>
-                    <Button
-                    color= 'rgba(255, 255, 255, 0.7)'
-                    title= "Login"
-                    fontSize = '16'
-                    //onPress={this.userLogin.bind(this)}
+                <TouchableOpacity
+                    style={styles.btnLogin}
                     onPress={this.validHome}
-                    />
+                >
+                <Text style = {styles.btnLoginText}> Login </Text>
                 </TouchableOpacity>
 
                 <View>
                     <TouchableOpacity onPress={this.signUp}>
                         <Text style={styles.signupButton} >
-                            Sign Up
+                            Don't have an account? {' '}
+                            <Text style = {{fontWeight: 'bold'}}>
+                                Sign up here
+                            </Text>
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -121,7 +121,17 @@ const styles = StyleSheet.create({
         borderRadius: 45,
         justifyContent: 'center',
         marginTop: 20,
-        backgroundColor: 'rgba(0,0,0,0.60)'
+        backgroundColor: 'rgba(247, 172, 24, 1)'
+    },
+
+    btnLoginText: {
+        textAlign: 'center',
+        fontFamily: 'Montserrat-Light',
+        color: 'white',
+        fontSize: 20,
+        justifyContent: 'center',
+        fontWeight: 'bold',
+        opacity: 1,
     },
     logoContainer: {
         alignItems: 'center',
@@ -135,6 +145,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Light',
         color: 'black',
         fontSize: 30,
+        justifyContent: 'center',
         fontWeight: 'bold',
         marginTop: 10,
         opacity: 1,
@@ -153,7 +164,8 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     signupButton:{
-        color: '#ffffff',
+        fontFamily: 'Montserrat-Light',
+        color: 'black',
         fontSize: 14,
         fontWeight: '500',
         alignItems: 'center',
