@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Button, Alert, StyleSheet, AsyncStorage } from 'react-native';
+import { Text, View, Button, Alert, StyleSheet, AsyncStorage, StatusBar} from 'react-native';
 
 // const getuserId = async () => {
 //   let userId = '';
@@ -23,7 +23,7 @@ import { Text, View, Button, Alert, StyleSheet, AsyncStorage } from 'react-nativ
 //       console.log(error.message);
 //     }
 //     return profileId;
-//   }
+//   } 
 
 
 export default class TaskClass extends React.Component {
@@ -65,7 +65,7 @@ export default class TaskClass extends React.Component {
 
     // }
 
-    json_funtion = (number) => {
+    getEvent = (number) => {
         const { data } = this.state;
         response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/')
             .then(function (response) {
@@ -76,7 +76,6 @@ export default class TaskClass extends React.Component {
                         // var id = json_array.id.toString();  //get the id
                         // var url = json_array.url;           //get url
                         var header = json_array.header;     //get header
-                        // Alert.alert(header);
                         Alert.alert(header);
             })
             .catch(function (error) {
@@ -87,7 +86,11 @@ export default class TaskClass extends React.Component {
             });
     }
 
+
+
     render() {
+
+        data = this.getEvent(9)
 
         return (
             /*<View style={styles.container}>
@@ -95,7 +98,7 @@ export default class TaskClass extends React.Component {
                 <Button title="Go" onPress={this.json_funtion} />
             </View>*/
             <View style={styles.container}>
-                <Button title="Go" onPress={this.json_funtion(9)} />
+                <StatusBar barStyle="light-content" />
             </View>
         );
     }
@@ -106,6 +109,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#f23657',
     },
 });
