@@ -69,7 +69,7 @@ export default class Login extends React.Component {
             <ImageBackground source={bgImage} style={styles.backgroundContainer}>
                 <View style={styles.logoContainer}>
                     <Image source={logo} style={styles.logo} />
-                    <Text style={styles.logoText}>Duck</Text>
+                    <Text style={styles.logoText}>welcome to Ducktv To-Do</Text>
                 </View>
 
                 <View style={styles.inputContainer}>
@@ -132,11 +132,12 @@ const styles = StyleSheet.create({
         height: 120,
     },
     logoText: {
-        color: 'white',
+        fontFamily: 'Montserrat-Light',
+        color: 'black',
         fontSize: 20,
-        fontWeight: '500',
+        fontWeight: 'bold',
         marginTop: 10,
-        opacity: 0.5,
+        opacity: 1,
     },
     input: {
         width: WIDTH - 55,
