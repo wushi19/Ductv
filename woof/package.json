@@ -29,8 +29,9 @@
   "jest": {
     "preset": "react-native"
   },
-
   "rnpm": {
-    "assets": ["assets/fonts/Montserrat"]
+    "assets": [
+      "assets/fonts/Montserrat"
+    ]
   }
 }

@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2dcd7901-2f0b-4906-83a1-4fe0e6b4889f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/woof/ios/woof.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/woof/ios/woof.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/woof/ios/woof/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/woof/ios/woof/Info.plist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/woof/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/woof/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/woof/src/pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/woof/src/pages/Login.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -212,7 +209,7 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="472" />
+    <option name="x" value="627" />
     <option name="y" value="23" />
     <option name="width" value="960" />
     <option name="height" value="1125" />
@@ -271,14 +268,6 @@
               <item name="woof" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="assets" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="fonts" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="Ductv" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="woof" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="assets" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fonts" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Montserrat" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="Ductv" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -355,17 +344,17 @@
       <workItem from="1541644110672" duration="161000" />
       <workItem from="1541649649890" duration="567000" />
       <workItem from="1541652219107" duration="4632000" />
-      <workItem from="1541699696740" duration="478000" />
+      <workItem from="1541699696740" duration="1512000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31094000" />
+    <option name="totallyTimeSpent" value="32128000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="472" y="23" width="960" height="1125" extended-state="0" />
+    <frame x="627" y="23" width="960" height="1125" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2747604" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2747604" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -377,7 +366,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32720232" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32720232" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
