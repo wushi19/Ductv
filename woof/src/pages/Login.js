@@ -22,7 +22,7 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
-import bgImage from '../images/bki.jpg'
+import bgImage from '../images/background2.jpg'
 import logo from '../images/logo.png'
 
 
@@ -68,8 +68,8 @@ export default class Login extends React.Component {
         return (
             <ImageBackground source={bgImage} style={styles.backgroundContainer}>
                 <View style={styles.logoContainer}>
-                    <Image source={logo} style={styles.logo} />
-                    <Text style={styles.logoText}>Ducktv To-Do</Text>
+                    {/*<Image source={logo} style={styles.logo} />*/}
+                    <Text style={styles.logoText}>Log In</Text>
                 </View>
 
                 <View style={styles.inputContainer}>
@@ -85,18 +85,18 @@ export default class Login extends React.Component {
                 </View>
 
                 <TouchableOpacity
-                    style={styles.btnLogin}
                     onPress={this.validHome}
+                    style={styles.btnLogin}
                 >
-                <Text style = {styles.btnLoginText}> Login </Text>
+                <Text style = {styles.btnLoginText}> Log in </Text>
                 </TouchableOpacity>
 
                 <View>
                     <TouchableOpacity onPress={this.signUp}>
                         <Text style={styles.signupButton} >
-                            Don't have an account? {' '}
+                            First time here? {' '}
                             <Text style = {{fontWeight: 'bold'}}>
-                                Sign up here
+                                Sign up.
                             </Text>
                         </Text>
                     </TouchableOpacity>
@@ -116,17 +116,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     btnLogin: {
-        width: WIDTH - 55,
-        height: 45,
+        width: WIDTH - 70,
+        height: 60,
         borderRadius: 45,
         justifyContent: 'center',
-        marginTop: 20,
-        backgroundColor: 'rgba(247, 172, 24, 1)'
+        marginTop: 160,
+        backgroundColor: 'rgba(33, 36, 44, 1)'
     },
 
     btnLoginText: {
         textAlign: 'center',
-        fontFamily: 'Montserrat-Light',
+        fontFamily: 'Montserrat-ExtraLight',
         color: 'white',
         fontSize: 20,
         justifyContent: 'center',
@@ -142,9 +142,9 @@ const styles = StyleSheet.create({
         height: 120,
     },
     logoText: {
-        fontFamily: 'Montserrat-Light',
-        color: 'black',
-        fontSize: 30,
+        fontFamily: 'Montserrat-ExtraLight',
+        color: 'white',
+        fontSize: 40,
         justifyContent: 'center',
         fontWeight: 'bold',
         marginTop: 10,
@@ -161,11 +161,11 @@ const styles = StyleSheet.create({
         marginHorizontal: 25,
     },
     inputContainer: {
-        marginTop: 10,
+        marginTop: 50,
     },
     signupButton:{
-        fontFamily: 'Montserrat-Light',
-        color: 'black',
+        fontFamily: 'Montserrat-ExtraLight',
+        color: 'white',
         fontSize: 14,
         fontWeight: '500',
         alignItems: 'center',

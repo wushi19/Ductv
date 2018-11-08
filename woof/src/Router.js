@@ -8,6 +8,7 @@ import calendar from './pages/Calendar';
 import enterTask from './pages/EnterTaskScreen';
 import taskdjangotest from './pages/TaskClass';
 import testAsyncStorage from './pages/TestAsyncStorage';
+import startPage from "./pages/startPage";
 
 export default class Routes extends Component {
 	render() {
@@ -15,11 +16,17 @@ export default class Routes extends Component {
 			<Router>
 				<Stack key="root" hideNavBar={true}>
 					<Scene
+						key="startPage"
+						component={startPage}
+						title="startPage"
+						initial={true}
+						hideNavBar={true}
+					/>
+
+					<Scene
 						key="login"
 						component={Login}
 						title="Login"
-						initial={true}
-						hideNavBar={true}
 					/>
 
 					<Scene
