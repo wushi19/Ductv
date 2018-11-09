@@ -100,8 +100,6 @@ export default class TaskClass extends React.Component {
             });
     }
 
-
-
     render() {
 
         data = this.getEvent(9)
@@ -127,6 +125,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#FCD12A',
+        backgroundColor: '#FFBF00',
     },
 });

@@ -95,17 +95,17 @@ export default class Home extends React.Component {
               Test AsyncStorage
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.tasktest}>
+          {/* <TouchableOpacity onPress={this.tasktest}>
             <Text style={styles.calendarbutton} >
               Make a task in Django (this page)
           </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     );
   }
 
-}
+}//t@t.com
 
 const styles = StyleSheet.create({
   container: {
