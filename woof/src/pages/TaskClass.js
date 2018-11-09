@@ -1,5 +1,7 @@
 import React from 'react';
-import { Text, View, Button, Alert, StyleSheet, AsyncStorage, StatusBar} from 'react-native';
+import { Text, View, Alert, StyleSheet, AsyncStorage, StatusBar} from 'react-native';
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 // const getuserId = async () => {
 //   let userId = '';
@@ -9,7 +11,7 @@ import { Text, View, Button, Alert, StyleSheet, AsyncStorage, StatusBar} from 'r
 //     // Error retrieving data
 //     Alert.alert("here");
 //     console.log(error.message);
-//   }
+//   } t@t.com
 //   return userId;
 // }
 
