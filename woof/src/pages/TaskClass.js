@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, View, Alert, StyleSheet, AsyncStorage, StatusBar} from 'react-native';
+import { Text, View, Alert, StyleSheet, AsyncStorage, StatusBar } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {Actions} from 'react-native-router-flux';
 
 // const getuserId = async () => {
 //   let userId = '';
@@ -67,6 +68,14 @@ export default class TaskClass extends React.Component {
 
     // }
 
+    goHome() {
+        Actions.home()
+    }
+
+    enterTask() {
+        Actions.enterTask()
+    }
+
     getEvent = (number) => {
         const { data } = this.state;
         response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/')
@@ -74,14 +83,14 @@ export default class TaskClass extends React.Component {
                 return response.json()
             })
             .then(data => {
-                        var json_array = data[number];           //get the first obj from django
-                        // var id = json_array.id.toString();  //get the id
-                        // var url = json_array.url;           //get url
-                        header = json_array.header;             //get header
-                        description = json_array.description;
-                        priority = json_array.priority;
-                        due = json_array.due;
-                        Alert.alert(header);
+                var json_array = data[number];           //get the first obj from django
+                // var id = json_array.id.toString();  //get the id
+                // var url = json_array.url;           //get url
+                header = json_array.header;             //get header
+                description = json_array.description;
+                priority = json_array.priority;
+                due = json_array.due;
+                Alert.alert(header);
             })
             .catch(function (error) {
                 console.log('There has been a problem with your fetch operation: ' + error.message);
@@ -100,6 +109,14 @@ export default class TaskClass extends React.Component {
         return (
             <View style={styles.container}>
                 <StatusBar barStyle="light-content" />
+                <ActionButton buttonColor="rgba(231,76,60,1)">
+                    <ActionButton.Item buttonColor='#9b59b6' title="Add New Task" onPress={this.enterTask}>
+                        <Icon name="md-create" style={styles.actionButtonIcon} />
+                    </ActionButton.Item>
+                    <ActionButton.Item buttonColor='#1abc9c' title="Go Home" onPress={this.goHome}>
+                        <Icon name="md-done-all" style={styles.actionButtonIcon} />
+                    </ActionButton.Item>
+                </ActionButton>
             </View>
         );
     }
@@ -110,6 +127,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f23657',
+        backgroundColor: '#FCD12A',
     },
 });
