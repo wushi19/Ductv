@@ -6,9 +6,13 @@ import signUp from './pages/signUp';
 import home from './pages/Home';
 import calendar from './pages/Calendar';
 import enterTask from './pages/EnterTaskScreen';
-import taskdjangotest from './pages/TaskClass';
+import todolist from './pages/TaskClass';
 import testAsyncStorage from './pages/TestAsyncStorage';
 import startPage from "./pages/startPage";
+import editEvent from "./pages/editEvent";
+import addEvent from "./pages/addEvent";
+import moreInfoEvent from "./pages/moreInfoEvent";
+import scratchPaper from "./pages/scratchPaper";
 
 export default class Routes extends Component {
 	render() {
@@ -51,14 +55,34 @@ export default class Routes extends Component {
 						title="enterTask"
 					/>
 					<Scene
-						key="taskdjangotest"
-						component={taskdjangotest}
-						title="taskdjangotest"
+						key="todolist"
+						component={todolist}
+						title="todolist"
 					/>
 					<Scene
 						key="testAsyncStorage"
 						component={testAsyncStorage}
 						title="testAsyncStorage"
+					/>
+					<Scene
+						key="editEvent"
+						component={editEvent}
+						title="editEvent"
+					/>
+					<Scene
+						key="addEvent"
+						component={addEvent}
+						title="addEvent"
+					/>
+					<Scene
+						key="moreInfoEvent"
+						component={moreInfoEvent}
+						title="moreInfoEvent"
+					/>
+					<Scene
+						key="scratchPaper"
+						component={scratchPaper}
+						title="scratchPaper"
 					/>
 				</Stack>
 			</Router>

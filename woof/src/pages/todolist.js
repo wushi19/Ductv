@@ -1,160 +1,163 @@
-import React, { Component } from "react";
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  AsyncStorage,
-  Button,
-  TextInput,
-  Keyboard,
-  Platform
-} from "react-native";
+// this is someone else's coded todo list to reference 
 
-const isAndroid = Platform.OS == "android";
-const viewPadding = 10;
+// this is nandar's page
+// import React, { Component } from "react";
+// import {
+//   AppRegistry,
+//   StyleSheet,
+//   Text,
+//   View,
+//   FlatList,
+//   AsyncStorage,
+//   Button,
+//   TextInput,
+//   Keyboard,
+//   Platform
+// } from "react-native";
 
-export default class TodoList extends Component {
-  state = {
-    tasks: [],
-    text: ""
-  };
+// const isAndroid = Platform.OS == "android";
+// const viewPadding = 10;
 
-  changeTextHandler = text => {
-    this.setState({ text: text });
-  };
+// export default class TodoList extends Component {
+//   state = {
+//     tasks: [],
+//     text: ""
+//   };
 
-  addTask = () => {
-    let notEmpty = this.state.text.trim().length > 0;
+//   changeTextHandler = text => {
+//     this.setState({ text: text });
+//   };
 
-    if (notEmpty) {
-      this.setState(
-        prevState => {
-          let { tasks, text } = prevState;
-          return {
-            tasks: tasks.concat({ key: tasks.length, text: text }),
-            text: ""
-          };
-        },
-        () => Tasks.save(this.state.tasks)
-      );
-    }
-  };
+//   addTask = () => {
+//     let notEmpty = this.state.text.trim().length > 0;
 
-  deleteTask = i => {
-    this.setState(
-      prevState => {
-        let tasks = prevState.tasks.slice();
+//     if (notEmpty) {
+//       this.setState(
+//         prevState => {
+//           let { tasks, text } = prevState;
+//           return {
+//             tasks: tasks.concat({ key: tasks.length, text: text }),
+//             text: ""
+//           };
+//         },
+//         () => Tasks.save(this.state.tasks)
+//       );
+//     }
+//   };
 
-        tasks.splice(i, 1);
+//   deleteTask = i => {
+//     this.setState(
+//       prevState => {
+//         let tasks = prevState.tasks.slice();
 
-        return { tasks: tasks };
-      },
-      () => Tasks.save(this.state.tasks)
-    );
-  };
+//         tasks.splice(i, 1);
 
-  componentDidMount() {
-    Keyboard.addListener(
-      isAndroid ? "keyboardDidShow" : "keyboardWillShow",
-      e => this.setState({ viewPadding: e.endCoordinates.height + viewPadding })
-    );
+//         return { tasks: tasks };
+//       },
+//       () => Tasks.save(this.state.tasks)
+//     );
+//   };
 
-    Keyboard.addListener(
-      isAndroid ? "keyboardDidHide" : "keyboardWillHide",
-      () => this.setState({ viewPadding: viewPadding })
-    );
+//   componentDidMount() {
+//     Keyboard.addListener(
+//       isAndroid ? "keyboardDidShow" : "keyboardWillShow",
+//       e => this.setState({ viewPadding: e.endCoordinates.height + viewPadding })
+//     );
 
-    Tasks.all(tasks => this.setState({ tasks: tasks || [] }));
-  }
+//     Keyboard.addListener(
+//       isAndroid ? "keyboardDidHide" : "keyboardWillHide",
+//       () => this.setState({ viewPadding: viewPadding })
+//     );
 
-  render() {
-    return (
-      <View
-        style={[styles.container, { paddingBottom: this.state.viewPadding }]}
-      >
-        <FlatList
-          style={styles.list}
-          data={this.state.tasks}
-          renderItem={({ item, index }) =>
-            <View>
-              <View style={styles.listItemCont}>
-                <Text style={styles.listItem}>
-                  {item.text}
-                </Text>
-                <Button title="X" onPress={() => this.deleteTask(index)} />
-              </View>
-              <View style={styles.hr} />
-            </View>}
-        />
-        <TextInput
-          style={styles.textInput}
-          onChangeText={this.changeTextHandler}
-          onSubmitEditing={this.addTask}
-          value={this.state.text}
-          placeholder="Add Tasks"
-          returnKeyType="done"
-          returnKeyLabel="done"
-        />
-      </View>
-    );
-  }
-}
+//     Tasks.all(tasks => this.setState({ tasks: tasks || [] }));
+//   }
 
-let Tasks = {
-  convertToArrayOfObject(tasks, callback) {
-    return callback(
-      tasks ? tasks.split("||").map((task, i) => ({ key: i, text: task })) : []
-    );
-  },
-  convertToStringWithSeparators(tasks) {
-    return tasks.map(task => task.text).join("||");
-  },
-  all(callback) {
-    return AsyncStorage.getItem("TASKS", (err, tasks) =>
-      this.convertToArrayOfObject(tasks, callback)
-    );
-  },
-  save(tasks) {
-    AsyncStorage.setItem("TASKS", this.convertToStringWithSeparators(tasks));
-  }
-};
+//   render() {
+//     return (
+//       <View
+//         style={[styles.container, { paddingBottom: this.state.viewPadding }]}
+//       >
+//         <FlatList
+//           style={styles.list}
+//           data={this.state.tasks}
+//           renderItem={({ item, index }) =>
+//             <View>
+//               <View style={styles.listItemCont}>
+//                 <Text style={styles.listItem}>
+//                   {item.text}
+//                 </Text>
+//                 <Button title="X" onPress={() => this.deleteTask(index)} />
+//               </View>
+//               <View style={styles.hr} />
+//             </View>}
+//         />
+//         <TextInput
+//           style={styles.textInput}
+//           onChangeText={this.changeTextHandler}
+//           onSubmitEditing={this.addTask}
+//           value={this.state.text}
+//           placeholder="Add Tasks"
+//           returnKeyType="done"
+//           returnKeyLabel="done"
+//         />
+//       </View>
+//     );
+//   }
+// }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF",
-    padding: viewPadding,
-    paddingTop: 20
-  },
-  list: {
-    width: "100%"
-  },
-  listItem: {
-    paddingTop: 2,
-    paddingBottom: 2,
-    fontSize: 18
-  },
-  hr: {
-    height: 1,
-    backgroundColor: "gray"
-  },
-  listItemCont: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
-  textInput: {
-    height: 40,
-    paddingRight: 10,
-    paddingLeft: 10,
-    borderColor: "gray",
-    borderWidth: isAndroid ? 0 : 1,
-    width: "100%"
-  }
-});
+// let Tasks = {
+//   convertToArrayOfObject(tasks, callback) {
+//     return callback(
+//       tasks ? tasks.split("||").map((task, i) => ({ key: i, text: task })) : []
+//     );
+//   },
+//   convertToStringWithSeparators(tasks) {
+//     return tasks.map(task => task.text).join("||");
+//   },
+//   all(callback) {
+//     return AsyncStorage.getItem("TASKS", (err, tasks) =>
+//       this.convertToArrayOfObject(tasks, callback)
+//     );
+//   },
+//   save(tasks) {
+//     AsyncStorage.setItem("TASKS", this.convertToStringWithSeparators(tasks));
+//   }
+// };
 
-AppRegistry.registerComponent("TodoList", () => TodoList);
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: "center",
+//     alignItems: "center",
+//     backgroundColor: "#F5FCFF",
+//     padding: viewPadding,
+//     paddingTop: 20
+//   },
+//   list: {
+//     width: "100%"
+//   },
+//   listItem: {
+//     paddingTop: 2,
+//     paddingBottom: 2,
+//     fontSize: 18
+//   },
+//   hr: {
+//     height: 1,
+//     backgroundColor: "gray"
+//   },
+//   listItemCont: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     justifyContent: "space-between"
+//   },
+//   textInput: {
+//     height: 40,
+//     paddingRight: 10,
+//     paddingLeft: 10,
+//     borderColor: "gray",
+//     borderWidth: isAndroid ? 0 : 1,
+//     width: "100%"
+//   }
+// });
+
+// AppRegistry.registerComponent("TodoList", () => TodoList);
