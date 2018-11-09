@@ -22,7 +22,7 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
-import bgImage from '../images/bki.jpg'
+import bgImage from '../images/background2.jpg'
 import logo from '../images/logo.png'
 
 
@@ -68,8 +68,8 @@ export default class Login extends React.Component {
         return (
             <ImageBackground source={bgImage} style={styles.backgroundContainer}>
                 <View style={styles.logoContainer}>
-                    <Image source={logo} style={styles.logo} />
-                    <Text style={styles.logoText}>Duck</Text>
+                    {/*<Image source={logo} style={styles.logo} />*/}
+                    <Text style={styles.logoText}>Log In</Text>
                 </View>
 
                 <View style={styles.inputContainer}>
@@ -84,20 +84,20 @@ export default class Login extends React.Component {
                     />
                 </View>
 
-                <TouchableOpacity style={styles.btnLogin}>
-                    <Button
-                    color= 'rgba(255, 255, 255, 0.7)'
-                    title= "Login"
-                    fontSize = '16'
-                    //onPress={this.userLogin.bind(this)}
+                <TouchableOpacity
                     onPress={this.validHome}
-                    />
+                    style={styles.btnLogin}
+                >
+                <Text style = {styles.btnLoginText}> Log in </Text>
                 </TouchableOpacity>
 
                 <View>
                     <TouchableOpacity onPress={this.signUp}>
                         <Text style={styles.signupButton} >
-                            Sign Up
+                            First time here? {' '}
+                            <Text style = {{fontWeight: 'bold'}}>
+                                Sign up.
+                            </Text>
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -116,27 +116,39 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     btnLogin: {
-        width: WIDTH - 55,
-        height: 45,
+        width: WIDTH - 70,
+        height: 60,
         borderRadius: 45,
         justifyContent: 'center',
-        marginTop: 20,
-        backgroundColor: 'rgba(0,0,0,0.60)'
+        marginTop: 160,
+        backgroundColor: 'rgba(33, 36, 44, 1)'
+    },
+
+    btnLoginText: {
+        textAlign: 'center',
+        fontFamily: 'Montserrat-ExtraLight',
+        color: 'white',
+        fontSize: 20,
+        justifyContent: 'center',
+        fontWeight: 'bold',
+        opacity: 1,
     },
     logoContainer: {
         alignItems: 'center',
-        marginBottom: 50,
+        marginBottom: 60,
     },
     logo: {
         width: 120,
         height: 120,
     },
     logoText: {
+        fontFamily: 'Montserrat-ExtraLight',
         color: 'white',
-        fontSize: 20,
-        fontWeight: '500',
+        fontSize: 40,
+        justifyContent: 'center',
+        fontWeight: 'bold',
         marginTop: 10,
-        opacity: 0.5,
+        opacity: 1,
     },
     input: {
         width: WIDTH - 55,
@@ -149,10 +161,11 @@ const styles = StyleSheet.create({
         marginHorizontal: 25,
     },
     inputContainer: {
-        marginTop: 10,
+        marginTop: 50,
     },
     signupButton:{
-        color: '#ffffff',
+        fontFamily: 'Montserrat-ExtraLight',
+        color: 'white',
         fontSize: 14,
         fontWeight: '500',
         alignItems: 'center',

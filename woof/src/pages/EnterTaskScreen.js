@@ -14,8 +14,13 @@ import {
   TextInput,
   Button,
   NavigatorIOS,
-  DatePickerIOS
+  DatePickerIOS,
+  DatePickerAndroid,
+  CheckBox,
+  Slider
 } from 'react-native';
+import DatePicker from 'react-native-datepicker'
+
 
 const { width: WIDTH } = Dimensions.get('window');
 
@@ -25,46 +30,73 @@ export default class EnterTaskScreen extends React.Component {
   static navigationOptions = {
     title: 'EnterTaskScreen',
   };
- 
-    tasktest = () =>{
-        fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          header: 'Post Task 3',
-          description: 'AAAAAAAAAAAAAAAAAAAAA',
-          owner: 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/profile/1/',
-        }),
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-    Alert.alert("You did it. I am so proud.");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    }
-  
 
+  constructor(props) {
+    super(props);
+    this.setDate = this.setDate.bind(this);
+    this.state = {
+      date:"2016-05-15",
+      chosenDate: new Date(),
+      date: new Date(),
+      showDatePicker: false,
+      taskname: '',
+      taskdescription: '',
+      priority: 0,
+      duration: 0,
+      due: ''
+    }
+  }
 
   setDate(newDate) {
     this.setState({ chosenDate: newDate })
+      
   }
 
+  taskbarr = () =>{
+      if(this.state.taskname == ''){
+          Alert.alert("Please enter Task Name.");
+      } else{
+          Alert.alert(this.state.taskname);
+          this.tasktest();
+      }
+  }
+  tasktest = () =>{
+    fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      header: this.state.taskname,
+      description: this.state.taskdescription,
+      priority: this.state.priority,
+      owner: 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/profile/1/',
+    }),
+})
+  .then((response) => response.json())
+  .then((responseJson) => {
+Alert.alert("Task Successfully Added.");
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+}
+
   render() {
-      
+            
     return (
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <Text style={styles.getStartedText}>WHAT NEEDS TO GET DONE?</Text>
 
         <View style={styles.inputContainer}>
           <TextInput
+            id={'tasknames'}
             style={styles.input}
             placeholder={'Task Name'}
             secureTextEntry={false}
             placeholderTextColor={'rgba(100, 100, 100, 0.7)'}
+            onChangeText={(taskname) => this.setState({ taskname })}
+            value={this.state.taskname}
           />
           <TextInput
             style={styles.input}
@@ -72,13 +104,132 @@ export default class EnterTaskScreen extends React.Component {
             secureTextEntry={false}
             placeholderTextColor={'rgba(100, 100, 100, 0.7)'}
             multiline={true}
+            onChangeText={(taskdescription) => this.setState({ taskdescription })}
+            value={this.state.taskdescription}
           />
+        </View>
+
+        <View style = {{flexDirection: 'row', paddingLeft: 10, paddingTop: 10}}>
+          <CheckBox
+            onIconPress={this.setDate}
+            title="Due Date?"
+            checked={this.state.checked}
+          />
+            
+          <DatePicker
+            style={{width: 200}}
+            date={this.state.date}
+            mode="time"
+            placeholder="select date"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            iconSource={require('../images/stopwatch.png')}
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                left: 0,
+                top: 4,
+                marginLeft: 0
+              },
+              dateInput: {
+                marginLeft: 36
+              }
+              // ... You can check the source to find the other keys.
+            }}
+            onDateChange={(date) => {this.setState({date: date})}}
+          />
+            <Text style={{paddingTop: 10}}>  Duration?</Text>
+        </View>
+        
+        <View style = {{flexDirection: 'row', paddingLeft: 10}}>
+          <CheckBox
+            onIconPress={this.setDate}
+            title="Due Date?"
+            checked={this.state.checked}
+          />
+          <Image source={require('../images/nimportant.png')} style={{width: 30, height: 30}} />
+          <Slider
+            style={{width: 140}}
+            minimumValue={1}
+            maximumValue={5}
+            step={1}
+            onValueChange={(priority) => this.setState({ priority })}
+            value={this.state.priority}
+          />
+          <Image source={require('../images/vimportant.png')} style={{width: 30, height: 30}} />
+          <Text style={{paddingTop: 10}}>  Priority?</Text>
+        </View>
+
+        <View style = {{flexDirection: 'row', paddingLeft: 10}}>
+          <CheckBox
+            onIconPress={this.setDate}
+            title="Due Date?"
+            checked={this.state.checked}
+          />
+          <DatePicker
+            style={{width: 200}}
+            date={this.state.date}
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            minDate="2016-05-01"
+            maxDate="2029-12-31"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                left: 0,
+                top: 4,
+                marginLeft: 0
+              },
+              dateInput: {
+                marginLeft: 36
+              }
+              // ... You can check the source to find the other keys.
+            }}
+            onDateChange={(date) => {this.setState({date: date})}}
+          />
+            <Text style={{paddingTop: 10}}>  Due Date?</Text>
         </View>
         
 
+        <View style = {{flexDirection: 'row', paddingLeft: 10}}>
+          <CheckBox
+            onIconPress={this.setDate}
+            title="Due Date?"
+            checked={this.state.checked}
+          />
+          <DatePicker
+            style={{width: 200}}
+            date={this.state.date}
+            mode="time"
+            placeholder="select date"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            iconSource={require('../images/clock.png')}
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                left: 0,
+                top: 4,
+                marginLeft: 0
+              },
+              dateInput: {
+                marginLeft: 36
+              }
+              // ... You can check the source to find the other keys.
+            }}
+            onDateChange={(date) => {this.setState({date: date})}}
+          />
+            <Text style={{paddingTop: 10}}>  Due Time?</Text>
+        </View>
+        
+        
+        
         <View style={styles.addButtonContainer}>
           <Button
-            onPress={this.tasktest}
+            onPress={this.taskbarr}
             title="ADD TASK"
             color="#000000"
           />
