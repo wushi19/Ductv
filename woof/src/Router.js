@@ -6,7 +6,7 @@ import signUp from './pages/signUp';
 import home from './pages/Home';
 import calendar from './pages/Calendar';
 import enterTask from './pages/EnterTaskScreen';
-import todolist from './pages/TaskClass';
+import todolist from './pages/todolist';
 import testAsyncStorage from './pages/TestAsyncStorage';
 import startPage from "./pages/startPage";
 import editEvent from "./pages/editEvent";

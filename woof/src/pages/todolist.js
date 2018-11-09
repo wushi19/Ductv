@@ -1,163 +1,130 @@
-// this is someone else's coded todo list to reference 
+import React from 'react';
+import { Text, View, Alert, StyleSheet, AsyncStorage, StatusBar } from 'react-native';
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {Actions} from 'react-native-router-flux';
 
-// this is nandar's page
-// import React, { Component } from "react";
-// import {
-//   AppRegistry,
-//   StyleSheet,
-//   Text,
-//   View,
-//   FlatList,
-//   AsyncStorage,
-//   Button,
-//   TextInput,
-//   Keyboard,
-//   Platform
-// } from "react-native";
-
-// const isAndroid = Platform.OS == "android";
-// const viewPadding = 10;
-
-// export default class TodoList extends Component {
-//   state = {
-//     tasks: [],
-//     text: ""
-//   };
-
-//   changeTextHandler = text => {
-//     this.setState({ text: text });
-//   };
-
-//   addTask = () => {
-//     let notEmpty = this.state.text.trim().length > 0;
-
-//     if (notEmpty) {
-//       this.setState(
-//         prevState => {
-//           let { tasks, text } = prevState;
-//           return {
-//             tasks: tasks.concat({ key: tasks.length, text: text }),
-//             text: ""
-//           };
-//         },
-//         () => Tasks.save(this.state.tasks)
-//       );
-//     }
-//   };
-
-//   deleteTask = i => {
-//     this.setState(
-//       prevState => {
-//         let tasks = prevState.tasks.slice();
-
-//         tasks.splice(i, 1);
-
-//         return { tasks: tasks };
-//       },
-//       () => Tasks.save(this.state.tasks)
-//     );
-//   };
-
-//   componentDidMount() {
-//     Keyboard.addListener(
-//       isAndroid ? "keyboardDidShow" : "keyboardWillShow",
-//       e => this.setState({ viewPadding: e.endCoordinates.height + viewPadding })
-//     );
-
-//     Keyboard.addListener(
-//       isAndroid ? "keyboardDidHide" : "keyboardWillHide",
-//       () => this.setState({ viewPadding: viewPadding })
-//     );
-
-//     Tasks.all(tasks => this.setState({ tasks: tasks || [] }));
-//   }
-
-//   render() {
-//     return (
-//       <View
-//         style={[styles.container, { paddingBottom: this.state.viewPadding }]}
-//       >
-//         <FlatList
-//           style={styles.list}
-//           data={this.state.tasks}
-//           renderItem={({ item, index }) =>
-//             <View>
-//               <View style={styles.listItemCont}>
-//                 <Text style={styles.listItem}>
-//                   {item.text}
-//                 </Text>
-//                 <Button title="X" onPress={() => this.deleteTask(index)} />
-//               </View>
-//               <View style={styles.hr} />
-//             </View>}
-//         />
-//         <TextInput
-//           style={styles.textInput}
-//           onChangeText={this.changeTextHandler}
-//           onSubmitEditing={this.addTask}
-//           value={this.state.text}
-//           placeholder="Add Tasks"
-//           returnKeyType="done"
-//           returnKeyLabel="done"
-//         />
-//       </View>
-//     );
-//   }
+// const getuserId = async () => {
+//   let userId = '';
+//   try {
+//     userId = await AsyncStorage.getItem('userId') || 'none';
+//   } catch (error) {
+//     // Error retrieving data
+//     Alert.alert("here");
+//     console.log(error.message);
+//   } t@t.com
+//   return userId;
 // }
 
-// let Tasks = {
-//   convertToArrayOfObject(tasks, callback) {
-//     return callback(
-//       tasks ? tasks.split("||").map((task, i) => ({ key: i, text: task })) : []
-//     );
-//   },
-//   convertToStringWithSeparators(tasks) {
-//     return tasks.map(task => task.text).join("||");
-//   },
-//   all(callback) {
-//     return AsyncStorage.getItem("TASKS", (err, tasks) =>
-//       this.convertToArrayOfObject(tasks, callback)
-//     );
-//   },
-//   save(tasks) {
-//     AsyncStorage.setItem("TASKS", this.convertToStringWithSeparators(tasks));
-//   }
-// };
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: "center",
-//     alignItems: "center",
-//     backgroundColor: "#F5FCFF",
-//     padding: viewPadding,
-//     paddingTop: 20
-//   },
-//   list: {
-//     width: "100%"
-//   },
-//   listItem: {
-//     paddingTop: 2,
-//     paddingBottom: 2,
-//     fontSize: 18
-//   },
-//   hr: {
-//     height: 1,
-//     backgroundColor: "gray"
-//   },
-//   listItemCont: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     justifyContent: "space-between"
-//   },
-//   textInput: {
-//     height: 40,
-//     paddingRight: 10,
-//     paddingLeft: 10,
-//     borderColor: "gray",
-//     borderWidth: isAndroid ? 0 : 1,
-//     width: "100%"
-//   }
-// });
+//   const getProfId = async () => {
+//     let profileId = '';
+//     try {
+//       profileId = await AsyncStorage.getItem('profileId') || 'none';
+//     } catch (error) {
+//       // Error retrieving data
+//       console.log(error.message);
+//     }
+//     return profileId;
+//   } 
 
-// AppRegistry.registerComponent("TodoList", () => TodoList);
+
+export default class TaskClass extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+
+            data: null,
+            header: null,
+            description: null,
+            priority: null,
+            userId: null,
+            duration: null,
+            due: null,
+            owner: 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/profile/2/',
+            task: null,
+            number: null,
+
+        }
+    };
+
+    // json_funtion = () => {
+    //     fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/')
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         var json_array = data[0];           //get the first obj from django
+    //         var id = json_array.id.toString();  //get the id
+    //         var url = json_array.url;           //get url
+    //         var header = json_array.header;     //get header
+    //         var priority = json_array.priority.toString();  //get priority
+    //         var duration = json_array.duration.toString();  //get duration
+    //         var due = json_array.due.toString();            //get duedate
+    //         var owner = json_array.owner;                   //get owner
+    //         Alert.alert(header);
+    //     })
+    //     .catch(error => console.log(error));
+
+    // }
+
+    goHome() {
+        Actions.home()
+    }
+
+    enterTask() {
+        Actions.enterTask()
+    }
+
+    getEvent = (number) => {
+        const { data } = this.state;
+        response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/')
+            .then(function (response) {
+                return response.json()
+            })
+            .then(data => {
+                var json_array = data[number];           //get the first obj from django
+                // var id = json_array.id.toString();  //get the id
+                // var url = json_array.url;           //get url
+                header = json_array.header;             //get header
+                description = json_array.description;
+                priority = json_array.priority;
+                due = json_array.due;
+                Alert.alert(header);
+            })
+            .catch(function (error) {
+                console.log('There has been a problem with your fetch operation: ' + error.message);
+                // ADD THIS THROW error
+                throw error;
+                //t@t.com
+            });
+    }
+
+    render() {
+
+        data = this.getEvent(9)
+
+        return (
+            <View style={styles.container}>
+                <StatusBar barStyle="light-content" />
+                <ActionButton buttonColor="rgba(231,76,60,1)">
+                    <ActionButton.Item buttonColor='#9b59b6' title="Add New Task" onPress={this.enterTask}>
+                        <Icon name="md-create" style={styles.actionButtonIcon} />
+                    </ActionButton.Item>
+                    <ActionButton.Item buttonColor='#1abc9c' title="Go Home" onPress={this.goHome}>
+                        <Icon name="md-done-all" style={styles.actionButtonIcon} />
+                    </ActionButton.Item>
+                </ActionButton>
+            </View>
+        );
+    }
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FFBF00',
+    },
+});
