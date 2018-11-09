@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from .models import Profile, Event, Invite, Calendar, Task
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    #profile = serializer.PrimaryKeyRelatedField(many=False)
+    profile = serializers.HyperlinkedRelatedField(many=False, read_only=True, view_name='profile-detail')
     class Meta:
         model = User
         fields = ('id', 'url', 'username', 'email', 'profile')
