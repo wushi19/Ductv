@@ -35,8 +35,8 @@ export default class TaskClass extends React.Component {
         super(props);
 
         this.state = {
-
-            data: null,
+            isLoading: true,
+            dataSource: null,
             header: null,
             description: null,
             priority: null,
@@ -48,7 +48,22 @@ export default class TaskClass extends React.Component {
             number: null,
 
         }
-    };
+    }
+
+    componentDidMount () {
+        return fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/?format=json')
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    isLoading: false,
+                    dataSource: responseJson
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
 
     // json_funtion = () => {
     //     fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/')
@@ -76,47 +91,73 @@ export default class TaskClass extends React.Component {
         Actions.enterTask()
     }
 
-    getEvent = (number) => {
-        const { data } = this.state;
-        response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/')
-            .then(function (response) {
-                return response.json()
-            })
-            .then(data => {
-                var json_array = data[number];           //get the first obj from django
-                // var id = json_array.id.toString();  //get the id
-                // var url = json_array.url;           //get url
-                header = json_array.header;             //get header
-                description = json_array.description;
-                priority = json_array.priority;
-                due = json_array.due;
-                Alert.alert(header);
-            })
-            .catch(function (error) {
-                console.log('There has been a problem with your fetch operation: ' + error.message);
-                // ADD THIS THROW error
-                throw error;
-                //t@t.com
-            });
-    }
+    // getEvent = (number) => {
+    //     const { data } = this.state;
+    //     response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/')
+    //         .then(function (response) {
+    //             return response.json()
+    //         })
+    //         .then(data => {
+    //             var json_array = data[number];           //get the first obj from django
+    //             // var id = json_array.id.toString();  //get the id
+    //             // var url = json_array.url;           //get url
+    //             header = json_array.header;             //get header
+    //             description = json_array.description;
+    //             priority = json_array.priority;
+    //             due = json_array.due;
+    //             Alert.alert(header);
+    //         })
+    //         .catch(function (error) {
+    //             console.log('There has been a problem with your fetch operation: ' + error.message);
+    //             // ADD THIS THROW error
+    //             throw error;
+    //             //t@t.com
+    //         });
+    // }
 
     render() {
 
-        data = this.getEvent(9)
+        if (this.state.isLoading) {
 
-        return (
-            <View style={styles.container}>
-                <StatusBar barStyle="light-content" />
-                <ActionButton buttonColor="rgba(231,76,60,1)">
-                    <ActionButton.Item buttonColor='#9b59b6' title="Add New Task" onPress={this.enterTask}>
-                        <Icon name="md-create" style={styles.actionButtonIcon} />
-                    </ActionButton.Item>
-                    <ActionButton.Item buttonColor='#1abc9c' title="Go Home" onPress={this.goHome}>
-                        <Icon name="md-done-all" style={styles.actionButtonIcon} />
-                    </ActionButton.Item>
-                </ActionButton>
-            </View>
-        );
+            return (
+                <View style={styles.container}>
+                    <Text>Content is loading</Text>
+                </View>
+            )
+
+        } else {
+            let tasks = this.state.dataSource.map((val, key) => {
+                return <View key = {key} style = {styles.item}>
+                             <Text style = {{fontWeight: 'bold'}}>
+                                 To Do: {val.header} </Text>
+                             <Text> {val.description} </Text>
+                    </View>
+            });
+
+
+            return (
+                <View style={styles.container}>
+                    {tasks}
+                </View>
+            );
+        }
+
+        // return (
+        //     <View style={styles.container}>
+        //
+        //
+        //     <View style={styles.container}>
+        //         <StatusBar barStyle="light-content" />
+        //         <ActionButton buttonColor="rgba(231,76,60,1)">
+        //             <ActionButton.Item buttonColor='#9b59b6' title="Add New Task" onPress={this.enterTask}>
+        //                 <Icon name="md-create" style={styles.actionButtonIcon} />
+        //             </ActionButton.Item>
+        //             <ActionButton.Item buttonColor='#1abc9c' title="Go Home" onPress={this.goHome}>
+        //                 <Icon name="md-done-all" style={styles.actionButtonIcon} />
+        //             </ActionButton.Item>
+        //         </ActionButton>
+        //     </View>
+        // );
     }
 }
 
@@ -127,4 +168,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#FFBF00',
     },
+
+    item: {
+        flex: 1,
+        alignSelf: 'stretch',
+        margin: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: '#eee'
+    }
 });
