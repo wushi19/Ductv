@@ -7,6 +7,7 @@ import {
 import {Agenda} from 'react-native-calendars';
 import ActionButton from "react-native-action-button";
 import Icon from "react-native-vector-icons/Ionicons";
+import {Actions} from "react-native-router-flux";
 
 export default class AgendaScreen extends Component {
     constructor(props) {
@@ -25,23 +26,20 @@ export default class AgendaScreen extends Component {
                 renderItem={this.renderItem.bind(this)}
                 renderEmptyDate={this.renderEmptyDate.bind(this)}
                 rowHasChanged={this.rowHasChanged.bind(this)}
-                // markingType={'period'}
-                // markedDates={{
-                //    '2017-05-08': {textColor: '#666'},
-                //    '2017-05-09': {textColor: '#666'},
-                //    '2017-05-14': {startingDay: true, endingDay: true, color: 'blue'},
-                //    '2017-05-21': {startingDay: true, color: 'blue'},
-                //    '2017-05-22': {endingDay: true, color: 'gray'},
-                //    '2017-05-24': {startingDay: true, color: 'gray'},
-                //    '2017-05-25': {color: 'gray'},
-                //    '2017-05-26': {endingDay: true, color: 'gray'}}}
                 monthFormat={'yyyy'}
-                //theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
-                //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
-
+                button = {this.addButton()}
             />
 
+
         );
+    }
+
+    goHome() {
+        Actions.home()
+    }
+
+    addEvent() {
+        Actions.addEvent()
     }
 
     loadItems(day) {
@@ -79,14 +77,12 @@ export default class AgendaScreen extends Component {
                     }
                 }
                 for (var k = -15; k < 16; k++) {
-                    //const newDay = moment(SelectedDay).add(i, 'day')
                     var newDay = day.timestamp + k * 24 * 60 * 60 * 1000;
                     newDay = new Date(newDay)
                     var strTime = newDay.toISOString().split('T')[0]
                     if (!items[strTime]) {
                         items[strTime] = []
                     }
-                    //return newItems
                 }
                 const SelectedDay = new Date(day.timestamp);
                 for (var k = -15; k < 16; k++) {
@@ -99,24 +95,9 @@ export default class AgendaScreen extends Component {
                     }
 
                 }
-                // const newItems = {};
-                // Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
-                // this.setState({
-                //     items: newItems
-                // });
 
             }
         });
-        // Alert.alert(newItems["2018-11-12"].name)
-
-        //Alert.alert(response)
-        //this.fetchDataFromApi();
-        //header = this.state.data["header"];
-        //header = this.state.items["header"];
-        //time = this.state.data["startTime"]
-
-        //console.log(this.state.items);
-        // console.log(`Load Items for ${day.year}-${day.month}`);
     }
 
     renderItem(item) {
@@ -132,6 +113,16 @@ export default class AgendaScreen extends Component {
         );
     }
 
+    addButton(){
+        <ActionButton buttonColor="rgba(231,76,60,1)">
+            <ActionButton.Item buttonColor='#9b59b6' title="Add New Task" onPress={this.addEvent}>
+                <Icon name="md-create" style={styles.actionButtonIcon} />
+            </ActionButton.Item>
+            <ActionButton.Item buttonColor='#1abc9c' title="Go Home" onPress={this.goHome}>
+                <Icon name="md-done-all" style={styles.actionButtonIcon} />
+            </ActionButton.Item>
+        </ActionButton>
+    }
     rowHasChanged(r1, r2) {
         return r1.name !== r2.name;
     }
@@ -155,5 +146,10 @@ const styles = StyleSheet.create({
         height: 15,
         flex: 1,
         paddingTop: 30
+    },
+    actionButtonIcon:{
+        fontSize: 20,
+        height: 22,
+        color: 'white',
     }
 });
