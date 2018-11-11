@@ -2,18 +2,11 @@ import React, {Component} from 'react';
 import {
     Text,
     View,
-<<<<<<< HEAD
     StyleSheet, Alert, StatusBar
 } from 'react-native';
 import {Agenda} from 'react-native-calendars';
 import ActionButton from "react-native-action-button";
 import Icon from "react-native-vector-icons/Ionicons";
-=======
-    StyleSheet,
-    Alert,
-} from 'react-native';
-import {Agenda} from 'react-native-calendars';
->>>>>>> a4c641d8453506fd03de70378b10780d0fe12cd3
 
 export default class AgendaScreen extends Component {
     constructor(props) {
@@ -32,7 +25,6 @@ export default class AgendaScreen extends Component {
                 renderItem={this.renderItem.bind(this)}
                 renderEmptyDate={this.renderEmptyDate.bind(this)}
                 rowHasChanged={this.rowHasChanged.bind(this)}
-<<<<<<< HEAD
                 // markingType={'period'}
                 // markedDates={{
                 //    '2017-05-08': {textColor: '#666'},
@@ -137,59 +129,6 @@ export default class AgendaScreen extends Component {
     renderEmptyDate(day) {
         return (
             <View style={styles.emptyDate}><Text>Nothing scheduled - Go feed ducks!</Text></View>
-=======
-                monthFormat={'yyyy'}
-            />
-        );
-    }
-
-    loadItems(day) {
-        const {items} = this.state
-        fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/').then(function (response) {
-            return response.json()
-        }).then(function(data) {
-            const newItems = {}
-            for (var i = 0; i < data.length; i++) {
-                var time = data[i]['startTime']
-                var header = data[i]['header']
-                time = new Date(time)
-                var strTime = time.toISOString().split('T')[0]
-                if (!items[strTime]){
-                    items[strTime] = [];
-                }
-                items[strTime].push({
-                    name: header,
-                    height: Math.max(50, Math.floor(Math.random() * 150)),
-                    id: data[i]['id']
-                });
-                this.setState({items: Set(this.state.items)})
-                //return newItems
-            }
-
-
-        });
-        // Alert.alert(newItems["2018-11-12"].name)
-
-        //Alert.alert(response)
-        //this.fetchDataFromApi();
-        //header = this.state.data["header"];
-        //header = this.state.items["header"];
-        //time = this.state.data["startTime"]
-
-        //console.log(this.state.items);
-        // console.log(`Load Items for ${day.year}-${day.month}`);
-    }
-
-    renderItem(item) {
-        return (
-            <View style={[styles.item, {height: item.height}]}><Text>{item.name}</Text></View>
-        );
-    }
-
-    renderEmptyDate() {
-        return (
-            <View style={styles.emptyDate}><Text>This is empty date!</Text></View>
->>>>>>> a4c641d8453506fd03de70378b10780d0fe12cd3
         );
     }
 
@@ -214,11 +153,7 @@ const styles = StyleSheet.create({
     },
     emptyDate: {
         height: 15,
-<<<<<<< HEAD
         flex: 1,
-=======
-        flex:1,
->>>>>>> a4c641d8453506fd03de70378b10780d0fe12cd3
         paddingTop: 30
     }
 });
