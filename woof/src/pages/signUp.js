@@ -23,7 +23,7 @@ import {
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
-import bgImage from '../images/homebkg.jpg'
+import bgImage from '../images/bki 2.jpg'
 import logo from '../images/homelogo.png'
 
 const { width: WIDTH } = Dimensions.get('window');
@@ -225,6 +225,7 @@ export default class signUp extends React.Component {
           <TextInput
             style={styles.input}
             placeholder={'Email address'}
+            autoCapitalize = 'none'
             placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
             underLineColorAndroid='transparent'
             onChangeText={(email) => this.setState({ email })}
