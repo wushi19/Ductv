@@ -95,29 +95,29 @@ export default class TaskClass extends React.Component {
         Actions.enterTask()
     }
 
-    getEvent = (number) => {
-        const { data } = this.state;
-        response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/')
-            .then(function (response) {
-                return response.json()
-            })
-            .then(data => {
-                var json_array = data[number];           //get the first obj from django
-                // var id = json_array.id.toString();  //get the id
-                // var url = json_array.url;           //get url
-                header = json_array.header;             //get header
-                description = json_array.description;
-                priority = json_array.priority;
-                due = json_array.due;
-                Alert.alert(header);
-            })
-            .catch(function (error) {
-                console.log('There has been a problem with your fetch operation: ' + error.message);
-                // ADD THIS THROW error
-                throw error;
-                //t@t.com
-            });
-    }
+    // getEvent = (number) => {
+    //     const { data } = this.state;
+    //     response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/')
+    //         .then(function (response) {
+    //             return response.json()
+    //         })
+    //         .then(data => {
+    //             var json_array = data[number];           //get the first obj from django
+    //             // var id = json_array.id.toString();  //get the id
+    //             // var url = json_array.url;           //get url
+    //             header = json_array.header;             //get header
+    //             description = json_array.description;
+    //             priority = json_array.priority;
+    //             due = json_array.due;
+    //             Alert.alert(header);
+    //         })
+    //         .catch(function (error) {
+    //             console.log('There has been a problem with your fetch operation: ' + error.message);
+    //             // ADD THIS THROW error
+    //             throw error;
+    //             //t@t.com
+    //         });
+    // }
 
     deleteData() {
         item = '3';
