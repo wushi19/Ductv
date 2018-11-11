@@ -82,6 +82,7 @@ export default class Login extends React.Component {
                         placeholder={'Email'}
                         // secureTextEntry={true}
                         placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                        autoCapitalize = 'none'
                         underLineColorAndroid='transparent'
                         onChangeText={(email) => this.setState({ email })}
                         value={this.state.email}
