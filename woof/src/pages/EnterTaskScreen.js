@@ -35,14 +35,14 @@ export default class EnterTaskScreen extends React.Component {
     super(props);
     this.setDate = this.setDate.bind(this);
     this.state = {
-      date:"2016-05-15",
+      
       chosenDate: new Date(),
       date: new Date(),
       showDatePicker: false,
       taskname: '',
       taskdescription: '',
       priority: 0,
-      duration: 0,
+      duration: '00:30',
       due: ''
     }
   }
@@ -118,7 +118,7 @@ Alert.alert("Task Successfully Added.");
             
           <DatePicker
             style={{width: 200}}
-            date={this.state.date}
+            date={this.state.duration}
             mode="time"
             placeholder="select date"
             confirmBtnText="Confirm"
@@ -220,7 +220,7 @@ Alert.alert("Task Successfully Added.");
               }
               // ... You can check the source to find the other keys.
             }}
-            onDateChange={(date) => {this.setState({date: date})}}
+            onDateChange={(date) => {this.setState({duration: date})}}
           />
             <Text style={{paddingTop: 10}}>  Due Time?</Text>
         </View>
