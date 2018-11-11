@@ -8,7 +8,7 @@ from datetime import timedelta, time, datetime, date
 # Create your models here.
 class Profile(models.Model):
     email = models.EmailField(blank=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
 
     #user.profile.stuff
@@ -52,7 +52,7 @@ class Event(models.Model):
         return self.header
 
 class Invite(models.Model):
-    organizer = models.OneToOneField(Profile, on_delete=models.CASCADE, related_name='organizer')
+    organizer = models.OneToOneField(Profile, on_delete=models.CASCADE, null=True, blank=True, related_name='organizer')
     invitee = models.OneToOneField(Profile, on_delete=models.CASCADE)
     accepted = models.BooleanField(default=False)
     event = models.OneToOneField(Event, on_delete=models.CASCADE)

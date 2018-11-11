@@ -27,12 +27,24 @@ export default class Home extends React.Component {
     Actions.enterTask()
   }
 
-  taskdjangotest() {
-    Actions.taskdjangotest()
+  todolist() {
+    Actions.todolist()
   }
 
   testAsyncStorage() {
     Actions.testAsyncStorage()
+  }
+
+  editEvent() {
+    Actions.editEvent()
+  }
+
+  addEvent() {
+    Actions.addEvent()
+  }
+
+  moreInfoEvent(){
+    Actions.moreInfoEvent()
   }
 
 
@@ -55,19 +67,7 @@ export default class Home extends React.Component {
       .catch((error) => {
         console.error(error);
       });
-  }
-  // var url = 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/profile/1/';
-  // var task = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/', {
-  //   method: 'POST',
-  //   contenttype: 'application/json',
-  //     body: JSON.stringify({
-  //       header: 'Post Task 3',
-  //       description: ';lfne[flin]',
-  //       owner: 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/profile/1/',
-  //     }),
-  // });
-  //return task
-  //}
+  } //t@t.com
 
 
   render() {
@@ -80,21 +80,43 @@ export default class Home extends React.Component {
               Calendar
             </Text>
           </TouchableOpacity>
+
           <TouchableOpacity onPress={this.enterTask}>
             <Text style={styles.calendarbutton} >
               Entering Task Screen
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.taskdjangotest}>
+
+          <TouchableOpacity onPress={this.todolist}>
             <Text style={styles.calendarbutton} >
-              Task Class
+              To do list
             </Text>
           </TouchableOpacity>
+
           <TouchableOpacity onPress={this.testAsyncStorage}>
             <Text style={styles.calendarbutton} >
               Test AsyncStorage
             </Text>
           </TouchableOpacity>
+
+          <TouchableOpacity onPress={this.addEvent}>
+            <Text style={styles.calendarbutton} >
+              Add Event
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={this.moreInfoEvent}>
+            <Text style={styles.calendarbutton} >
+              More Info Event
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={this.editEvent}>
+            <Text style={styles.calendarbutton} >
+              Edit Event
+            </Text>
+          </TouchableOpacity>
+
           {/* <TouchableOpacity onPress={this.tasktest}>
             <Text style={styles.calendarbutton} >
               Make a task in Django (this page)
