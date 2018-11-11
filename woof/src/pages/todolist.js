@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, Alert, StyleSheet, AsyncStorage, StatusBar } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 
 // const getuserId = async () => {
 //   let userId = '';
@@ -50,7 +50,7 @@ export default class TaskClass extends React.Component {
         }
     }
 
-    componentDidMount () {
+    componentDidMount() {
         return fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/?format=json')
             .then((response) => response.json())
             .then((responseJson) => {
@@ -127,37 +127,30 @@ export default class TaskClass extends React.Component {
 
         } else {
             let tasks = this.state.dataSource.map((val, key) => {
-                return <View key = {key} style = {styles.item}>
-                             <Text style = {{fontWeight: 'bold'}}>
-                                 To Do: {val.header} </Text>
-                             <Text> {val.description} </Text>
-                    </View>
+                return <View key={key} style={styles.item}>
+                    <Text style={{ fontWeight: 'bold' }}>
+                        To Do: {val.header} </Text>
+                    <Text> {val.description} </Text>
+                </View>
             });
 
 
             return (
                 <View style={styles.container}>
+                    <StatusBar barStyle="light-content" />
                     {tasks}
+                    <ActionButton buttonColor="rgba(231,76,60,1)">
+                        <ActionButton.Item buttonColor='#9b59b6' title="Add New Task" onPress={this.enterTask}>
+                            <Icon name="md-create" style={styles.actionButtonIcon} />
+                        </ActionButton.Item>
+                        <ActionButton.Item buttonColor='#1abc9c' title="Go Home" onPress={this.goHome}>
+                            <Icon name="md-done-all" style={styles.actionButtonIcon} />
+                        </ActionButton.Item>
+                    </ActionButton>
                 </View>
             );
         }
 
-        // return (
-        //     <View style={styles.container}>
-        //
-        //
-        //     <View style={styles.container}>
-        //         <StatusBar barStyle="light-content" />
-        //         <ActionButton buttonColor="rgba(231,76,60,1)">
-        //             <ActionButton.Item buttonColor='#9b59b6' title="Add New Task" onPress={this.enterTask}>
-        //                 <Icon name="md-create" style={styles.actionButtonIcon} />
-        //             </ActionButton.Item>
-        //             <ActionButton.Item buttonColor='#1abc9c' title="Go Home" onPress={this.goHome}>
-        //                 <Icon name="md-done-all" style={styles.actionButtonIcon} />
-        //             </ActionButton.Item>
-        //         </ActionButton>
-        //     </View>
-        // );
     }
 }
 
@@ -175,7 +168,7 @@ const styles = StyleSheet.create({
         margin: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        borderBottomWidth: 1,
+        borderBottomWidth: 0,
         borderBottomColor: '#eee'
     }
 });
