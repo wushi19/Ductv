@@ -47,6 +47,10 @@ export default class Home extends React.Component {
     Actions.moreInfoEvent()
   }
 
+  scratchPaper() {
+    Actions.scratchPaper()
+  }
+
 
   tasktest = () => {
     fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/', {
@@ -67,7 +71,7 @@ export default class Home extends React.Component {
       .catch((error) => {
         console.error(error);
       });
-  } //t@t.com
+  } 
 
 
   render() {
@@ -114,6 +118,12 @@ export default class Home extends React.Component {
           <TouchableOpacity onPress={this.editEvent}>
             <Text style={styles.calendarbutton} >
               Edit Event
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={this.scratchPaper}>
+            <Text style={styles.scratchPaper} >
+              Scratch Page
             </Text>
           </TouchableOpacity>
 
