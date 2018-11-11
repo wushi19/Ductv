@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "moment": "^2.22.2",
+    "moment-timezone": "^0.5.23",
     "react": "16.6.0-alpha.8af6728",
+    "react-moment": "^0.8.3",
     "react-native": "^0.57.4",
     "react-native-action-button": "^2.8.5",
     "react-native-calendar-events": "^1.6.3",

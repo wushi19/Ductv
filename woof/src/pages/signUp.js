@@ -27,7 +27,6 @@ import bgImage from '../images/homebkg.jpg'
 import logo from '../images/homelogo.png'
 
 const { width: WIDTH } = Dimensions.get('window');
-const EMAIL = 'soe.mailbox@gmial.com';
 
 // createUser = (username, email) =>{
 //   fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/', {
