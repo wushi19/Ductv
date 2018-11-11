@@ -64,6 +64,10 @@ export default class Login extends React.Component {
       });
     }
 
+    goHome(){
+        Actions.home()
+    }
+
     render() {
         return (
             <ImageBackground source={bgImage} style={styles.backgroundContainer}>
@@ -86,7 +90,7 @@ export default class Login extends React.Component {
                 </View>
 
                 <TouchableOpacity
-                    onPress={this.validHome}
+                    onPress={this.goHome}
                     style={styles.btnLogin}
                 >
                 <Text style = {styles.btnLoginText}> Log in </Text>

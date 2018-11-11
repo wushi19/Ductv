@@ -67,7 +67,7 @@ export default class Home extends React.Component {
       .catch((error) => {
         console.error(error);
       });
-  } //t@t.com
+  } 
 
 
   render() {

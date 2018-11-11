@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, View, Alert, StyleSheet, AsyncStorage, StatusBar } from 'react-native';
+import { Text, View, Alert, StyleSheet, AsyncStorage, StatusBar, ScrollView, FlatList } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
+import Moment from 'react-moment';
 
 // const getuserId = async () => {
 //   let userId = '';
@@ -28,13 +29,13 @@ import { Actions } from 'react-native-router-flux';
 //     return profileId;
 //   } 
 
-
 export default class TaskClass extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
+            data: null,
             isLoading: true,
             dataSource: null,
             header: null,
@@ -45,12 +46,14 @@ export default class TaskClass extends React.Component {
             due: null,
             owner: 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/profile/2/',
             task: null,
-            number: null,
+            curTime: null,
+            item: null,
 
         }
     }
 
     componentDidMount() {
+        setInterval(function(){this.setState({curTime: new  Date().toLocaleString()});}.bind(this), 1000);
         return fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/?format=json')
             .then((response) => response.json())
             .then((responseJson) => {
@@ -63,7 +66,6 @@ export default class TaskClass extends React.Component {
                 console.log(error)
             });
     }
-
 
     // json_funtion = () => {
     //     fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/')
@@ -84,36 +86,47 @@ export default class TaskClass extends React.Component {
     // }
 
     goHome() {
-        Actions.home()
+
+        Alert.alert(currentTime.toString())
+
     }
 
     enterTask() {
         Actions.enterTask()
     }
 
-    // getEvent = (number) => {
-    //     const { data } = this.state;
-    //     response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/')
-    //         .then(function (response) {
-    //             return response.json()
-    //         })
-    //         .then(data => {
-    //             var json_array = data[number];           //get the first obj from django
-    //             // var id = json_array.id.toString();  //get the id
-    //             // var url = json_array.url;           //get url
-    //             header = json_array.header;             //get header
-    //             description = json_array.description;
-    //             priority = json_array.priority;
-    //             due = json_array.due;
-    //             Alert.alert(header);
-    //         })
-    //         .catch(function (error) {
-    //             console.log('There has been a problem with your fetch operation: ' + error.message);
-    //             // ADD THIS THROW error
-    //             throw error;
-    //             //t@t.com
-    //         });
-    // }
+    getEvent = (number) => {
+        const { data } = this.state;
+        response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/')
+            .then(function (response) {
+                return response.json()
+            })
+            .then(data => {
+                var json_array = data[number];           //get the first obj from django
+                // var id = json_array.id.toString();  //get the id
+                // var url = json_array.url;           //get url
+                header = json_array.header;             //get header
+                description = json_array.description;
+                priority = json_array.priority;
+                due = json_array.due;
+                Alert.alert(header);
+            })
+            .catch(function (error) {
+                console.log('There has been a problem with your fetch operation: ' + error.message);
+                // ADD THIS THROW error
+                throw error;
+                //t@t.com
+            });
+    }
+
+    deleteData() {
+        item = '3';
+        var url = "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/";
+        return fetch(url + '/' + item +'/', {
+          method: 'DELETE'
+        })
+        .then(response => response.json());
+    }      
 
     render() {
 
@@ -129,16 +142,20 @@ export default class TaskClass extends React.Component {
             let tasks = this.state.dataSource.map((val, key) => {
                 return <View key={key} style={styles.item}>
                     <Text style={{ fontWeight: 'bold' }}>
-                        To Do: {val.header} </Text>
+                        {val.header} </Text>
                     <Text> {val.description} </Text>
                 </View>
             });
 
-
             return (
                 <View style={styles.container}>
                     <StatusBar barStyle="light-content" />
-                    {tasks}
+
+                    <Text style={styles.title}>Today</Text>
+                    <Text style={styles.time}>{this.state.curTime}</Text>
+                    <ScrollView style={styles.mostImportantScroll}>
+                        {tasks}  
+                    </ScrollView>
                     <ActionButton buttonColor="rgba(231,76,60,1)">
                         <ActionButton.Item buttonColor='#9b59b6' title="Add New Task" onPress={this.enterTask}>
                             <Icon name="md-create" style={styles.actionButtonIcon} />
@@ -157,8 +174,6 @@ export default class TaskClass extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#FFBF00',
     },
 
@@ -166,9 +181,28 @@ const styles = StyleSheet.create({
         flex: 1,
         alignSelf: 'stretch',
         margin: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
+        // alignItems: 'center',
+        // justifyContent: 'center',
         borderBottomWidth: 0,
         borderBottomColor: '#eee'
+    },
+    title: {
+        textAlign: 'center',
+        color: 'white',
+        fontSize: 20,
+        fontWeight: '500',
+        marginTop: 60,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    mostImportantScroll: {
+        flex: 0.5,
+    },
+    time: {
+        textAlign: 'center',
+        color: 'white',
+        fontWeight: '500',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
