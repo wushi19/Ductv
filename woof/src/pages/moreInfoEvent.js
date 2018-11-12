@@ -93,25 +93,25 @@ export default class moreInfoEvent extends React.Component {
 
                     return <View key={key} style={styles.eventContainer}>
 
-                    <Text style={styles.title}>Event Information</Text>
+                        <Text style={styles.title}>Event Information</Text>
 
-                    <Text style={styles.statictextDescriptors}>Event:</Text>
-                    <Text>{val.header}</Text>
+                        <Text style={styles.statictextDescriptors}>Event:</Text>
+                        <Text>{this.props.header}</Text>
 
-                    <Text style={styles.statictextDescriptors}>Location:</Text>
-                    <Text>{location}</Text>
+                        <Text style={styles.statictextDescriptors}>Location:</Text>
+                        <Text>{this.props.loc}</Text>
 
-                    <Text style={styles.statictextDescriptors}>Date:</Text>
-                    <Text>{date}</Text>
+                        <Text style={styles.statictextDescriptors}>Date:</Text>
+                        <Text>{this.props.date}</Text>
 
-                    <Text style={styles.statictextDescriptors}>Start Time:</Text>
-                    <Text>{time}</Text>
+                        <Text style={styles.statictextDescriptors}>Start Time:</Text>
+                        <Text>{this.props.startTime}</Text>
 
-                    <Text style={styles.statictextDescriptors}>End Time:</Text>
-                    <Text>{endtime}</Text>
-                
-                    <Text style={styles.statictextDescriptors}>Details:</Text>
-                    <Text>{val.description}</Text>
+                        <Text style={styles.statictextDescriptors}>End Time:</Text>
+                        <Text>{this.props.endTime}</Text>
+
+                        <Text style={styles.statictextDescriptors}>Details:</Text>
+                        <Text>{this.props.desc}</Text>
 
                     </View>
                 }

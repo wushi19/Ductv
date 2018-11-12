@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {
     Text,
     View,
+    TouchableHighlight,
     StyleSheet, Alert, StatusBar
 } from 'react-native';
 import {Agenda} from 'react-native-calendars';
@@ -27,10 +28,8 @@ export default class AgendaScreen extends Component {
                 renderEmptyDate={this.renderEmptyDate.bind(this)}
                 rowHasChanged={this.rowHasChanged.bind(this)}
                 monthFormat={'yyyy'}
-                button = {this.addButton()}
+                button={this.addButton()}
             />
-
-
         );
     }
 
@@ -40,6 +39,17 @@ export default class AgendaScreen extends Component {
 
     addEvent() {
         Actions.addEvent()
+    }
+
+    seeEvent(item) {
+        Actions.moreInfoEvent({
+            header: item.name,
+            startTime: item.startTime,
+            endTime: item.endTime,
+            desc: item.desc,
+            date: item.date,
+            loc: item.loc
+        })
     }
 
     loadItems(day) {
@@ -53,10 +63,17 @@ export default class AgendaScreen extends Component {
                 var header = data[i]['header']
                 time = new Date(time)
                 var strTime = time.toISOString().split('T')[0]
+                var endtime = new Date(data[i]['endtime'])
+                var endtime = endtime.toISOString().split('T')[1]
                 if (!items[strTime]) {
                     items[strTime] = [];
                     items[strTime].push({
                         name: header,
+                        date: strTime,
+                        startTime: time.toISOString().split('T')[1],
+                        endTime: endtime,
+                        desc: data[i]['description'],
+                        loc: data[i]['location'],
                         height: Math.max(50, Math.floor(Math.random() * 150)),
                         id: data[i]['id']
                     });
@@ -93,17 +110,18 @@ export default class AgendaScreen extends Component {
                     if (!items[strTime]) {
                         items[strTime] = []
                     }
-
                 }
-
             }
         });
     }
 
     renderItem(item) {
         return (
-            <View style={[styles.item, {height: item.height}]}><Text>{item.name}</Text>
-            </View>
+            <TouchableHighlight onPress={() => this.seeEvent(item)}>
+                <View style={[styles.item, {height: item.height}]}><Text>{item.name}</Text>
+                </View>
+            </TouchableHighlight>
+
         );
     }
 
@@ -113,16 +131,17 @@ export default class AgendaScreen extends Component {
         );
     }
 
-    addButton(){
+    addButton() {
         <ActionButton buttonColor="rgba(231,76,60,1)">
             <ActionButton.Item buttonColor='#9b59b6' title="Add New Task" onPress={this.addEvent}>
-                <Icon name="md-create" style={styles.actionButtonIcon} />
+                <Icon name="md-create" style={styles.actionButtonIcon}/>
             </ActionButton.Item>
             <ActionButton.Item buttonColor='#1abc9c' title="Go Home" onPress={this.goHome}>
-                <Icon name="md-done-all" style={styles.actionButtonIcon} />
+                <Icon name="md-done-all" style={styles.actionButtonIcon}/>
             </ActionButton.Item>
         </ActionButton>
     }
+
     rowHasChanged(r1, r2) {
         return r1.name !== r2.name;
     }
@@ -147,7 +166,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 30
     },
-    actionButtonIcon:{
+    actionButtonIcon: {
         fontSize: 20,
         height: 22,
         color: 'white',

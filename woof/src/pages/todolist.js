@@ -153,9 +153,14 @@ export default class todolist extends React.Component {
 
                     <Text style={styles.title}>Today</Text>
                     <Text style={styles.time}>{this.state.curTime}</Text>
-                    <ScrollView style={styles.mostImportantScroll}>
-                        {tasks}  
-                    </ScrollView>
+                    {/*<ScrollView style={styles.mostImportantScroll}>*/}
+                        {/*{tasks}  */}
+                    {/*</ScrollView>*/}
+                    <FlatList
+                        data={this.state.dataSource}
+                        keyExtrator = {this._keyExtractor}
+                        renderItem={({item}) => <Text> {item.header}, {item.description} </Text>}
+                    />
                     <ActionButton buttonColor="rgba(231,76,60,1)">
                         <ActionButton.Item buttonColor='#9b59b6' title="Add New Task" onPress={this.enterTask}>
                             <Icon name="md-create" style={styles.actionButtonIcon} />
