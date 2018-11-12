@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, View, Alert, StyleSheet, AsyncStorage, StatusBar, ScrollView, FlatList } from 'react-native';
+import { Alert, StyleSheet, AsyncStorage, StatusBar, ScrollView, FlatList } from 'react-native';
+import { Text, View, SwipeRow, Button } from 'native-base';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
@@ -119,14 +120,27 @@ export default class todolist extends React.Component {
     //         });
     // }
 
-    deleteData() {
-        item = '3';
+    deleteData(taskId) {
         var url = "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/";
-        return fetch(url + '/' + item +'/', {
+        return fetch(url + '/' + taskId +'/', {
           method: 'DELETE'
         })
         .then(response => response.json());
-    }      
+    }
+
+    updateData() {
+        return fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/?format=json')
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    isLoading: false,
+                    dataSource: responseJson
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
 
     render() {
 
@@ -150,17 +164,36 @@ export default class todolist extends React.Component {
             return (
                 <View style={styles.container}>
                     <StatusBar barStyle="light-content" />
-
                     <Text style={styles.title}>Today</Text>
                     <Text style={styles.time}>{this.state.curTime}</Text>
-                    {/*<ScrollView style={styles.mostImportantScroll}>*/}
-                        {/*{tasks}  */}
-                    {/*</ScrollView>*/}
-                    <FlatList
-                        data={this.state.dataSource}
-                        keyExtrator = {this._keyExtractor}
-                        renderItem={({item}) => <Text> {item.header}, {item.description} </Text>}
-                    />
+                    <ScrollView style={styles.mostImportantScroll}>
+                        <FlatList
+                            data={this.state.dataSource}
+                            keyExtrator = {this._keyExtractor}
+                            renderItem={({item}) => <SwipeRow
+                                leftOpenValue={75}
+                                rightOpenValue={-75}
+                                left={
+                                    <Button success onPress={() => alert(item.header)}>
+                                        <Text> left </Text>
+                                    </Button>
+                                }
+                                body={
+                                    <Text style={{paddingLeft: 15, fontWeight: 'bold'}}>
+                                        {item.header}
+                                        <Text style={{fontWeight: 'normal'}}> {item.description} </Text>
+                                    </Text>
+                                }
+                                right={
+                                    <Button danger onPress={() => this.deleteData(item.id)
+                                        .then(this.updateData())}>
+                                        <Text> delete </Text>
+                                    </Button>
+                                }
+                            />}
+                        />
+                    </ScrollView>
+
                     <ActionButton buttonColor="rgba(231,76,60,1)">
                         <ActionButton.Item buttonColor='#9b59b6' title="Add New Task" onPress={this.enterTask}>
                             <Icon name="md-create" style={styles.actionButtonIcon} />
@@ -169,6 +202,7 @@ export default class todolist extends React.Component {
                             <Icon name="md-done-all" style={styles.actionButtonIcon} />
                         </ActionButton.Item>
                     </ActionButton>
+
                 </View>
             );
         }
