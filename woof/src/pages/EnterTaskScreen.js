@@ -46,7 +46,7 @@ export default class EnterTaskScreen extends React.Component {
       chosenpri: 0,
       duration: '00:30',
       chosendur: '30',
-      chosendue: "2018-11-12T15:30",
+      chosendue: null,
       checkdur: false,
       checkpri: false,
       checkdate: false,
@@ -70,9 +70,9 @@ export default class EnterTaskScreen extends React.Component {
           if(this.state.checkpri) this.state.chosenpri =  this.state.priority;
           if(this.state.checkdate) {
               if(this.state.checktime){
-                  this.state.chosendue = this.state.dated + 'T' + this.state.timed + ':00-05:00';
+                  this.state.chosendue = this.state.dated + ' ' + this.state.timed;
               } else{
-                  this.state.chosendue = this.state.dated + 'T00:00:00-05:00';
+                  this.state.chosendue = this.state.dated + ' 00:00';
               }
           }
           this.tasktest();
