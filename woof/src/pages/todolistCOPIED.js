@@ -1,6 +1,5 @@
 // this is someone else's coded todo list to reference 
 
-// this is nandar's page
 // import React, { Component } from "react";
 // import {
 //   AppRegistry,

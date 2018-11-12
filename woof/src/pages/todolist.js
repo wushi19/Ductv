@@ -186,14 +186,22 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0,
         borderBottomColor: '#eee'
     },
+    // title: {
+    //     textAlign: 'center',
+    //     color: 'white',
+    //     fontSize: 20,
+    //     fontWeight: '500',
+    //     marginTop: 60,
+    //     alignItems: 'center',
+    //     justifyContent: 'center'
+    // },
     title: {
         textAlign: 'center',
-        color: 'white',
-        fontSize: 20,
-        fontWeight: '500',
+        color: '#fff',
+        fontSize: 36,
         marginTop: 60,
-        alignItems: 'center',
-        justifyContent: 'center'
+        marginBottom: 30,
+        fontWeight: '300'
     },
     mostImportantScroll: {
         flex: 0.5,
