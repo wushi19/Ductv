@@ -87,7 +87,7 @@ export default class TaskClass extends React.Component {
 
     goHome() {
 
-        Alert.alert(currentTime.toString())
+        Actions.home()
 
     }
 
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 36,
         marginTop: 60,
-        marginBottom: 30,
+        marginBottom: 20,
         fontWeight: '300'
     },
     mostImportantScroll: {
