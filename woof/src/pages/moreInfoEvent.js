@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
 import bkg from '../images/yellowbkg.jpg';
 
-export default class TaskClass extends React.Component {
+export default class moreInfoEvent extends React.Component {
 
     constructor(props) {
         super(props);

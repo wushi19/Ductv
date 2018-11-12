@@ -29,7 +29,7 @@ import Moment from 'react-moment';
 //     return profileId;
 //   } 
 
-export default class TaskClass extends React.Component {
+export default class todolist extends React.Component {
 
     constructor(props) {
         super(props);

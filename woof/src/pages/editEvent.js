@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
-export default class Validate extends React.Component {
+export default class editEvents extends React.Component {
   render() {
     return (
       <View style={styles.container}>
