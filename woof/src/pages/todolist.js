@@ -125,7 +125,6 @@ export default class todolist extends React.Component {
         return fetch(url + '/' + taskId +'/', {
           method: 'DELETE'
         })
-        .then(response => response.json());
     }
 
     updateData() {
