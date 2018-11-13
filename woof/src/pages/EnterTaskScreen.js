@@ -75,10 +75,10 @@ export default class EnterTaskScreen extends React.Component {
                   this.state.chosendue = this.state.dated + ' 00:00';
               }
           }
-          this.tasktest();
+          this.tasktest()
+          this.props.navigation.navigate('todolist')
       }
-      
-  }
+  };
   
   changedur(){
     this.setState({
@@ -134,7 +134,6 @@ Alert.alert("Task Successfully Added.");
 }
 
   render() {
-            
     return (
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <Text style={styles.getStartedText}>WHAT NEEDS TO GET DONE?</Text>
@@ -276,8 +275,6 @@ Alert.alert("Task Successfully Added.");
           />
             <Text style={{paddingTop: 10}}>  Due Time?</Text>
         </View>
-        
-        
         
         <View style={styles.addButtonContainer}>
           <Button
