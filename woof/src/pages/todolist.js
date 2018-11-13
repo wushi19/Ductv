@@ -152,13 +152,13 @@ export default class todolist extends React.Component {
             )
 
         } else {
-            let tasks = this.state.dataSource.map((val, key) => {
-                return <View key={key} style={styles.item}>
-                    <Text style={{ fontWeight: 'bold' }}>
-                        {val.header} </Text>
-                    <Text> {val.description} </Text>
-                </View>
-            });
+            // let tasks = this.state.dataSource.map((val, key) => {
+            //     return <View key={key} style={styles.item}>
+            //         <Text style={{ fontWeight: 'bold' }}>
+            //             {val.header} </Text>
+            //         <Text> {val.description} </Text>
+            //     </View>
+            // });
 
             return (
                 <View style={styles.container}>
