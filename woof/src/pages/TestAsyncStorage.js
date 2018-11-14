@@ -39,11 +39,13 @@ export default class Validate extends React.Component {
 
 //Stores strings in the text field to async with key testdat
   storeData = () =>{
-    var addingdata = this.state.addingdata;
-    var testData = addingdata;
+    //var addingdata = this.state.addingdata;
+    //var testData = addingdata;
+    var testData = {"a":1, "b":2};
+    testData = JSON.stringify(testData);
     try {
       answer = AsyncStorage.setItem('testdat', testData);
-      //Alert.alert('storing: '+ testData);
+      Alert.alert('storing: '+ testData);
     } catch (error) {
   // Error saving data
     }
