@@ -16,18 +16,30 @@ import {Actions} from 'react-native-router-flux';
 
 const { width: WIDTH } = Dimensions.get('window');
 
+//Gets value related to key parameter
+function getData(key){
+  try {
+    rec = AsyncStorage.getItem(String(key), (error, val) =>{
+      return val;
+    });
+  } catch (error){
+    return "None to show"
+  }
+}
+
 export default class Validate extends React.Component {
   constructor() {
     super();
 
     this.state = {
       addingdata: "",
+      gettingkey:"",
     }
   }
 
 //Stores strings in the text field to async with key testdat
   storeData = () =>{
-    const {addingdata} = this.state;
+    var addingdata = this.state.addingdata;
     var testData = addingdata;
     try {
       answer = AsyncStorage.setItem('testdat', testData);
@@ -39,23 +51,24 @@ export default class Validate extends React.Component {
 
   //click alert data to show displayed data
   showData = () =>{
+    var getkey = String(this.state.gettingkey);
+    Alert.alert(getData(getkey));
+    // try {
+    //   rec = AsyncStorage.getItem(getkey, (error, val) =>{
+    //     Alert.alert(val);
+    //   });
+    // } catch (error){
+    //
+    // }
+  }
+
+  showTest = () =>{
     try {
       rec = AsyncStorage.getItem('testdat', (error, val) =>{
         Alert.alert(val);
       });
     } catch (error){
 
-    }
-  }
-
-//Gets value related to key parameter
-  getData = (key) =>{
-    try {
-      rec = AsyncStorage.getItem(key, (error, val) =>{
-        return val;
-      });
-    } catch (error){
-      return "None to show"
     }
   }
 
@@ -87,8 +100,36 @@ export default class Validate extends React.Component {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.showData}>
-          <Text>Alert Data</Text>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder={'key'}
+            placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+            underLineColorAndroid='transparent'
+            onChangeText={(gettingkey) => this.setState({ gettingkey })}
+            value={this.state.gettingkey}
+          />
+        </View>
+
+
+
+
+        <TouchableOpacity style={styles.btnLogin}>
+          <Button
+            color='rgba(255, 255, 255, 0.7)'
+            title="show"
+            fontSize='16'
+            onPress={this.showData}
+          />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.btnLogin}>
+          <Button
+            color='rgba(255, 255, 255, 0.7)'
+            title="testData"
+            fontSize='16'
+            onPress={this.showTest}
+          />
         </TouchableOpacity>
 
       </View>

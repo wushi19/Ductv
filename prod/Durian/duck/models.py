@@ -43,7 +43,7 @@ class Event(models.Model):
     startTime = models.DateTimeField(null=True)
     endtime = models.DateTimeField(null=True, blank=True)
     timezone = models.CharField(default='EST', max_length=3)
-    recurring = models.BooleanField(default=False)
+    recurring = models.CharField(max_length=14, null=True, blank=True)
     private = models.BooleanField(default=True)
     calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE, related_name='events')
     location = models.TextField(blank=True, null=True)
