@@ -20,7 +20,7 @@ const { width: WIDTH } = Dimensions.get('window');
 function getData(key){
   try {
     rec = AsyncStorage.getItem(String(key), (error, val) =>{
-      return val;
+      Alert.alert(val);
     });
   } catch (error){
     return "None to show"
@@ -52,7 +52,7 @@ export default class Validate extends React.Component {
   //click alert data to show displayed data
   showData = () =>{
     var getkey = String(this.state.gettingkey);
-    Alert.alert(getData(getkey));
+    getData(getkey);
     // try {
     //   rec = AsyncStorage.getItem(getkey, (error, val) =>{
     //     Alert.alert(val);
