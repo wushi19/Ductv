@@ -133,7 +133,7 @@ export default class AgendaScreen extends Component {
 
     addButton() {
         <ActionButton buttonColor="rgba(231,76,60,1)">
-            <ActionButton.Item buttonColor='#9b59b6' title="Add New Task" onPress={this.addEvent}>
+            <ActionButton.Item buttonColor='#9b59b6' title="Add New Event" onPress={this.addEvent}>
                 <Icon name="md-create" style={styles.actionButtonIcon}/>
             </ActionButton.Item>
             <ActionButton.Item buttonColor='#1abc9c' title="Go Home" onPress={this.goHome}>

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text, View, Alert, StyleSheet, AsyncStorage, StatusBar, ImageBackground } from 'react-native';
+import {Text, View, Alert, StyleSheet, AsyncStorage, StatusBar, ImageBackground} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Actions } from 'react-native-router-flux';
+import {Actions} from 'react-native-router-flux';
 import bkg from '../images/yellowbkg.jpg';
 
 export default class moreInfoEvent extends React.Component {
@@ -67,67 +67,36 @@ export default class moreInfoEvent extends React.Component {
     }
 
     render() {
-        const {id} = this.state;
-        if (this.state.isLoading) {
+        return (
+            <View style={styles.container}>
+                <StatusBar barStyle="light-content"/>
+                <View style={styles.eventContainer}>
 
-            return (
-                <View style={styles.container}>
-                    <Text>Content is loading</Text>
-                </View>
-            )
+                    <Text style={styles.title}>Event Information</Text>
 
-        } else {
-            let tasks = this.state.dataSource.map((val, key) => {
-                if(key == id){
-                    var rawDateStart = val.startTime
-                    date = rawDateStart.substring(0, 10)
-                    time = rawDateStart.substring(11,16)
+                    <Text style={styles.statictextDescriptors}>Event:</Text>
+                    <Text>{this.props.header}</Text>
 
-                    var rawDateEnd = val.endtime
-                    endtime = rawDateEnd.substring(11,16)
+                    <Text style={styles.statictextDescriptors}>Location:</Text>
+                    <Text>{this.props.loc}</Text>
 
-                    var location = val.location;
-                    if(location == ""){
-                        location = "-";
-                    }
+                    <Text style={styles.statictextDescriptors}>Date:</Text>
+                    <Text>{this.props.date}</Text>
 
-                    return <View key={key} style={styles.eventContainer}>
+                    <Text style={styles.statictextDescriptors}>Start Time:</Text>
+                    <Text>{this.props.startTime}</Text>
 
-                        <Text style={styles.title}>Event Information</Text>
+                    <Text style={styles.statictextDescriptors}>End Time:</Text>
+                    <Text>{this.props.endTime}</Text>
 
-                        <Text style={styles.statictextDescriptors}>Event:</Text>
-                        <Text>{this.props.header}</Text>
-
-                        <Text style={styles.statictextDescriptors}>Location:</Text>
-                        <Text>{this.props.loc}</Text>
-
-                        <Text style={styles.statictextDescriptors}>Date:</Text>
-                        <Text>{this.props.date}</Text>
-
-                        <Text style={styles.statictextDescriptors}>Start Time:</Text>
-                        <Text>{this.props.startTime}</Text>
-
-                        <Text style={styles.statictextDescriptors}>End Time:</Text>
-                        <Text>{this.props.endTime}</Text>
-
-                        <Text style={styles.statictextDescriptors}>Details:</Text>
-                        <Text>{this.props.desc}</Text>
-
-                    </View>
-                }
-                else{
-                    <Text>Error no such event!</Text>
-                }
-            });
-            return (
-                <View style={styles.container}>
-                    <StatusBar barStyle="light-content" />
-                    {tasks}
-                    <ActionButton buttonColor="rgba(231,76,60,1)" onPress={this.editEvent} />
+                    <Text style={styles.statictextDescriptors}>Details:</Text>
+                    <Text>{this.props.desc}</Text>
 
                 </View>
-            );
-        }
+                <ActionButton buttonColor="rgba(231,76,60,1)" onPress={this.editEvent}/>
+
+            </View>
+        );
     }
 }
 
