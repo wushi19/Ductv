@@ -102,7 +102,8 @@ export default class signUp extends React.Component {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        Alert.alert("You did it. User is created.");
+        Alert.alert(JSON.stringify(responseJson));
+        //Alert.alert("You did it. User is created.");
       })
       .catch((error) => {
         console.error(error);
@@ -171,7 +172,13 @@ export default class signUp extends React.Component {
       })
         .then((response) => response.json())
         .then((responseJson) => {
-          Actions.home()
+          var usr = JSON.stringify(responseJson);
+          try {
+            answer = AsyncStorage.setItem('user', usr);
+            Actions.home();
+          } catch (error) {
+            Alert.alert("oh shit waddup");
+          }
         })
         .catch((error) => {
           console.error(error);

@@ -27,6 +27,21 @@ function getData(key){
   }
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// try {
+//   res = AsyncStorage.getItem('user', (error, val) =>{
+//     //
+//     //
+//     //YOUR CODE HERE
+//     //
+//     //
+//   });
+// } catch (error){
+//   res = "YA DONE GOOFED";
+// }
+///////////////////////////////////////////////////////////////////////////////
+
+
 export default class Validate extends React.Component {
   constructor() {
     super();
@@ -70,7 +85,7 @@ export default class Validate extends React.Component {
         Alert.alert(val);
       });
     } catch (error){
-
+      Alert.alert("OH NO MY DUDE");
     }
   }
 
