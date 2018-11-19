@@ -59,13 +59,33 @@ export default class Login extends React.Component {
           }
           //Alert.alert()
           if (loggedInUser != null){
-            Actions.home()
+            try {
+              loggedInUser = JSON.stringify(loggedInUser);
+              answer = AsyncStorage.setItem('user', loggedInUser);
+              Actions.home();
+            } catch (error) {
+              Alert.alert("oh shit waddup");
+            }
           } else { Alert.alert("Invalid Email")}
       });
     }
 
     goHome(){
-        Actions.home()
+      fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/3/')
+        .then(function(response) {
+          return response.json()
+        })
+        .then(function(myJson){
+          var user = JSON.stringify(myJson);
+          try {
+            answer = AsyncStorage.setItem('user', user);
+            Actions.home()
+          } catch (error) {
+            Alert.alert("oh shit waddup");
+          }
+          //Alert.alert(user);
+          //usr = JSON.parse(usr);
+      });
     }
 
     render() {
