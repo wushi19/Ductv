@@ -78,10 +78,16 @@ export default class AgendaScreen extends Component {
                 var time = data[i]['startTime']
                 var header = data[i]['header']
                 time = new Date(time)
+                //var timeMoment = moment(time)
                 var strTime = time.toISOString().split('T')[0]
                 var endtime = new Date(data[i]['endtime'])
+                //var endTimeMoment = moment(endtime)
+                var len = ((endtime - time)/60)/1000
                 var endtime = endtime.toISOString().split('T')[1]
                 var year = strTime.slice(0,4)
+                //var len = endTimeMoment.diff(timeMoment);
+                //var lenMoment = moment(len)
+                //Alert.alert(lenMoment.hours())
                 //this.cleanTime(endtime)
                 if (!items[strTime]) {
                     items[strTime] = [];
@@ -92,7 +98,7 @@ export default class AgendaScreen extends Component {
                         endTime: endtime.slice(0, -8),
                         desc: data[i]['description'],
                         loc: data[i]['location'],
-                        height: Math.max(50, Math.floor(Math.random() * 150)),
+                        height: Math.max(30, Math.floor(len)),
                         id: data[i]['id']
                     });
                 }
@@ -106,7 +112,12 @@ export default class AgendaScreen extends Component {
                     if (!dupe) {
                         items[strTime].push({
                             name: header,
-                            height: Math.max(50, Math.floor(Math.random() * 150)),
+                            date: strTime.slice(5,10) + "-" + year,
+                            startTime: time.toISOString().split('T')[1].slice(0, -8),
+                            endTime: endtime.slice(0, -8),
+                            desc: data[i]['description'],
+                            loc: data[i]['location'],
+                            height: Math.max(30, Math.floor(len)),
                             id: data[i]['id']
                         });
                     }
@@ -175,9 +186,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightblue',
         flex: 1,
         borderRadius: 5,
-        padding: 10,
-        marginRight: 10,
-        marginTop: 17
+        padding: 10//,
+ //       marginRight: 10//,
+ //       marginTop: 17
     },
     emptyDate: {
         height: 15,
