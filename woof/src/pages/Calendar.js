@@ -9,7 +9,6 @@ import {Agenda} from 'react-native-calendars';
 import ActionButton from "react-native-action-button";
 import Icon from "react-native-vector-icons/Ionicons";
 import {Actions} from "react-native-router-flux";
-import * as moment from "moment";
 
 export default class AgendaScreen extends Component {
     constructor(props) {
@@ -53,21 +52,6 @@ export default class AgendaScreen extends Component {
         })
     }
 
-    // cleanTime(time){
-    //     var hours = time.slice(0, 2);
-    //     Alert.alert(hours);
-    //     var morn = " AM";
-    //     hours = Number(hours);
-    //     if (hours > 12){
-    //         morn = " PM";
-    //         hours = hours - 12
-    //     }
-    //     var adjTime = hours + time.slice(3, -8) + morn
-    //     Alert.alert(adjTime)
-    //     return adjTime
-    // }
-
-
     loadItems(day) {
         const {items} = this.state
         fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/').then(function (response) {
@@ -78,17 +62,11 @@ export default class AgendaScreen extends Component {
                 var time = data[i]['startTime']
                 var header = data[i]['header']
                 time = new Date(time)
-                //var timeMoment = moment(time)
                 var strTime = time.toISOString().split('T')[0]
                 var endtime = new Date(data[i]['endtime'])
-                //var endTimeMoment = moment(endtime)
                 var len = ((endtime - time)/60)/1000
                 var endtime = endtime.toISOString().split('T')[1]
                 var year = strTime.slice(0,4)
-                //var len = endTimeMoment.diff(timeMoment);
-                //var lenMoment = moment(len)
-                //Alert.alert(lenMoment.hours())
-                //this.cleanTime(endtime)
                 if (!items[strTime]) {
                     items[strTime] = [];
                     items[strTime].push({
@@ -129,10 +107,8 @@ export default class AgendaScreen extends Component {
                     if (!items[strTime]) {
                         items[strTime] = []
                     }
-                }
-                const SelectedDay = new Date(day.timestamp);
+                };
                 for (var k = -15; k < 16; k++) {
-                    //const newDay = moment(SelectedDay).add(i, 'day')
                     var newDay = day.timestamp + k * 24 * 60 * 60 * 1000;
                     newDay = new Date(newDay)
                     var strTime = newDay.toISOString().split('T')[0]
@@ -186,9 +162,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightblue',
         flex: 1,
         borderRadius: 5,
-        padding: 10//,
- //       marginRight: 10//,
- //       marginTop: 17
+        padding: 10
     },
     emptyDate: {
         height: 15,
