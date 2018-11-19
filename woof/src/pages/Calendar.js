@@ -9,6 +9,7 @@ import {Agenda} from 'react-native-calendars';
 import ActionButton from "react-native-action-button";
 import Icon from "react-native-vector-icons/Ionicons";
 import {Actions} from "react-native-router-flux";
+import * as moment from "moment";
 
 export default class AgendaScreen extends Component {
     constructor(props) {
@@ -52,6 +53,21 @@ export default class AgendaScreen extends Component {
         })
     }
 
+    // cleanTime(time){
+    //     var hours = time.slice(0, 2);
+    //     Alert.alert(hours);
+    //     var morn = " AM";
+    //     hours = Number(hours);
+    //     if (hours > 12){
+    //         morn = " PM";
+    //         hours = hours - 12
+    //     }
+    //     var adjTime = hours + time.slice(3, -8) + morn
+    //     Alert.alert(adjTime)
+    //     return adjTime
+    // }
+
+
     loadItems(day) {
         const {items} = this.state
         fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/').then(function (response) {
@@ -65,13 +81,15 @@ export default class AgendaScreen extends Component {
                 var strTime = time.toISOString().split('T')[0]
                 var endtime = new Date(data[i]['endtime'])
                 var endtime = endtime.toISOString().split('T')[1]
+                var year = strTime.slice(0,4)
+                //this.cleanTime(endtime)
                 if (!items[strTime]) {
                     items[strTime] = [];
                     items[strTime].push({
                         name: header,
-                        date: strTime,
-                        startTime: time.toISOString().split('T')[1],
-                        endTime: endtime,
+                        date: strTime.slice(5,10) + "-" + year,
+                        startTime: time.toISOString().split('T')[1].slice(0, -8),
+                        endTime: endtime.slice(0, -8),
                         desc: data[i]['description'],
                         loc: data[i]['location'],
                         height: Math.max(50, Math.floor(Math.random() * 150)),
