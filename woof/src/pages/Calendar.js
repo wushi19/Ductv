@@ -9,12 +9,15 @@ import {Agenda} from 'react-native-calendars';
 import ActionButton from "react-native-action-button";
 import Icon from "react-native-vector-icons/Ionicons";
 import {Actions} from "react-native-router-flux";
+import PriorityQueue from  "js-priority-queue";
 
 export default class AgendaScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: {}
+            items: {},
+            //tasks: new PriorityQueue({ comparator: {function(a, b) { return b.die - a.die }} })
+            tasks: new PriorityQueue()
         };
     }
 
@@ -22,6 +25,7 @@ export default class AgendaScreen extends Component {
         return (
             <Agenda
                 items={this.state.items}
+                tasks = {this.state.tasks}
                 loadItemsForMonth={this.loadItems.bind(this)}
                 selected={this.onDayPress}
                 renderItem={this.renderItem.bind(this)}
@@ -54,6 +58,7 @@ export default class AgendaScreen extends Component {
 
     loadItems(day) {
         const {items} = this.state
+        const {tasks} = this.state
         fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/').then(function (response) {
             return response.json()
         }).then(function (data) {
@@ -77,6 +82,7 @@ export default class AgendaScreen extends Component {
                         desc: data[i]['description'],
                         loc: data[i]['location'],
                         height: Math.max(30, Math.floor(len)),
+                        duration: len,
                         id: data[i]['id']
                     });
                 }
@@ -96,6 +102,7 @@ export default class AgendaScreen extends Component {
                             desc: data[i]['description'],
                             loc: data[i]['location'],
                             height: Math.max(30, Math.floor(len)),
+                            duration: len,
                             id: data[i]['id']
                         });
                     }
@@ -118,16 +125,74 @@ export default class AgendaScreen extends Component {
                 }
             }
         });
+        fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/?format=json').then(function (response) {
+            return response.json()
+        }).then(function (data) {
+            const newItems = {}
+            for (var i = 0; i < data.length; i++) {
+                var header = data[i]['header'].toString()
+                //time = Date.now()
+                //var strTime = time.toISOString().split('T')[0]
+                //Alert.alert(strTime)
+                //if (!tasks) {
+                //tasks[strTime] = [];
+                tasks.queue({
+                    name: header,
+                    desc: data[i]['description'],
+                    priority: data[i]['priority'],
+                    duration: data[i]['duration'],
+                    due: data[i]['due'],
+                    height: Math.max(60, Math.floor(Number(data[i]['duration']))),
+                    id: "Task - " + data[i]['id'].toString(),
+                    die: data[i]['id']  / ((data[i]['priority'] + 1) * data[i]['duration'])
+                });
+            }
+        });
+        this.makeEvents()
     }
 
     renderItem(item) {
-        return (
-            <TouchableHighlight onPress={() => this.seeEvent(item)}>
-                <View style={[styles.item, {height: item.height}]}><Text>{item.name}</Text>
-                </View>
-            </TouchableHighlight>
+        const id = item.id.toString()
+        const letter = id.slice(0,1)
+        const b = Boolean(letter == "T")
+        if (b){
+            return(
+                <TouchableHighlight onPress={() => this.seeEvent(item)}>
+                    <View style={[styles.task, {height: item.height}]}><Text>{item.name}</Text>
+                    </View>
+                </TouchableHighlight>
+            );
+        }
+        else{
+            return(
+                <TouchableHighlight onPress={() => this.seeEvent(item)}>
+                    <View style={[styles.item, {height: item.height}]}><Text>{item.name}</Text>
+                    </View>
+                </TouchableHighlight>
+            );
+        }
+    }
 
-        );
+
+    makeEvents(){
+        const {tasks} = this.state
+        const {items} = this.state
+        time = new Date()
+        var strTime = time.toISOString().split('T')[0]
+        var year = strTime.slice(0,4)
+        while (tasks.length > 0){
+            var t = tasks.dequeue()
+            items[strTime].push({
+                name: t.name,
+                date: strTime.slice(5,10) + "-" + year,
+                startTime: "",
+                endTime: "",
+                desc: t.description,
+                loc: "",
+                height: t.height,
+                id: t.id
+            });
+        }
     }
 
     renderEmptyDate(day) {
@@ -160,6 +225,12 @@ export default class AgendaScreen extends Component {
 const styles = StyleSheet.create({
     item: {
         backgroundColor: 'lightblue',
+        flex: 1,
+        borderRadius: 5,
+        padding: 10
+    },
+    task: {
+        backgroundColor: 'lightcyan',
         flex: 1,
         borderRadius: 5,
         padding: 10

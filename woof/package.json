@@ -8,6 +8,7 @@
     "update-android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "dependencies": {
+    "js-priority-queue": "^0.1.5",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.23",
     "native-base": "^2.8.1",
