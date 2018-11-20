@@ -96,17 +96,29 @@ export default class AgendaScreen extends Component {
                             }
                         }
                         if (!dupe) {
-                            items[strTime].push({
+                            var repeats = 1
+                            if (data[i]["recurring"]){
+                                repeats = 10
+                            }
+                            for (var j = 0; j < repeats; j++){
+                                var time = data[i]['startTime']
+                                time = new Date(time)
+                                time.setTime(time.getTime() + j * 24 * 60 * 60 * 1000)
+                                var strTime = time.toISOString().split('T')[0]
+                                items[strTime].push({
                                 name: header,
                                 date: strTime.slice(5, 10) + "-" + year,
                                 startTime: time.toISOString().split('T')[1].slice(0, -8),
+                                recurrence: data[i]["recurring"],
                                 endTime: endtime.slice(0, -8),
                                 desc: data[i]['description'],
                                 loc: data[i]['location'],
                                 height: Math.max(30, Math.floor(len)),
                                 duration: len,
                                 id: data[i]['id']
-                            });
+                                });
+                            }
+
                         }
                     }
                     for (var k = -15; k < 16; k++) {
@@ -217,7 +229,7 @@ export default class AgendaScreen extends Component {
                 }
         }
     }
-    
+
 
     renderEmptyDate(day) {
         return (
