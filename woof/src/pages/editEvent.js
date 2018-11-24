@@ -89,19 +89,64 @@ export default class editEvent extends React.Component {
                     />
 
                     <Text style={styles.statictextDescriptors}>Location:</Text>
-                    <Text>{this.props.loc}</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder={this.props.header}
+                        // secureTextEntry={true}
+                        placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                        autoCapitalize = 'none'
+                        underLineColorAndroid='transparent'
+                        //onChangeText={(email) => this.setState({ email })}
+                        //value={this.state.email}
+                    />
 
                     <Text style={styles.statictextDescriptors}>Date:</Text>
-                    <Text>{this.props.date}</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder={this.props.header}
+                        // secureTextEntry={true}
+                        placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                        autoCapitalize = 'none'
+                        underLineColorAndroid='transparent'
+                        //onChangeText={(email) => this.setState({ email })}
+                        //value={this.state.email}
+                    />
 
                     <Text style={styles.statictextDescriptors}>Start Time:</Text>
-                    <Text>{this.props.startTime}</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder={this.props.header}
+                        // secureTextEntry={true}
+                        placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                        autoCapitalize = 'none'
+                        underLineColorAndroid='transparent'
+                        //onChangeText={(email) => this.setState({ email })}
+                        //value={this.state.email}
+                    />
 
                     <Text style={styles.statictextDescriptors}>End Time:</Text>
-                    <Text>{this.props.endTime}</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder={this.props.header}
+                        // secureTextEntry={true}
+                        placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                        autoCapitalize = 'none'
+                        underLineColorAndroid='transparent'
+                        //onChangeText={(email) => this.setState({ email })}
+                        //value={this.state.email}
+                    />
 
                     <Text style={styles.statictextDescriptors}>Details:</Text>
-                    <Text>{this.props.desc}</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder={this.props.header}
+                        // secureTextEntry={true}
+                        placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                        autoCapitalize = 'none'
+                        underLineColorAndroid='transparent'
+                        //onChangeText={(email) => this.setState({ email })}
+                        //value={this.state.email}
+                    />
 
                 </View>
                 <ActionButton buttonColor="#EADCD9" onPress={this.editEvent}/>
@@ -154,7 +199,7 @@ const styles = StyleSheet.create({
       height: 40,         //up-down text input size
       borderRadius: 20,
       fontSize: 16,
-      paddingLeft: 40,  //inside text paddinging
+      paddingLeft: 20,  //inside text paddinging
       backgroundColor: 'rgba(0,0,0,0.35)',
       color: '#EADCD9',
       marginHorizontal: 40,
