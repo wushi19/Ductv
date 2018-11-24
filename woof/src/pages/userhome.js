@@ -47,7 +47,7 @@ export default class Login extends React.Component {
         return (
             <ImageBackground source={bgImage} style={styles.backgroundContainer}>
                 <View style={styles.logoContainer}>
-                    <Text style={styles.logoText}>Good Morning</Text>
+                    <Text style={styles.logoText}>Hiiii Friend!</Text>
                 </View>
 
                 <ActionButton buttonColor="#C7AFA3">

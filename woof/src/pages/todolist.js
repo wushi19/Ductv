@@ -87,9 +87,7 @@ export default class todolist extends React.Component {
     // }
 
     goHome() {
-
-        Actions.home()
-
+        Actions.userhome()
     }
 
     enterTask() {
@@ -167,7 +165,7 @@ export default class todolist extends React.Component {
             return (
                 <View style={styles.container}>
                     <StatusBar barStyle="light-content" />
-                    <Text style={styles.title}>Today</Text>
+                    <Text style={styles.title}>To Do</Text>
                     <Text style={styles.time}>{this.state.curTime}</Text>
                     <ScrollView style={styles.mostImportantScroll}>
                         <FlatList
@@ -219,7 +217,7 @@ export default class todolist extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#C7AFA3',
+        backgroundColor: '#D0C9E1',
     },
 
     item: {
