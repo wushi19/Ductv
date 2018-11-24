@@ -47,12 +47,12 @@ export default class Home extends React.Component {
     Actions.moreInfoEvent()
   }
 
-  scratchPaper() {
-    Actions.scratchPaper()
-  }
-
   editTask(){
     Actions.editTask()
+  }
+
+  userhome(){
+    Actions.userhome()
   }
 
 
@@ -89,12 +89,6 @@ export default class Home extends React.Component {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={this.enterTask}>
-            <Text style={styles.calendarbutton} >
-              Entering Task Screen
-            </Text>
-          </TouchableOpacity>
-
           <TouchableOpacity onPress={this.todolist}>
             <Text style={styles.calendarbutton} >
               To do list
@@ -113,6 +107,12 @@ export default class Home extends React.Component {
             </Text>
           </TouchableOpacity>
 
+          <TouchableOpacity onPress={this.enterTask}>
+            <Text style={styles.calendarbutton} >
+              Add Task
+            </Text>
+          </TouchableOpacity>
+
           <TouchableOpacity onPress={this.moreInfoEvent}>
             <Text style={styles.calendarbutton} >
               More Info Event
@@ -125,15 +125,15 @@ export default class Home extends React.Component {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={this.scratchPaper}>
-            <Text style={styles.scratchPaper} >
-              Scratch Page
-            </Text>
-          </TouchableOpacity>
-
           <TouchableOpacity onPress={this.editTask}>
             <Text style={styles.scratchPaper} >
               Edit Task
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={this.userhome}>
+            <Text style={styles.scratchPaper} >
+              User HomeScreen
             </Text>
           </TouchableOpacity>
 

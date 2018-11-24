@@ -12,8 +12,8 @@ import startPage from "./pages/startPage";
 import editEvent from "./pages/editEvent";
 import addEvent from "./pages/addEvent";
 import moreInfoEvent from "./pages/moreInfoEvent";
-import scratchPaper from "./pages/scratchPaper";
 import editTask from "./pages/editTask";
+import userhome from "./pages/userhome";
 
 export default class Routes extends Component {
 	render() {
@@ -81,14 +81,14 @@ export default class Routes extends Component {
 						title="moreInfoEvent"
 					/>
 					<Scene
-						key="scratchPaper"
-						component={scratchPaper}
-						title="scratchPaper"
-					/>
-					<Scene
 						key="editTask"
 						component={editTask}
 						title="editTask"
+					/>
+					<Scene
+						key="userhome"
+						component={userhome}
+						title="userhome"
 					/>
 				</Stack>
 			</Router>
