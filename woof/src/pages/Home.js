@@ -51,6 +51,10 @@ export default class Home extends React.Component {
     Actions.scratchPaper()
   }
 
+  editTask(){
+    Actions.editTask()
+  }
+
 
   tasktest = () => {
     fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/', {
@@ -124,6 +128,12 @@ export default class Home extends React.Component {
           <TouchableOpacity onPress={this.scratchPaper}>
             <Text style={styles.scratchPaper} >
               Scratch Page
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={this.editTask}>
+            <Text style={styles.scratchPaper} >
+              Edit Task
             </Text>
           </TouchableOpacity>
 
