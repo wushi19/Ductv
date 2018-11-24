@@ -17,8 +17,9 @@ import {
     Alert,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-
-import bgImage from '../images/userhome.jpg'
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
+import bgImage from '../images/purpleuserhome.jpg'
 import logo from '../images/logo.png'
 
 
@@ -34,24 +35,29 @@ export default class Login extends React.Component {
         }
     }
 
-    signUp() {
-		Actions.signUp()
+    todolist() {
+        Actions.todolist()
+    }
+
+    calendar(){
+        Actions.calendar()
     }
 
     render() {
         return (
             <ImageBackground source={bgImage} style={styles.backgroundContainer}>
                 <View style={styles.logoContainer}>
-                    {/*<Image source={logo} style={styles.logo} />*/}
-                    <Text style={styles.logoText}>Log In</Text>
+                    <Text style={styles.logoText}>Good Morning</Text>
                 </View>
 
-                <TouchableOpacity
-                    onPress={this.goHome}
-                    style={styles.btnLogin}
-                >
-                <Text style = {styles.btnLoginText}> Log in </Text>
-                </TouchableOpacity>
+                <ActionButton buttonColor="rgba(231,76,60,1)">
+                        <ActionButton.Item buttonColor='#9b59b6' title="Calendar" onPress={this.calendar}>
+                            <Icon name="md-create" style={styles.actionButtonIcon} />
+                        </ActionButton.Item>
+                        <ActionButton.Item buttonColor='#1abc9c' title="To Do List" onPress={this.todolist}>
+                            <Icon name="md-done-all" style={styles.actionButtonIcon} />
+                        </ActionButton.Item>
+                </ActionButton>
 
             </ImageBackground>
         );

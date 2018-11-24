@@ -62,7 +62,7 @@ export default class Login extends React.Component {
             try {
               loggedInUser = JSON.stringify(loggedInUser);
               answer = AsyncStorage.setItem('user', loggedInUser);
-              Actions.home();
+              Actions.userhome();
             } catch (error) {
               Alert.alert("oh shit waddup");
             }
@@ -79,7 +79,7 @@ export default class Login extends React.Component {
           var user = JSON.stringify(myJson);
           try {
             answer = AsyncStorage.setItem('user', user);
-            Actions.home()
+            Actions.userhome();
           } catch (error) {
             Alert.alert("oh shit waddup");
           }
