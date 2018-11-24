@@ -96,6 +96,10 @@ export default class todolist extends React.Component {
         Actions.enterTask()
     }
 
+    editTask(){
+        Actions.editTask()
+    }
+
     // getEvent = (number) => {
     //     const { data } = this.state;
     //     response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/')
@@ -193,12 +197,15 @@ export default class todolist extends React.Component {
                         />
                     </ScrollView>
 
-                    <ActionButton buttonColor="rgba(231,76,60,1)">
-                        <ActionButton.Item buttonColor='#9b59b6' title="Add New Task" onPress={this.enterTask}>
-                            <Icon name="md-create" style={styles.actionButtonIcon} />
+                    <ActionButton buttonColor="#C7AFA3">
+                        <ActionButton.Item buttonColor='#413A5D' title="Go Home" onPress={this.goHome}>
+                            <Icon name="md-home" style={styles.actionButtonIcon} size={30} color='#fff'/>
                         </ActionButton.Item>
-                        <ActionButton.Item buttonColor='#1abc9c' title="Go Home" onPress={this.goHome}>
-                            <Icon name="md-done-all" style={styles.actionButtonIcon} />
+                        <ActionButton.Item buttonColor='#413A5D' title="Add New Task" onPress={this.enterTask}>
+                            <Icon name="md-create" style={styles.actionButtonIcon} size={30} color='#fff'/>
+                        </ActionButton.Item>
+                        <ActionButton.Item buttonColor='#413A5D' title="Edit Task" onPress={this.editTask}>
+                            <Icon name="md-cut" style={styles.actionButtonIcon} size={30} color='#fff'/>
                         </ActionButton.Item>
                     </ActionButton>
 

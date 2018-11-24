@@ -50,12 +50,12 @@ export default class Login extends React.Component {
                     <Text style={styles.logoText}>Good Morning</Text>
                 </View>
 
-                <ActionButton buttonColor="rgba(231,76,60,1)">
-                        <ActionButton.Item buttonColor='#9b59b6' title="Calendar" onPress={this.calendar}>
-                            <Icon name="md-create" style={styles.actionButtonIcon} />
+                <ActionButton buttonColor="#C7AFA3">
+                        <ActionButton.Item buttonColor='#413A5D' title="Calendar" onPress={this.calendar}>
+                            <Icon name="ios-calendar" style={styles.actionButtonIcon} size={30} color='#fff'/>
                         </ActionButton.Item>
-                        <ActionButton.Item buttonColor='#1abc9c' title="To Do List" onPress={this.todolist}>
-                            <Icon name="md-done-all" style={styles.actionButtonIcon} />
+                        <ActionButton.Item buttonColor='#413A5D' title="To Do List" onPress={this.todolist}>
+                            <Icon name="ios-list" style={styles.actionButtonIcon} size={30} color='#fff'/>
                         </ActionButton.Item>
                 </ActionButton>
 
