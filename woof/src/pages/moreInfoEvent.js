@@ -12,15 +12,20 @@ export default class moreInfoEvent extends React.Component {
 
         this.state = {
 
-            // id: null,
-            // url: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/",
-            // header: "",
+            id: this.props.id,
+            url: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/" + this.props.id + "/",
+            header: this.props.header,
+            startTime: this.props.startTime,
+            endTime: this.props.endTime,
+            desc: this.props.desc,
+            date: this.props.date,
+            loc: this.props.loc,
             // description: "",
             // startTime: "",
             // endtime: "",
             // recurring: null,
             // p: null, //private is res
-            // calendar: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/calendar/1/",
+            calendar: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/calendar/1/",
             // created: "",
             // updated: "",
             // location: "",
@@ -33,9 +38,9 @@ export default class moreInfoEvent extends React.Component {
     };
 
 
-    editEvent() {
-        Actions.editEvent()
-    }
+    //editEvent(the) {
+    //    Actions.editEvent(the)
+    //}
 
     // getEvent = (number) => {
     //     response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/0/')
@@ -93,7 +98,7 @@ export default class moreInfoEvent extends React.Component {
                     <Text>{this.props.desc}</Text>
 
                 </View>
-                <ActionButton buttonColor="rgba(231,76,60,1)" onPress={this.editEvent}/>
+                <ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => {Actions.editEvent(this.state)}}/>
 
             </View>
         );

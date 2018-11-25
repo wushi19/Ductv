@@ -48,6 +48,8 @@ export default class AgendaScreen extends Component {
 
     seeEvent(item) {
         Actions.moreInfoEvent({
+            id: item.id,
+            url: item.url,
             header: item.name,
             startTime: item.startTime,
             endTime: item.endTime,

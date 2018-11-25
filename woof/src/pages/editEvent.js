@@ -1,11 +1,13 @@
 import React from 'react';
-import {Text, View, Alert, StyleSheet, AsyncStorage, StatusBar, ImageBackground, TextInput, Dimensions} from 'react-native';
+import {Text, View, Alert, StyleSheet, ScrollView, AsyncStorage, StatusBar, ImageBackground, TextInput, Dimensions} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Actions} from 'react-native-router-flux';
 import bkg from '../images/yellowbkg.jpg';
 
 const { width: WIDTH } = Dimensions.get('window');
+
+var moment = require('moment');
 
 export default class editEvent extends React.Component {
 
@@ -14,30 +16,23 @@ export default class editEvent extends React.Component {
 
         this.state = {
 
-            // id: null,
-            // url: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/",
-            // header: "",
-            // description: "",
-            // startTime: "",
-            // endtime: "",
+            id: this.props.id,
+            url: this.props.url,
+            header: this.props.header,
+            description: this.props.desc,
+            startTime: "",
+            endtime: "",
             // recurring: null,
-            // p: null, //private is res
-            // calendar: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/calendar/1/",
-            // created: "",
-            // updated: "",
-            // location: "",
-            // data: null,
+            // private: null, //private is res
+            calendar: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/calendar/1/",
+            updated: moment(new Date()).format("YYYY-MM-DD") + "T" + moment(new Date()).format("hh:mm:ss"),
+            location: this.props.loc,
             isLoading: true,
             dataSource: null,
             id: '0',
 
         }
     };
-
-
-    editEvent() {
-        Alert.alert(this.props.header)
-    }
 
     // getEvent = (number) => {
     //     response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/0/')
@@ -54,29 +49,57 @@ export default class editEvent extends React.Component {
     //         });
     // }
 
-    // componentDidMount() {
-    //     return fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/?format=json')
-    //         .then((response) => response.json())
-    //         .then((responseJson) => {
-    //             this.setState({
-    //                 isLoading: false,
-    //                 dataSource: responseJson
-    //             })
-    //         })
-    //         .catch((error) => {
-    //             console.log(error)
-    //         });
-    // }
+    componentDidMount() {
+        return fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/?format=json')
+            .then((response) => response.json())
+            .then((responseJson) => {
+              this.setState({
+                   isLoading: false,
+                   dataSource: responseJson
+               })
+            })
+            .catch((error) => {
+               console.log(error)
+            });
+    }
+
+    updateEvent = () =>{
+        this.tasktest();
+        alert(this.state.url + "\nPROPS: " + this.props.url)
+    }
+
+    tasktest = () =>{
+        fetch(this.state.url, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                header: this.state.header,
+                updated: this.state.updated,
+                description: this.state.description,
+                location: this.state.location,
+            }),
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+
+                
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
 
     render() {
         return (
             <View style={styles.container}>
                 <StatusBar barStyle="light-content"/>
-                <View style={styles.eventContainer}>
+                <ScrollView style={styles.eventContainer}>
 
                     <Text style={styles.title}>Event Information</Text>
 
-                    <Text style={styles.statictextDescriptors}>Event:</Text>
+                    <Text style={styles.statictextDescriptors}>Event Name:</Text>
                     <TextInput
                         style={styles.input}
                         placeholder={this.props.header}
@@ -84,26 +107,26 @@ export default class editEvent extends React.Component {
                         placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                         autoCapitalize = 'none'
                         underLineColorAndroid='transparent'
-                        //onChangeText={(email) => this.setState({ email })}
-                        //value={this.state.email}
+                        onChangeText={(header) => this.setState({header})}
+                        value={this.state.header}
                     />
 
                     <Text style={styles.statictextDescriptors}>Location:</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder={this.props.header}
+                        placeholder={this.props.loc}
                         // secureTextEntry={true}
                         placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                         autoCapitalize = 'none'
                         underLineColorAndroid='transparent'
-                        //onChangeText={(email) => this.setState({ email })}
-                        //value={this.state.email}
+                        onChangeText={(location) => this.setState({ location })}
+                        value={this.state.location}
                     />
 
                     <Text style={styles.statictextDescriptors}>Date:</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder={this.props.header}
+                        placeholder={this.props.date}
                         // secureTextEntry={true}
                         placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                         autoCapitalize = 'none'
@@ -115,7 +138,7 @@ export default class editEvent extends React.Component {
                     <Text style={styles.statictextDescriptors}>Start Time:</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder={this.props.header}
+                        placeholder={this.props.startTime}
                         // secureTextEntry={true}
                         placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                         autoCapitalize = 'none'
@@ -127,7 +150,7 @@ export default class editEvent extends React.Component {
                     <Text style={styles.statictextDescriptors}>End Time:</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder={this.props.header}
+                        placeholder={this.props.endTime}
                         // secureTextEntry={true}
                         placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                         autoCapitalize = 'none'
@@ -139,17 +162,17 @@ export default class editEvent extends React.Component {
                     <Text style={styles.statictextDescriptors}>Details:</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder={this.props.header}
+                        placehol der={this.props.desc}
                         // secureTextEntry={true}
                         placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                         autoCapitalize = 'none'
                         underLineColorAndroid='transparent'
-                        //onChangeText={(email) => this.setState({ email })}
-                        //value={this.state.email}
+                        onChangeText={(description) => this.setState({ description })}
+                        value={this.state.description}
                     />
 
-                </View>
-                <ActionButton buttonColor="#EADCD9" onPress={this.editEvent}/>
+                </ScrollView>
+                <ActionButton buttonColor="#EADCD9" onPress={this.updateEvent}/>
 
             </View>
         );
@@ -204,4 +227,15 @@ const styles = StyleSheet.create({
       color: '#EADCD9',
       marginHorizontal: 40,
   },
+    input: {
+        width: WIDTH - 90, //left-right text input size
+        height: 40,         //up-down text input size
+        borderRadius: 20,
+        marginBottom: 20,
+        fontSize: 16,
+        paddingLeft: 20,  //inside text paddinging
+        backgroundColor: 'rgba(0,0,0,0.35)',
+        color: '#EADCD9',
+        marginHorizontal: 40,
+    },
 });
