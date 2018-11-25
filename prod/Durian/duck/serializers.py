@@ -35,4 +35,4 @@ class CalendarSerializer(serializers.HyperlinkedModelSerializer):
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Task
-        fields = ('id', 'url', 'header', 'description', 'priority', 'duration', 'due', 'owner')
+        fields = ('id', 'url', 'header', 'description', 'priority', 'duration', 'due', 'owner', 'completed')

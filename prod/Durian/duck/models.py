@@ -69,6 +69,7 @@ class Task(models.Model):
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='tasks')
     due = models.DateTimeField(blank=True, null=True)
     location = models.TextField(blank=True, null=True)
+    completed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.header
