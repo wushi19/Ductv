@@ -1,6 +1,7 @@
 # Ductv
 A cross-platform collaborative calendar that takes into account decencies of tasks.
 
-Feel free to make pull requests at will, but they will only be commited after careful
-deliberation and approval from ____. 
+THIS CODE IS OUR OWN WORK, IT WAS WRITTEN WITHOUT CONSULTING
+A TUTOR OR CODE WRITTEN BY OTHER STUDENTS OUTSIDE OF OUR TEAM.
+    - Bryan Deleon-Vargas, Nandar Soe, Jonathon Gomez, Alvin Choi, Sage Ono, Yibo Wang
 
