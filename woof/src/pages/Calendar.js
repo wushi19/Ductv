@@ -18,7 +18,8 @@ export default class AgendaScreen extends Component {
             first: true,
             items: {},
             //tasks: new PriorityQueue({ comparator: {function(a, b) { return b.die - a.die }} })
-            tasks: new PriorityQueue()
+            tasks: new PriorityQueue(),
+            markedDates: {}
         };
     }
 
@@ -30,6 +31,8 @@ export default class AgendaScreen extends Component {
                 loadItemsForMonth={this.loadItems.bind(this)}
                 selected={this.onDayPress}
                 renderItem={this.renderItem.bind(this)}
+                markedDates={this.state.markedDates}
+                markingType={'period'}
                 renderEmptyDate={this.renderEmptyDate.bind(this)}
                 rowHasChanged={this.rowHasChanged.bind(this)}
                 monthFormat={'yyyy'}
@@ -37,6 +40,7 @@ export default class AgendaScreen extends Component {
             />
         );
     }
+
 
     goHome() {
         Actions.home()
@@ -164,6 +168,7 @@ export default class AgendaScreen extends Component {
                 }
             });
             this.makeEvents()
+            this.markDays()
         }
     }
 
@@ -209,17 +214,26 @@ export default class AgendaScreen extends Component {
                 total = total + tasks.peek().duration
                 if (total < 300) {
                     var t = tasks.dequeue()
-                    items[strTime].push({
-                        name: t.name,
-                        date: strTime.slice(5, 10) + "-" + year,
-                        startTime: "",
-                        endTime: "",
-                        desc: t.description,
-                        loc: "",
-                        height: t.height,
-                        duration: t.duration,
-                        id: t.id
-                    });
+                    var dupe = false
+                    for (var j = 0; j < items[strTime].length; j++) {
+                        if (items[strTime][j]["id"] == t.id) {
+                            dupe = true
+                        }
+                    }
+                    if (!dupe) {
+                        items[strTime].push({
+                            name: t.name,
+                            date: strTime.slice(5, 10) + "-" + year,
+                            startTime: "",
+                            endTime: "",
+                            desc: t.description,
+                            loc: "",
+                            height: t.height,
+                            duration: t.duration,
+                            id: t.id
+                        });
+                        total = total + t.duration
+                    }
                 }
                 else{
                     total = 0
@@ -227,11 +241,38 @@ export default class AgendaScreen extends Component {
                     time = new Date(time)
                     strTime = time.toISOString().split('T')[0]
                 }
+
+        }
+    }
+
+    markDays() {
+        const {items} = this.state
+        const {markedDates} = this.state
+        for (var key in items) {
+            var day = items[key];
+            var total = 0
+            for (var i = 0; i < day.length; i++) {
+                total = total + day[i].duration
+            }
+            var col = "#47e3ff"
+            if (total > 0) {
+                if (total >= 30) {
+                    col = "#4787ff"
+                    if (total > 100) {
+                        col = "#ff7474"
+                        if (total > 200) {
+                            col = "#ff0000"
+                        }
+                    }
+                }
+                markedDates[key] = {startingDay: true, color: col, endingDay: true}
+            }
+
         }
     }
 
 
-    renderEmptyDate(day) {
+    renderEmptyDate(day){
         return (
             <View style={styles.emptyDate}><Text>Nothing scheduled - Go feed ducks!</Text></View>
         );
