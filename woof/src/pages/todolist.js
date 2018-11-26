@@ -166,7 +166,7 @@ export default class todolist extends React.Component {
                 <View style={styles.container}>
                     <StatusBar barStyle="light-content" />
                     <Text style={styles.title}>To Do</Text>
-                    <Text style={styles.time}>{this.state.curTime}</Text>
+                    {/* <Text style={styles.time}>{this.state.curTime}</Text> */}
                     <ScrollView style={styles.mostImportantScroll}>
                         <FlatList
                             data={this.state.dataSource}

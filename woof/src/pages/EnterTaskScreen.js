@@ -17,7 +17,8 @@ import {
   DatePickerIOS,
   DatePickerAndroid,
   CheckBox,
-  Slider
+  Slider,
+  StatusBar,
 } from 'react-native';
 import DatePicker from 'react-native-datepicker'
 
@@ -27,10 +28,6 @@ const { width: WIDTH } = Dimensions.get('window');
 var moment = require('moment');
 
 export default class EnterTaskScreen extends React.Component {
-  static navigationOptions = {
-    title: 'EnterTaskScreen',
-  };
-
   constructor(props) {
     super(props);
     this.setDate = this.setDate.bind(this);
@@ -136,7 +133,8 @@ Alert.alert("Task Successfully Added.");
   render() {
     return (
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <Text style={styles.getStartedText}>WHAT NEEDS TO GET DONE?</Text>
+        <StatusBar barStyle="light-content" />
+        <Text style={styles.getStartedText}>Task Information</Text>
 
         <View style={styles.inputContainer}>
           <TextInput
@@ -150,22 +148,23 @@ Alert.alert("Task Successfully Added.");
           />
           <TextInput
             style={styles.input}
-            placeholder={'Task Description(Optional)'}
+            placeholder={'Description'}
             secureTextEntry={false}
             placeholderTextColor={'rgba(100, 100, 100, 0.7)'}
-            multiline={true}
             onChangeText={(taskdescription) => this.setState({ taskdescription })}
             value={this.state.taskdescription}
           />
         </View>
 
-        <View style = {{flexDirection: 'row', paddingLeft: 10, paddingTop: 10}}>
+        <View style = {{flexDirection: 'row', paddingLeft: 40}}>
           <CheckBox
             onChange={this.changedur.bind(this)}
             title="checkdur"
             checked={this.state.checkdur}
           />
-            
+
+          <Text style={{paddingTop: 10}}>Duration: </Text>
+
           <DatePicker
             style={{width: 200}}
             date={this.state.duration}
@@ -175,29 +174,31 @@ Alert.alert("Task Successfully Added.");
             cancelBtnText="Cancel"
             iconSource={require('../images/stopwatch.png')}
             customStyles={{
+              dateInput: {
+                marginLeft: 36
+              },
               dateIcon: {
                 position: 'absolute',
                 left: 0,
                 top: 4,
                 marginLeft: 0
-              },
-              dateInput: {
-                marginLeft: 36
               }
               // ... You can check the source to find the other keys.
             }}
             onDateChange={(date) => {this.setState({duration: date})}}
           />
-            <Text style={{paddingTop: 10}}>  Duration?</Text>
         </View>
         
-        <View style = {{flexDirection: 'row', paddingLeft: 10}}>
+        <View style = {{flexDirection: 'row', paddingLeft: 40}}>
           
           <CheckBox
             onChange={this.changepri.bind(this)}
             title="checkpri"
             checked={this.state.checkpri}
           />
+
+          <Text style={{paddingTop: 10}}>Priority:</Text>
+
           <Image source={require('../images/nimportant.png')} style={{width: 30, height: 30}} />
           <Slider
             style={{width: 140}}
@@ -208,15 +209,15 @@ Alert.alert("Task Successfully Added.");
             value={this.state.priority}
           />
           <Image source={require('../images/vimportant.png')} style={{width: 30, height: 30}} />
-          <Text style={{paddingTop: 10}}>  Priority?</Text>
         </View>
 
-        <View style = {{flexDirection: 'row', paddingLeft: 10}}>
+        <View style = {{flexDirection: 'row', paddingLeft: 40}}>
           <CheckBox
             onChange={this.changedate.bind(this)}
             title="checkdate"
             checked={this.state.checkdate}
           />
+          <Text style={{paddingTop: 10}}>Due Date:</Text>
           <DatePicker
             style={{width: 200}}
             date={this.state.dated}
@@ -241,16 +242,16 @@ Alert.alert("Task Successfully Added.");
             }}
             onDateChange={(date) => {this.setState({dated: date})}}
           />
-            <Text style={{paddingTop: 10}}>  Due Date?</Text>
         </View>
         
 
-        <View style = {{flexDirection: 'row', paddingLeft: 10}}>
+        <View style = {{flexDirection: 'row', paddingLeft: 40}}>
           <CheckBox
             onChange={this.changetime.bind(this)}
             title="checktime"
             checked={this.state.checktime}
           />
+          <Text style={{paddingTop: 10}}>Time Due:</Text>
           <DatePicker
             style={{width: 200}}
             date={this.state.timed}
@@ -273,7 +274,7 @@ Alert.alert("Task Successfully Added.");
             }}
             onDateChange={(date) => {this.setState({timed: date})}}
           />
-            <Text style={{paddingTop: 10}}>  Due Time?</Text>
+          
         </View>
         
         <View style={styles.addButtonContainer}>
@@ -291,11 +292,11 @@ Alert.alert("Task Successfully Added.");
 
 const styles = StyleSheet.create({
   getStartedText: {
-    paddingTop: 10,
-    fontSize: 20,
-    color: 'rgba(50, 50, 50, 1)',
-    lineHeight: 24,
     textAlign: 'center',
+    color: '#fff',
+    fontSize: 36,
+    marginTop: 60,
+    fontWeight: '300'
   },
   inputContainer: {
     marginTop: 10,
@@ -310,6 +311,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.1)',
     color: 'rgba(0, 0, 0, 1)',
     marginHorizontal: 25,
+    borderRadius: 45,
+    marginTop: 10,
+    marginBottom: 10,
   },
   dateContainer: {
     flex: 1,
@@ -320,7 +324,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 0,
-    backgroundColor: '#FFF',
+    backgroundColor: '#D0C9E1',
   },
   developmentModeText: {
     marginBottom: 20,
