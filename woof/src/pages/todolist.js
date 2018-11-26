@@ -217,7 +217,7 @@ export default class todolist extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#D0C9E1',
+        backgroundColor: '#7B6F92',
     },
 
     item: {
