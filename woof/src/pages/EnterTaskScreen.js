@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 0,
-    backgroundColor: '#D0C9E1',
+    backgroundColor: '#7B6F92',
   },
   developmentModeText: {
     marginBottom: 20,
