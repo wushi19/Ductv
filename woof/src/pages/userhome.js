@@ -65,16 +65,6 @@ export default class Login extends React.Component {
                 <View style={styles.logoContainer}>
                     <Text style={styles.logoText}>Hiiii Friend!</Text>
                 </View>
-
-                <ActionButton buttonColor="#C7AFA3">
-                        <ActionButton.Item buttonColor='#413A5D' title="Calendar" onPress={this.calendar}>
-                            <Icon name="ios-calendar" style={styles.actionButtonIcon} size={30} color='#fff'/>
-                        </ActionButton.Item>
-                        <ActionButton.Item buttonColor='#413A5D' title="To Do List" onPress={this.todolist}>
-                            <Icon name="ios-list" style={styles.actionButtonIcon} size={30} color='#fff'/>
-                        </ActionButton.Item>
-                </ActionButton>
-
             </ImageBackground>
             </GestureRecognizer>
 
