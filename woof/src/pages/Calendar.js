@@ -67,7 +67,9 @@ export default class AgendaScreen extends Component {
         const {items} = this.state
         const {tasks} = this.state
         if (this.state.first) {
-            fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/').then(function (response) {
+            const AWS = 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/'
+            const Heroku = 'https://ductv.herokuapp.com/event/'
+            fetch(AWS).then(function (response) {
                 return response.json()
             }).then(function (data) {
                 const newItems = {}
@@ -146,7 +148,9 @@ export default class AgendaScreen extends Component {
                     }
                 }
             });
-            fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/?format=json').then(function (response) {
+            const AWS2 = 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/?format=json'
+            const Heroku2 = 'https://ductv.herokuapp.com/task/'
+            fetch(AWS2).then(function (response) {
                 return response.json()
             }).then(function (data) {
                 const newItems = {}
@@ -256,14 +260,15 @@ export default class AgendaScreen extends Component {
             for (var i = 0; i < day.length; i++) {
                 total = total + day[i].duration
             }
-            var col = "#47e3ff"
+            var col = "#FFFFFF"
             if (total > 0) {
-                if (total >= 30) {
-                    col = "#4787ff"
-                    if (total > 100) {
-                        col = "#ff7474"
-                        if (total > 200) {
-                            col = "#ff0000"
+                col = "#d1d0ef"
+                if (total >= 150) {
+                    col = "#a385cb"
+                    if (total > 300) {
+                        col = "#774699"
+                        if (total > 450) {
+                            col = "#4c2359"
                         }
                     }
                 }
@@ -303,13 +308,15 @@ export default class AgendaScreen extends Component {
 
 const styles = StyleSheet.create({
     item: {
-        backgroundColor: 'lightblue',
+        //backgroundColor: 'lightblue',
+        backgroundColor: '#d0c9e1',
         flex: 1,
         borderRadius: 5,
         padding: 10
     },
     task: {
-        backgroundColor: 'lightcyan',
+        //backgroundColor: 'lightcyan',
+        backgroundColor: '#eadcd9',
         flex: 1,
         borderRadius: 5,
         padding: 10

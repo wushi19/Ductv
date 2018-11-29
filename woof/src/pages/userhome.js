@@ -19,8 +19,10 @@ import {
 import {Actions} from 'react-native-router-flux';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
-import bgImage from '../images/purpleuserhome.jpg'
-import logo from '../images/logo.png'
+import bgImage from '../images/purpleuserhome.jpg';
+import logo from '../images/logo.png';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+
 
 
 const { width: WIDTH } = Dimensions.get('window');
@@ -44,7 +46,21 @@ export default class Login extends React.Component {
     }
 
     render() {
+        const config = {
+            velocityThreshold: 0.3,
+            directionalOffsetThreshold: 80
+        };
         return (
+            <GestureRecognizer
+                onSwipeLeft={(state) => Actions.calendar()}
+                onSwipeRight={(state) => Actions.todolist()}
+                config={config}
+                style={{
+                    flex: 1,
+                    backgroundColor: '#fff'
+                }}
+            >
+
             <ImageBackground source={bgImage} style={styles.backgroundContainer}>
                 <View style={styles.logoContainer}>
                     <Text style={styles.logoText}>Hiiii Friend!</Text>
@@ -60,6 +76,8 @@ export default class Login extends React.Component {
                 </ActionButton>
 
             </ImageBackground>
+            </GestureRecognizer>
+
         );
     }
 }
