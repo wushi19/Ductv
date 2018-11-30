@@ -5,6 +5,8 @@ import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
 import Moment from 'react-moment';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+
 
 // const getuserId = async () => {
 //   let userId = '';
@@ -161,9 +163,22 @@ export default class todolist extends React.Component {
             //         <Text> {val.description} </Text>
             //     </View>
             // });
-
+            const config = {
+                velocityThreshold: 0.3,
+                directionalOffsetThreshold: 80
+            };
             return (
+
                 <View style={styles.container}>
+                    <GestureRecognizer
+                        onSwipeLeft={(state) => Actions.userhome()}
+                        onSwipeRight={(state) => Actions.calendar()}
+                        config={config}
+                        style={{
+                            flex: 1,
+                            backgroundColor: '#fff'
+                        }}
+                    >
                     <StatusBar barStyle="light-content" />
                     <Text style={styles.title}>To Do</Text>
                     {/* <Text style={styles.time}>{this.state.curTime}</Text> */}
@@ -206,6 +221,7 @@ export default class todolist extends React.Component {
                             <Icon name="md-cut" style={styles.actionButtonIcon} size={30} color='#fff'/>
                         </ActionButton.Item>
                     </ActionButton>
+                </GestureRecognizer>
 
                 </View>
             );
