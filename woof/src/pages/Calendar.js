@@ -36,7 +36,7 @@ export default class AgendaScreen extends Component {
                 renderEmptyDate={this.renderEmptyDate.bind(this)}
                 rowHasChanged={this.rowHasChanged.bind(this)}
                 monthFormat={'yyyy'}
-                button={this.addButton()}
+                //button={this.addButton()}
             />
         );
     }
@@ -148,6 +148,9 @@ export default class AgendaScreen extends Component {
                     }
                 }
             });
+            this.setState({
+                items: items
+            })
             const AWS2 = 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/?format=json'
             const Heroku2 = 'https://ductv.herokuapp.com/task/'
             fetch(AWS2).then(function (response) {
@@ -249,6 +252,10 @@ export default class AgendaScreen extends Component {
                 }
 
         }
+        this.setState({
+            items: items,
+            tasks: tasks
+        })
     }
 
     markDays() {
