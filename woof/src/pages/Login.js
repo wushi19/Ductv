@@ -19,10 +19,11 @@ import {
     TouchableOpacity,
     Button,
     Alert,
+    StatusBar,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
-import bgImage from '../images/background2.jpg'
+import bgImage from '../images/loginbkg.jpg'
 import logo from '../images/logo.png'
 
 
@@ -91,9 +92,11 @@ export default class Login extends React.Component {
     render() {
         return (
             <ImageBackground source={bgImage} style={styles.backgroundContainer}>
+                <StatusBar barStyle="light-content"/>
+
                 <View style={styles.logoContainer}>
-                    {/*<Image source={logo} style={styles.logo} />*/}
-                    <Text style={styles.logoText}>Log In</Text>
+                    <Image source={logo} style={styles.logo} />
+                    <Text style={styles.logoText}>Ducktive</Text>
                 </View>
 
                 <View style={styles.inputContainer}>
@@ -101,6 +104,17 @@ export default class Login extends React.Component {
                         style={styles.input}
                         placeholder={'Email'}
                         // secureTextEntry={true}
+                        placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                        autoCapitalize = 'none'
+                        underLineColorAndroid='transparent'
+                        onChangeText={(email) => this.setState({ email })}
+                        value={this.state.email}
+                        marginBottom={10}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder={'Password'}
+                        secureTextEntry={true}
                         placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                         autoCapitalize = 'none'
                         underLineColorAndroid='transparent'
@@ -146,7 +160,8 @@ const styles = StyleSheet.create({
         borderRadius: 45,
         justifyContent: 'center',
         marginTop: 160,
-        backgroundColor: 'rgba(33, 36, 44, 1)'
+        backgroundColor: '#413a5d',
+        opacity: 0.8,
     },
 
     btnLoginText: {
@@ -160,7 +175,6 @@ const styles = StyleSheet.create({
     },
     logoContainer: {
         alignItems: 'center',
-        marginBottom: 60,
     },
     logo: {
         width: 120,
@@ -171,9 +185,9 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 40,
         justifyContent: 'center',
-        fontWeight: 'bold',
+        fontWeight: '500',
         marginTop: 10,
-        opacity: 1,
+        // opacity: ,
     },
     input: {
         width: WIDTH - 55,
