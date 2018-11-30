@@ -26,6 +26,8 @@ export default class AgendaScreen extends Component {
     render() {
         return (
             <Agenda
+                minDate={'2018-01-01'}
+                pastScrollRange={50}
                 items={this.state.items}
                 tasks={this.state.tasks}
                 loadItemsForMonth={this.loadItems.bind(this)}
@@ -224,9 +226,11 @@ export default class AgendaScreen extends Component {
                 if (total < 300) {
                     var t = tasks.dequeue()
                     var dupe = false
-                    for (var j = 0; j < items[strTime].length; j++) {
-                        if (items[strTime][j]["id"] == t.id) {
-                            dupe = true
+                    for (var key in items) {
+                    for (var j = 0; j < items[key].length; j++) {
+                            if (items[key][j]["id"] == t.id) {
+                                dupe = true
+                            }
                         }
                     }
                     if (!dupe) {
@@ -283,6 +287,9 @@ export default class AgendaScreen extends Component {
             }
 
         }
+        this.setState({
+            markedDates: markedDates
+        })
     }
 
 
