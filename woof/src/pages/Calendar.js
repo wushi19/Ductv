@@ -17,8 +17,8 @@ export default class AgendaScreen extends Component {
         this.state = {
             first: true,
             items: {},
-            //tasks: new PriorityQueue({ comparator: {function(a, b) { return b.die - a.die }} })
-            tasks: new PriorityQueue(),
+            tasks: new PriorityQueue({ comparator: {function(a, b) { return b.die - a.die }} }),
+            //tasks: new PriorityQueue(),
             markedDates: {}
         };
     }
@@ -26,10 +26,10 @@ export default class AgendaScreen extends Component {
     render() {
         return (
             <Agenda
-                minDate={'2018-01-01'}
-                pastScrollRange={50}
+                //minDate={'2018-01-01'}
+                //pastScrollRange={50}
                 items={this.state.items}
-                tasks={this.state.tasks}
+                //tasks={this.state.tasks}
                 loadItemsForMonth={this.loadItems.bind(this)}
                 selected={this.onDayPress}
                 renderItem={this.renderItem.bind(this)}
@@ -107,25 +107,25 @@ export default class AgendaScreen extends Component {
                         }
                         if (!dupe) {
                             var repeats = 1
-                            if (data[i]["recurring"]){
+                            if (data[i]["recurring"]) {
                                 repeats = 10
                             }
-                            for (var j = 0; j < repeats; j++){
+                            for (var j = 0; j < repeats; j++) {
                                 var time = data[i]['startTime']
                                 time = new Date(time)
                                 time.setTime(time.getTime() + j * 24 * 60 * 60 * 1000)
                                 var strTime = time.toISOString().split('T')[0]
                                 items[strTime].push({
-                                name: header,
-                                date: strTime.slice(5, 10) + "-" + year,
-                                startTime: time.toISOString().split('T')[1].slice(0, -8),
-                                recurrence: data[i]["recurring"],
-                                endTime: endtime.slice(0, -8),
-                                desc: data[i]['description'],
-                                loc: data[i]['location'],
-                                height: Math.max(30, Math.floor(len)),
-                                duration: len,
-                                id: data[i]['id']
+                                    name: header,
+                                    date: strTime.slice(5, 10) + "-" + year,
+                                    startTime: time.toISOString().split('T')[1].slice(0, -8),
+                                    recurrence: data[i]["recurring"],
+                                    endTime: endtime.slice(0, -8),
+                                    desc: data[i]['description'],
+                                    loc: data[i]['location'],
+                                    height: Math.max(30, Math.floor(len)),
+                                    duration: len,
+                                    id: data[i]['id']
                                 });
                             }
 
@@ -205,61 +205,62 @@ export default class AgendaScreen extends Component {
         }
     }
 
-    makeEvents(){
+    makeEvents() {
         const {tasks} = this.state
         const {items} = this.state
         var time = new Date()
         var strTime = time.toISOString().split('T')[0]
         var year = strTime.slice(0, 4)
-        while (tasks.length > 0){
+        while (tasks.length > 0) {
             if (!items[strTime]) {
-                    items[strTime] = []
+                items[strTime] = []
+                var total = 0
+            }
+            else {
+                const today = items[strTime]
+                var total = 0
+                for (var i = 0; i < today.length; i++) {
+                    total = total + today[i].duration
                 }
-                else {
-                    const today = items[strTime]
-                    var total = 0
-                    for (var i = 0; i < today.length; i++) {
-                        total = total + today[i].duration
-                    }
-                }
-                total = total + tasks.peek().duration
-                if (total < 300) {
-                    var t = tasks.dequeue()
-                    var dupe = false
-                    for (var key in items) {
+            }
+            total = total + tasks.peek().duration
+            if (total < 300) {
+                var t = tasks.dequeue()
+                var dupe = false
+                for (var key in items) {
                     for (var j = 0; j < items[key].length; j++) {
-                            if (items[key][j]["id"] == t.id) {
-                                dupe = true
-                            }
+                        if (items[key][j]["id"] == t.id) {
+                            dupe = true
                         }
                     }
-                    if (!dupe) {
-                        items[strTime].push({
-                            name: t.name,
-                            date: strTime.slice(5, 10) + "-" + year,
-                            startTime: "",
-                            endTime: "",
-                            desc: t.description,
-                            loc: "",
-                            height: t.height,
-                            duration: t.duration,
-                            id: t.id
-                        });
-                        total = total + t.duration
-                    }
                 }
-                else{
-                    total = 0
-                    time.setTime(time.getTime() + 24 * 60 * 60 * 1000)
-                    time = new Date(time)
-                    strTime = time.toISOString().split('T')[0]
+                if (!dupe) {
+                    items[strTime].push({
+                        name: t.name,
+                        date: strTime.slice(5, 10) + "-" + year,
+                        startTime: "",
+                        endTime: "",
+                        desc: t.description,
+                        loc: "",
+                        height: t.height,
+                        duration: t.duration,
+                        id: t.id
+                    });
+                    total = total + t.duration
                 }
-
+            }
+            else {
+                total = 0
+                time.setTime(time.getTime() + 24 * 60 * 60 * 1000)
+                time = new Date(time)
+                strTime = time.toISOString().split('T')[0]
+            }
+            this.setState({
+                items: items,
+                tasks: tasks
+            })
         }
-        this.setState({
-            items: items,
-            tasks: tasks
-        })
+
     }
 
     markDays() {
@@ -293,7 +294,7 @@ export default class AgendaScreen extends Component {
     }
 
 
-    renderEmptyDate(day){
+    renderEmptyDate(day) {
         return (
             <View style={styles.emptyDate}><Text>Nothing scheduled - Go feed ducks!</Text></View>
         );
