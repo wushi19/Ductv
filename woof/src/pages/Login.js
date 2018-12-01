@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
         height: 120,
     },
     logoText: {
-        fontFamily: 'PT_Sans-Web-Bold',
+        fontFamily: 'Montserrat-ExtraLight',
         color: 'white',
         fontSize: 40,
         justifyContent: 'center',
