@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
         height: 120,
     },
     logoText: {
-        fontFamily: 'Roboto-LightItalic',
+        fontFamily: 'Roboto-Bold',
         color: 'white',
         fontSize: 40,
         justifyContent: 'center',
