@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2dcd7901-2f0b-4906-83a1-4fe0e6b4889f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/woof/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/woof/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/woof/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/woof/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/woof/src/images/loginbkg.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/woof/src/images/loginbkg.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/woof/src/pages/EnterTaskScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/woof/src/pages/EnterTaskScreen.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,7 +18,7 @@
     <session id="-198479124">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
+          <entry key="project.closed" value="11" />
           <entry key="project.open.time.10" value="2" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="1" />
@@ -28,11 +26,10 @@
           <entry key="project.open.time.20" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.open.time.6" value="2" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="13" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -52,9 +49,9 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Image" value="59" />
+          <entry key="Image" value="37" />
           <entry key="JSON" value="7" />
-          <entry key="JavaScript" value="62" />
+          <entry key="JavaScript" value="57" />
           <entry key="yarn.lock" value="1" />
         </counts>
       </usages-collector>
@@ -67,7 +64,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="36" />
-          <entry key="JavaScript" value="6969" />
+          <entry key="JavaScript" value="6956" />
         </counts>
       </usages-collector>
     </session>
@@ -75,15 +72,39 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/woof/src/images/homebkg.jpg">
-          <provider selected="true" editor-type-id="images" />
+        <entry file="file://$PROJECT_DIR$/woof/src/pages/TaskClass.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="49" selection-start-line="4" selection-start-column="49" selection-end-line="4" selection-end-column="49" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/woof/src/pages/editEvent.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/woof/src/pages/Calendar.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2370">
+              <caret line="168" column="9" selection-start-line="168" selection-start-column="9" selection-end-line="168" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/woof/src/pages/EnterTaskScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
+            <state relative-caret-position="383">
+              <caret line="78" column="25" selection-start-line="78" selection-start-column="25" selection-end-line="78" selection-end-column="25" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -94,8 +115,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/woof/src/pages/addEvent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2576">
-              <caret line="252" column="11" lean-forward="true" selection-start-line="252" selection-start-column="11" selection-end-line="252" selection-end-column="11" />
+            <state relative-caret-position="3900">
+              <caret line="283" column="35" selection-start-line="283" selection-start-column="35" selection-end-line="283" selection-end-column="35" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -104,25 +125,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/woof/src/images/loginbkg.jpg">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/woof/src/images/nimportant.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/woof/src/images/logo.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/woof/src/pages/Login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-135">
-              <caret line="136" column="48" selection-start-line="136" selection-start-column="48" selection-end-line="136" selection-end-column="48" />
+            <state relative-caret-position="855">
+              <caret line="74" column="4" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="4" />
               <folding>
                 <element signature="e#103#144#0" expanded="true" />
               </folding>
@@ -131,8 +137,39 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/woof/src/images/homelogo.png">
-          <provider selected="true" editor-type-id="images" />
+        <entry file="file://$PROJECT_DIR$/woof/src/pages/Home.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1185">
+              <caret line="93" column="51" selection-start-line="93" selection-start-column="28" selection-end-line="93" selection-end-column="51" />
+              <folding>
+                <element signature="e#9#50#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/woof/src/pages/todolist.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/woof/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+              <folding>
+                <element signature="e#16#57#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -140,15 +177,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
               <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/woof/App.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="33" column="27" lean-forward="true" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -164,6 +192,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>fontFamily</find>
+      <find>Duc</find>
+      <find>logo</find>
+      <find>DUCK</find>
       <find>flex</find>
       <find>Email</find>
       <find>Login</find>
@@ -190,10 +222,6 @@
       <find>task added</find>
       <find>onpress</find>
       <find>updatedata</find>
-      <find>FONT</find>
-      <find>font</find>
-      <find>asset</find>
-      <find>font faml</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -207,6 +235,7 @@
         <option value="$PROJECT_DIR$/woof/package.json" />
         <option value="$PROJECT_DIR$/woof/src/Router.js" />
         <option value="$PROJECT_DIR$/woof/src/pages/startPage.js" />
+        <option value="$PROJECT_DIR$/woof/src/pages/Login.js" />
         <option value="$PROJECT_DIR$/woof/src/pages/signUp.js" />
         <option value="$PROJECT_DIR$/woof/node_modules/react-native-calendars/src/agenda/index.js" />
         <option value="$PROJECT_DIR$/woof/src/pages/addEvent.js" />
@@ -214,7 +243,6 @@
         <option value="$PROJECT_DIR$/woof/src/pages/moreInfoEvent.js" />
         <option value="$PROJECT_DIR$/woof/src/pages/EnterTaskScreen.js" />
         <option value="$PROJECT_DIR$/woof/src/pages/todolist.js" />
-        <option value="$PROJECT_DIR$/woof/src/pages/Login.js" />
       </list>
     </option>
   </component>
@@ -236,13 +264,12 @@
     <dismissed value="$PROJECT_DIR$/woof/package.json" />
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="670" />
     <option name="y" value="23" />
     <option name="width" value="1378" />
     <option name="height" value="1122" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -259,19 +286,6 @@
               <item name="Ductv" type="b2602c69:ProjectViewProjectNode" />
               <item name="Ductv" type="462c0819:PsiDirectoryNode" />
               <item name="woof" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Ductv" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ductv" type="462c0819:PsiDirectoryNode" />
-              <item name="woof" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Ductv" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Ductv" type="462c0819:PsiDirectoryNode" />
-              <item name="woof" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="fonts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Ductv" type="b2602c69:ProjectViewProjectNode" />
@@ -361,11 +375,11 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/woof/src/images" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/woof/src/pages" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/woof/src/images" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -403,16 +417,14 @@
       <workItem from="1541934283568" duration="5293000" />
       <workItem from="1542080219996" duration="3698000" />
       <workItem from="1542084104255" duration="239000" />
-      <workItem from="1543685022900" duration="30000" />
-      <workItem from="1543685144827" duration="4399000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63471000" />
+    <option name="totallyTimeSpent" value="59042000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1378" height="1122" extended-state="0" />
+    <frame x="670" y="23" width="1378" height="1122" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21591747" />
@@ -442,11 +454,36 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/woof/yarn.lock" />
+    <entry file="file://$PROJECT_DIR$/woof/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/woof/src/images/nimportant.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/woof/src/images/vimportant.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/woof/src/images/stopwatch.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/woof/src/images/logo.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/woof/src/images/clock.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/woof/.babelrc">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/woof/src/images/homelogo.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/woof/src/images/homebkg.jpg">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/woof/src/component/Validate.js" />
     <entry file="file://$PROJECT_DIR$/woof/src/component/TaskClass.js" />
@@ -470,7 +507,24 @@
     <entry file="file://$PROJECT_DIR$/woof/src/pages/todolistCOPIED.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/woof/node_modules/react-native/jest/mockComponent.js" />
+    <entry file="file://$PROJECT_DIR$/woof/src/images/logo 2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/woof/src/images/bki 2.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/woof/src/images/bki.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/woof/node_modules/react-native/jest/mockComponent.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/woof/src/images/bkghome.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/woof/src/images/background2.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/woof/src/pages/signUp.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1500">
@@ -492,7 +546,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/woof/node_modules/react-native-calendars/src/agenda/index.js" />
+    <entry file="file://$PROJECT_DIR$/woof/node_modules/react-native-calendars/src/agenda/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="497" column="28" selection-start-line="497" selection-start-column="28" selection-end-line="497" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/woof/src/pages/moreInfoEvent.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -515,7 +575,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/woof/src/pages/Calendar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2355">
+        <state relative-caret-position="2370">
           <caret line="168" column="9" selection-start-line="168" selection-start-column="9" selection-end-line="168" selection-end-column="9" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
@@ -523,22 +583,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/pages/Home.js">
+    <entry file="file://$PROJECT_DIR$/woof/src/pages/addEvent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1185">
-          <caret line="93" column="24" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
+        <state relative-caret-position="3900">
+          <caret line="283" column="35" selection-start-line="283" selection-start-column="35" selection-end-line="283" selection-end-column="35" />
           <folding>
-            <element signature="e#9#50#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/pages/todolist.js">
+    <entry file="file://$PROJECT_DIR$/woof/src/pages/Login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        <state relative-caret-position="855">
+          <caret line="74" column="4" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="4" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#103#144#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/woof/src/pages/Home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1185">
+          <caret line="93" column="51" selection-start-line="93" selection-start-column="28" selection-end-line="93" selection-end-column="51" />
+          <folding>
+            <element signature="e#9#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -553,48 +623,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/images/bkghome.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/images/stopwatch.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/images/bki 2.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/images/background2.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/images/bki.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/images/yellowbkg.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/images/vimportant.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/images/userhome.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/images/pgradientbkg.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/images/logo 2.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/images/nimportant.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/images/logo.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/images/homebkg.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/images/homelogo.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/woof/src/Router.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -602,17 +630,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/woof/App.js">
+    <entry file="file://$PROJECT_DIR$/woof/src/pages/todolist.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="33" column="27" lean-forward="true" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/pages/addEvent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2576">
-          <caret line="252" column="11" lean-forward="true" selection-start-line="252" selection-start-column="11" selection-end-line="252" selection-end-column="11" />
+        <state relative-caret-position="465">
+          <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -621,23 +642,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/woof/src/pages/EnterTaskScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
+        <state relative-caret-position="383">
+          <caret line="78" column="25" selection-start-line="78" selection-start-column="25" selection-end-line="78" selection-end-column="25" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/images/loginbkg.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/woof/src/pages/Login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-135">
-          <caret line="136" column="48" selection-start-line="136" selection-start-column="48" selection-end-line="136" selection-end-column="48" />
-          <folding>
-            <element signature="e#103#144#0" expanded="true" />
           </folding>
         </state>
       </provider>
