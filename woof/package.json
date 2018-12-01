@@ -42,8 +42,7 @@
   },
   "rnpm": {
     "assets": [
-      "assets/fonts/Montserrat",
-      "assets/fonts/PT_Sans"
+      "./assets/fonts"
     ]
   }
 }
