@@ -17,8 +17,8 @@ export default class AgendaScreen extends Component {
         this.state = {
             first: true,
             items: {},
-            tasks: new PriorityQueue({ comparator: {function(a, b) { return b.die - a.die }} }),
-            //tasks: new PriorityQueue(),
+            //tasks: new PriorityQueue({ comparator: {function(a, b) { return b - a}} }),
+            tasks: new PriorityQueue(),
             markedDates: {}
         };
     }
@@ -31,6 +31,7 @@ export default class AgendaScreen extends Component {
                 items={this.state.items}
                 //tasks={this.state.tasks}
                 loadItemsForMonth={this.loadItems.bind(this)}
+                //tasks = {this.makeEvents.bind(this)}
                 selected={this.onDayPress}
                 renderItem={this.renderItem.bind(this)}
                 markedDates={this.state.markedDates}
@@ -150,9 +151,6 @@ export default class AgendaScreen extends Component {
                     }
                 }
             });
-            this.setState({
-                items: items
-            })
             const AWS2 = 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/?format=json'
             const Heroku2 = 'https://ductv.herokuapp.com/task/'
             fetch(AWS2).then(function (response) {
@@ -161,11 +159,6 @@ export default class AgendaScreen extends Component {
                 const newItems = {}
                 for (var i = 0; i < data.length; i++) {
                     var header = data[i]['header'].toString()
-                    //time = Date.now()
-                    //var strTime = time.toISOString().split('T')[0]
-                    //Alert.alert(strTime)
-                    //if (!tasks) {
-                    //tasks[strTime] = [];
                     tasks.queue({
                         name: header,
                         desc: data[i]['description'],
@@ -178,9 +171,13 @@ export default class AgendaScreen extends Component {
                     });
                 }
             });
-            this.makeEvents()
-            this.markDays()
         }
+        const it = this.makeEvents(items)
+        const markedD = this.markDays(it)
+        this.setState({
+            items: it,
+            markedDays: markedD
+        })
     }
 
     renderItem(item) {
@@ -205,9 +202,8 @@ export default class AgendaScreen extends Component {
         }
     }
 
-    makeEvents() {
+    makeEvents(items) {
         const {tasks} = this.state
-        const {items} = this.state
         var time = new Date()
         var strTime = time.toISOString().split('T')[0]
         var year = strTime.slice(0, 4)
@@ -255,16 +251,12 @@ export default class AgendaScreen extends Component {
                 time = new Date(time)
                 strTime = time.toISOString().split('T')[0]
             }
-            this.setState({
-                items: items,
-                tasks: tasks
-            })
         }
-
+        return (items)
     }
 
-    markDays() {
-        const {items} = this.state
+    markDays(items) {
+        //const {items} = this.state
         const {markedDates} = this.state
         for (var key in items) {
             var day = items[key];
@@ -288,9 +280,7 @@ export default class AgendaScreen extends Component {
             }
 
         }
-        this.setState({
-            markedDates: markedDates
-        })
+    return(markedDates)
     }
 
 
