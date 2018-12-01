@@ -15,8 +15,8 @@ export default class moreInfoEvent extends React.Component {
             id: this.props.id,
             url: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/" + this.props.id + "/",
             header: this.props.header,
-            startTime: this.props.startTime,
-            endTime: this.props.endTime,
+            startTime: (parseInt(this.props.startTime.split(":")[0], 10) - 5) + ":" + this.props.startTime.split(":")[1],
+            endTime: (parseInt(this.props.endTime.split(":")[0], 10) - 5) + ":" + this.props.endTime.split(":")[1],
             desc: this.props.desc,
             date: this.props.date,
             loc: this.props.loc,
@@ -32,8 +32,7 @@ export default class moreInfoEvent extends React.Component {
             // data: null,
             isLoading: true,
             dataSource: null,
-            id: '0',
-
+            id: this.props.id
         }
     };
 
@@ -68,7 +67,7 @@ export default class moreInfoEvent extends React.Component {
             })
             .catch((error) => {
                 console.log(error)
-            });
+            }); 
     }
 
     render() {
@@ -87,12 +86,12 @@ export default class moreInfoEvent extends React.Component {
 
                     <Text style={styles.statictextDescriptors}>Date:</Text>
                     <Text>{this.props.date}</Text>
-
+                    
                     <Text style={styles.statictextDescriptors}>Start Time:</Text>
-                    <Text>{this.props.startTime}</Text>
+                    <Text>{this.state.startTime}</Text>
 
                     <Text style={styles.statictextDescriptors}>End Time:</Text>
-                    <Text>{this.props.endTime}</Text>
+                    <Text>{this.state.endTime}</Text>
 
                     <Text style={styles.statictextDescriptors}>Details:</Text>
                     <Text>{this.props.desc}</Text>

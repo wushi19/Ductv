@@ -19,7 +19,8 @@ export default class AgendaScreen extends Component {
             items: {},
             //tasks: new PriorityQueue({ comparator: {function(a, b) { return b - a}} }),
             tasks: new PriorityQueue(),
-            markedDates: {}
+            markedDates: {},
+            gameCount: 0
         };
     }
 
@@ -94,7 +95,7 @@ export default class AgendaScreen extends Component {
                             endTime: endtime.slice(0, -8),
                             desc: data[i]['description'],
                             loc: data[i]['location'],
-                            height: Math.max(30, Math.floor(len)),
+                            height: Math.max(60, Math.floor(len)),
                             duration: len,
                             id: data[i]['id']
                         });
@@ -124,7 +125,7 @@ export default class AgendaScreen extends Component {
                                     endTime: endtime.slice(0, -8),
                                     desc: data[i]['description'],
                                     loc: data[i]['location'],
-                                    height: Math.max(30, Math.floor(len)),
+                                    height: Math.max(60, Math.floor(len)),
                                     duration: len,
                                     id: data[i]['id']
                                 });
@@ -280,25 +281,40 @@ export default class AgendaScreen extends Component {
             }
 
         }
-    return(markedDates)
+        return (markedDates)
     }
 
 
     renderEmptyDate(day) {
         return (
-            <View style={styles.emptyDate}><Text>Nothing scheduled - Go feed ducks!</Text></View>
+            <TouchableHighlight onPress={() => this.GameOrNah()}>
+                <View style={styles.emptyDate}><Text>Nothing scheduled - Go feed ducks!</Text></View>
+            </TouchableHighlight>
+
         );
     }
 
+    GameOrNah() {
+        var {gameCount} = this.state
+        var game = false
+        if (gameCount < 5) {
+            gameCount = gameCount + 1
+            Alert.alert(gameCount.toString())
+        }
+        else {
+            gameCount = 0
+            game = true
+        }
+        this.setState({
+            gameCount: gameCount
+        })
+        if (game) {
+            Actions.userhome()
+        }
+    }
+
     addButton() {
-        <ActionButton buttonColor="rgba(231,76,60,1)">
-            <ActionButton.Item buttonColor='#9b59b6' title="Add New Event" onPress={this.addEvent}>
-                <Icon name="md-create" style={styles.actionButtonIcon}/>
-            </ActionButton.Item>
-            <ActionButton.Item buttonColor='#1abc9c' title="Go Home" onPress={this.goHome}>
-                <Icon name="md-done-all" style={styles.actionButtonIcon}/>
-            </ActionButton.Item>
-        </ActionButton>
+            <ActionButton buttonColor='#9b59b6' title="Add New Event" onPress={this.addEvent}/>
     }
 
     rowHasChanged(r1, r2) {

@@ -4,6 +4,7 @@ import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Actions} from 'react-native-router-flux';
 import bkg from '../images/yellowbkg.jpg';
+import DatePicker from 'react-native-datepicker';
 
 const { width: WIDTH } = Dimensions.get('window');
 
@@ -20,8 +21,9 @@ export default class editEvent extends React.Component {
             url: this.props.url,
             header: this.props.header,
             description: this.props.desc,
-            startTime: "",
-            endtime: "",
+            startTime: this.props.startTime,
+            endtime: this.props.endTime,
+            date: this.props.date.split("-")[2] + "-" + this.props.date.split("-")[0] + "-" + this.props.date.split("-")[1],
             // recurring: null,
             // private: null, //private is res
             calendar: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/calendar/1/",
@@ -29,8 +31,7 @@ export default class editEvent extends React.Component {
             location: this.props.loc,
             isLoading: true,
             dataSource: null,
-            id: '0',
-
+            id: this.props.id,
         }
     };
 
@@ -65,7 +66,6 @@ export default class editEvent extends React.Component {
 
     updateEvent = () =>{
         this.tasktest();
-        alert(this.state.url + "\nPROPS: " + this.props.url)
     }
 
     tasktest = () =>{
@@ -79,6 +79,8 @@ export default class editEvent extends React.Component {
                 updated: this.state.updated,
                 description: this.state.description,
                 location: this.state.location,
+                startTime: this.state.date + "T" + this.state.startTime + ":00-05:00",
+                endtime: this.state.date + "T" + this.state.endtime + ":00-05:00",
             }),
         })
             .then((response) => response.json())
@@ -89,6 +91,7 @@ export default class editEvent extends React.Component {
             .catch((error) => {
                 console.error(error);
             });
+            alert("Event successfully updated!");
     }
 
     render() {
@@ -123,42 +126,6 @@ export default class editEvent extends React.Component {
                         value={this.state.location}
                     />
 
-                    <Text style={styles.statictextDescriptors}>Date:</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder={this.props.date}
-                        // secureTextEntry={true}
-                        placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
-                        autoCapitalize = 'none'
-                        underLineColorAndroid='transparent'
-                        //onChangeText={(email) => this.setState({ email })}
-                        //value={this.state.email}
-                    />
-
-                    <Text style={styles.statictextDescriptors}>Start Time:</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder={this.props.startTime}
-                        // secureTextEntry={true}
-                        placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
-                        autoCapitalize = 'none'
-                        underLineColorAndroid='transparent'
-                        //onChangeText={(email) => this.setState({ email })}
-                        //value={this.state.email}
-                    />
-
-                    <Text style={styles.statictextDescriptors}>End Time:</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder={this.props.endTime}
-                        // secureTextEntry={true}
-                        placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
-                        autoCapitalize = 'none'
-                        underLineColorAndroid='transparent'
-                        //onChangeText={(email) => this.setState({ email })}
-                        //value={this.state.email}
-                    />
-
                     <Text style={styles.statictextDescriptors}>Details:</Text>
                     <TextInput
                         style={styles.input}
@@ -169,6 +136,81 @@ export default class editEvent extends React.Component {
                         underLineColorAndroid='transparent'
                         onChangeText={(description) => this.setState({ description })}
                         value={this.state.description}
+                    />
+
+                    <Text style={styles.statictextDescriptors}>Date:</Text>
+                    <DatePicker
+                        style={{width: 200}}
+                        date={this.state.date}
+                        mode="date"
+                        placeholder={this.state.date}
+                        format="YYYY-MM-DD"
+                        minDate="2016-05-01"
+                        maxDate="2029-12-31"
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                        showIcon={false}
+                        customStyles={{
+                            dateIcon: {
+                                position: 'absolute',
+                                left: 0,
+                                top: 4,
+                                marginLeft: 0
+                            },
+                            dateInput: {
+                                marginLeft: 36
+                            }
+                            // ... You can check the source to find the other keys.
+                        }}
+                        onDateChange={(date) => {this.setState({date: date})}}
+                    />
+
+                    <Text style={styles.statictextDescriptors}>Start Time:</Text>
+                    <DatePicker
+                        style={{width: 200}}
+                        date={this.state.startTime}
+                        mode="time"
+                        placeholder={this.state.startTime}
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                        showIcon={false}
+                        customStyles={{
+                            dateIcon: {
+                                position: 'absolute',
+                                left: 0,
+                                top: 4,
+                                marginLeft: 0
+                            },
+                            dateInput: {
+                                marginLeft: 36
+                            }
+                            // ... You can check the source to find the other keys.
+                        }}
+                        onDateChange={(startTime) => this.setState({ startTime })}
+                    />
+
+                    <Text style={styles.statictextDescriptors}>End Time:</Text>
+                    <DatePicker
+                        style={{width: 200}}
+                        date={this.state.endtime}
+                        mode="time"
+                        placeholder={this.state.endtime}
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                        showIcon={false}
+                        customStyles={{
+                            dateIcon: {
+                                position: 'absolute',
+                                left: 0,
+                                top: 4,
+                                marginLeft: 0
+                            },
+                            dateInput: {
+                                marginLeft: 36
+                            }
+                            // ... You can check the source to find the other keys.
+                        }}
+                        onDateChange={(endtime) => this.setState({ endtime })}
                     />
 
                 </ScrollView>
