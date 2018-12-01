@@ -95,7 +95,7 @@ export default class AgendaScreen extends Component {
                             endTime: endtime.slice(0, -8),
                             desc: data[i]['description'],
                             loc: data[i]['location'],
-                            height: Math.max(30, Math.floor(len)),
+                            height: Math.max(60, Math.floor(len)),
                             duration: len,
                             id: data[i]['id']
                         });
@@ -125,7 +125,7 @@ export default class AgendaScreen extends Component {
                                     endTime: endtime.slice(0, -8),
                                     desc: data[i]['description'],
                                     loc: data[i]['location'],
-                                    height: Math.max(30, Math.floor(len)),
+                                    height: Math.max(60, Math.floor(len)),
                                     duration: len,
                                     id: data[i]['id']
                                 });
