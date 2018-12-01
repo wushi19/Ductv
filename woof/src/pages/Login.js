@@ -181,10 +181,11 @@ const styles = StyleSheet.create({
         height: 120,
     },
     logoText: {
-        fontFamily: "PT-Sans",
+        fontFamily: 'PT Sans Bold',
         color: 'white',
         fontSize: 40,
         justifyContent: 'center',
+        fontWeight: 'bold',
         marginTop: 10,
         // opacity: ,
     },
