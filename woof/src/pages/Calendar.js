@@ -19,7 +19,8 @@ export default class AgendaScreen extends Component {
             items: {},
             //tasks: new PriorityQueue({ comparator: {function(a, b) { return b - a}} }),
             tasks: new PriorityQueue(),
-            markedDates: {}
+            markedDates: {},
+            gameCount: 0
         };
     }
 
@@ -280,14 +281,36 @@ export default class AgendaScreen extends Component {
             }
 
         }
-    return(markedDates)
+        return (markedDates)
     }
 
 
     renderEmptyDate(day) {
         return (
-            <View style={styles.emptyDate}><Text>Nothing scheduled - Go feed ducks!</Text></View>
+            <TouchableHighlight onPress={() => this.GameOrNah()}>
+                <View style={styles.emptyDate}><Text>Nothing scheduled - Go feed ducks!</Text></View>
+            </TouchableHighlight>
+
         );
+    }
+
+    GameOrNah() {
+        var {gameCount} = this.state
+        var game = false
+        if (gameCount < 5) {
+            gameCount = gameCount + 1
+            Alert.alert(gameCount.toString())
+        }
+        else {
+            gameCount = 0
+            game = true
+        }
+        this.setState({
+            gameCount: gameCount
+        })
+        if (game) {
+            Actions.userhome()
+        }
     }
 
     addButton() {
