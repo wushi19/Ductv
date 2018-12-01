@@ -11,6 +11,7 @@
     "js-priority-queue": "^0.1.5",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.23",
+    "myriad-font": "0.0.2",
     "native-base": "^2.8.1",
     "react": "16.6.0-alpha.8af6728",
     "react-base": "^0.2.0",
