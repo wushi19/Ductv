@@ -16,33 +16,57 @@ import {
     Button,
     Alert,
 } from 'react-native';
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import bgImage from '../images/purpleuserhome.jpg';
 import logo from '../images/logo.png';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-
-
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 
 const { width: WIDTH } = Dimensions.get('window');
 
 export default class Login extends React.Component {
 
-    constructor(){
+    constructor() {
         super();
 
         this.state = {
-          email: ""
+            email: "",
+            hour: null,
+            minute: null,
+            quote: "\"I exist as I am, that is enough.\" - Walt Whitman",
         }
+    }
+
+    formatAMPM(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? '' : '';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
     }
 
     todolist() {
         Actions.todolist()
     }
 
-    calendar(){
+    calendar() {
         Actions.calendar()
+    }
+
+    componentDidMount() {
+
+        var date = new Date();
+
+        setInterval(() => {
+            this.setState({
+                hour: this.formatAMPM(date)
+            })
+        })
+
     }
 
     render() {
@@ -50,6 +74,7 @@ export default class Login extends React.Component {
             velocityThreshold: 0.3,
             directionalOffsetThreshold: 80
         };
+
         return (
             <GestureRecognizer
                 onSwipeLeft={(state) => Actions.calendar()}
@@ -61,11 +86,17 @@ export default class Login extends React.Component {
                 }}
             >
 
-            <ImageBackground source={bgImage} style={styles.backgroundContainer}>
-                <View style={styles.logoContainer}>
-                    <Text style={styles.logoText}>Hiiii Friend!</Text>
-                </View>
-            </ImageBackground>
+                <ImageBackground source={bgImage} style={styles.backgroundContainer}>
+
+                    <View style={styles.textContainer}>
+                        <Text style={styles.timeText}>{this.state.hour}</Text>
+                        <Text style={styles.nameText}>Good Morning, Dorian.</Text>
+                    </View>
+
+                    <View style={styles.quoteContainer}>
+                        <Text style={styles.quoteText}>{this.state.quote}</Text>
+                    </View>
+                </ImageBackground>
             </GestureRecognizer>
 
         );
@@ -74,67 +105,41 @@ export default class Login extends React.Component {
 
 const styles = StyleSheet.create({
     backgroundContainer: {
+        alignItems: 'center', //bkg to be centered
+        justifyContent: 'center', //text to be centered
         flex: 1,
-        width: null,
-        height: null,
+        // paddingTop:20
+    },
+    textContainer: {
         justifyContent: 'center',
         alignItems: 'center',
+        flex: 1,
     },
-    btnLogin: {
-        width: WIDTH - 70,
-        height: 60,
-        borderRadius: 45,
+    nameText: {
         justifyContent: 'center',
-        marginTop: 160,
-        backgroundColor: 'rgba(33, 36, 44, 1)'
-    },
-
-    btnLoginText: {
-        textAlign: 'center',
+        alignItems: 'center',
         fontFamily: 'Montserrat-ExtraLight',
         color: 'white',
         fontSize: 20,
-        justifyContent: 'center',
         fontWeight: 'bold',
         opacity: 1,
     },
-    logoContainer: {
-        alignItems: 'center',
-        marginBottom: 60,
-    },
-    logo: {
-        width: 120,
-        height: 120,
-    },
-    logoText: {
+    timeText: {
         fontFamily: 'Montserrat-ExtraLight',
         color: 'white',
-        fontSize: 40,
+        fontSize: 100,
+        alignItems: 'center',
         justifyContent: 'center',
-        fontWeight: 'bold',
-        marginTop: 10,
+        // fontWeight: 'bold',
         opacity: 1,
     },
-    input: {
-        width: WIDTH - 55,
-        height: 45,
-        borderRadius: 45,
-        fontSize: 16,
-        paddingLeft: 45,
-        backgroundColor: 'rgba(0,0,0,0.35)',
-        color: 'rgba(255, 255, 255, 0.7)',
-        marginHorizontal: 25,
+    quoteContainer: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        marginBottom: 36
     },
-    inputContainer: {
-        marginTop: 50,
-    },
-    signupButton:{
-        fontFamily: 'Montserrat-ExtraLight',
+    quoteText:{
         color: 'white',
-        fontSize: 14,
-        fontWeight: '500',
-        alignItems: 'center',
-        paddingVertical: 16,
+        fontFamily: 'Montserrat-ExtraLight',
     },
-
 });
