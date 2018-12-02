@@ -266,16 +266,12 @@ export default class signUp extends React.Component {
            />
          </View>
 
-        <TouchableOpacity style={styles.btnLogin}>
-          <Button
-            color='rgba(255, 255, 255, 0.7)'
-            title="Sign me up!"
-            fontSize='16'
-            //onPress={this.userLogin.bind(this)}
-            onPress={this.handleSubmit}
-            fontFamily= 'Montserrat-ExtraLight'
-          />
-        </TouchableOpacity>
+          <TouchableOpacity
+              onPress={this.goHome}
+              style={styles.btnLogin}
+          >
+              <Text style = {styles.btnSignupText}> Sign me up! </Text>
+          </TouchableOpacity>
 
       </ImageBackground>
     );
@@ -289,6 +285,15 @@ const styles = StyleSheet.create({
     height: null,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  btnSignupText: {
+      textAlign: 'center',
+      fontFamily: 'Montserrat-ExtraLight',
+      color: 'white',
+      fontSize: 20,
+      justifyContent: 'center',
+      fontWeight: 'bold',
+      opacity: 1,
   },
   input: {
     width: WIDTH - 55, //padding on right
@@ -320,11 +325,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   btnLogin: {
-    width: WIDTH - 55,
-    height: 45,
-    borderRadius: 45,
-    justifyContent: 'center',
-    marginTop: 20,
-    backgroundColor: 'rgba(0,0,0,0.75)'
+      width: WIDTH - 70,
+      height: 60,
+      borderRadius: 45,
+      justifyContent: 'center',
+      marginTop: 160,
+      backgroundColor: '#413a5d',
+      opacity: 0.8,
   },
 });

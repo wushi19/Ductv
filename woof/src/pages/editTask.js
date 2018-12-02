@@ -112,7 +112,7 @@ export default class editTask extends React.Component {
                 <StatusBar barStyle="light-content"/>
                 <View style={styles.eventContainer}>
 
-                    <Text style={styles.title}>Task Information</Text>
+                    <Text style={styles.title}>Edit Task</Text>
 
                     <Text style={styles.statictextDescriptors}>Event:</Text>
                     <TextInput

@@ -193,7 +193,7 @@ export default class EnterTaskScreen extends React.Component {
             onPress={this.taskbarr}
             style={styles.btnLogin}
           >
-            <Text style={styles.btnLoginText}> Add Event </Text>
+            <Text style={styles.btnLoginText}> Add Task </Text>
           </TouchableOpacity>
         </View>
 

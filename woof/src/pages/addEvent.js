@@ -117,7 +117,7 @@ export default class addEvent extends React.Component {
           <TextInput
             id={'tasknames'}
             style={styles.input}
-            placeholder={'Task Name'}
+            placeholder={'Event Name'}
             secureTextEntry={false}
             placeholderTextColor={'#fff'}
             onChangeText={(taskname) => this.setState({ taskname })}
