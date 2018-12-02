@@ -97,7 +97,11 @@ export default class moreInfoEvent extends React.Component {
                     <Text>{this.props.desc}</Text>
 
                 </View>
-                <ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => {Actions.editEvent(this.state)}}/>
+                <ActionButton 
+                buttonColor="#413A5D" 
+                onPress={() => {Actions.editEvent(this.state)}}
+                renderIcon={active => active ? (<Icon name="md-create" style={styles.actionButtonIcon} /> ) : (<Icon name="md-create" style={styles.actionButtonIcon}/>)}
+                />
 
             </View>
         );
@@ -135,5 +139,9 @@ const styles = StyleSheet.create({
         fontSize: 15,
         marginTop: 10,
         marginBottom: 5,
-    }
+    },
+    actionButtonIcon: {
+        fontSize: 30,
+        color: '#7B6F92',
+      },
 });
