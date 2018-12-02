@@ -1,9 +1,10 @@
 import React from 'react';
-import {Text, View, Alert, StyleSheet, AsyncStorage, StatusBar, ImageBackground, TextInput, Dimensions} from 'react-native';
+import {Text, View, Alert, StyleSheet, AsyncStorage, StatusBar, ImageBackground, TextInput, Dimensions, Slider} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Actions} from 'react-native-router-flux';
 import bkg from '../images/yellowbkg.jpg';
+import DatePicker from 'react-native-datepicker'
 
 const { width: WIDTH } = Dimensions.get('window');
 
@@ -29,14 +30,21 @@ export default class editTask extends React.Component {
             // data: null,
             isLoading: true,
             dataSource: null,
-            id: '0',
-
+            id: this.props.id,
+            header: this.props.header,
+            description: this.props.description,
+            priority: this.props.priority,
+            durationFormat: (parseInt(this.props.duration /60) > 9) ? parseInt(this.props.duration /60) : ('0' + parseInt(this.props.duration /60)) + ':' + (((this.props.duration % 60) > 9) ? (this.props.duration % 60) : ('0' + (this.props.duration % 60)) ),
+            duration: this.props.duration,
+            due: this.props.due,
+            id: this.props.id,
+            url: this.props.url
         }
     };
 
 
     editEvent() {
-        Alert.alert(this.props.header)
+        Alert.alert(this.props.header.url)
     }
 
     // getEvent = (number) => {
@@ -68,6 +76,36 @@ export default class editTask extends React.Component {
     //         });
     // }
 
+    updateTask = () =>{
+        this.tasktest();
+    }
+
+    tasktest = () =>{
+        fetch(this.state.url, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                header: this.state.header,
+                description: this.state.description,
+                priority: this.state.priority,
+                duration: (parseInt(this.state.durationFormat.substring(3, 5), 10) + (parseInt(this.state.durationFormat.substring(0, 2), 10) * 60)),
+                due: this.state.due,
+                owner: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/profile/1/"
+            }),
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+
+                
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+            alert("Task successfully updated!");
+    }
+    
     render() {
         return (
             <View style={styles.container}>
@@ -84,30 +122,84 @@ export default class editTask extends React.Component {
                         placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                         autoCapitalize = 'none'
                         underLineColorAndroid='transparent'
-                        //onChangeText={(email) => this.setState({ email })}
-                        //value={this.state.email}
+                        onChangeText={(header) => this.setState({ header })}
+                        value={this.state.header}
                     />
 
-                    <Text style={styles.statictextDescriptors}>Location:</Text>
-                    <Text>{this.props.loc}</Text>
-
-                    <Text style={styles.statictextDescriptors}>Date:</Text>
-                    <Text>{this.props.date}</Text>
-
-                    <Text style={styles.statictextDescriptors}>Start Time:</Text>
-                    <Text>{this.props.startTime}</Text>
-
-                    <Text style={styles.statictextDescriptors}>End Time:</Text>
-                    <Text>{this.props.endTime}</Text>
-
                     <Text style={styles.statictextDescriptors}>Details:</Text>
-                    <Text>{this.props.desc}</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder={this.props.description}
+                        // secureTextEntry={true}
+                        placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
+                        autoCapitalize = 'none'
+                        underLineColorAndroid='transparent'
+                        onChangeText={(description) => this.setState({ description })}
+                        value={this.state.description}
+                    />
 
+                    <Text style={styles.statictextDescriptors}>Priority:</Text>
+                    <Slider
+                        style={{width: 200, paddingLeft: 100,}}
+                        minimumValue={1}
+                        maximumValue={5}
+                        step={1}
+                        onValueChange={(priority) => this.setState({ priority })}
+                        value={this.state.priority}
+                    />
+
+                    <Text style={styles.statictextDescriptors}>Duration:</Text>
+                    <DatePicker
+                        style={{width: 200}}
+                        date={this.state.durationFormat}
+                        mode="time"
+                        placeholder="select date"
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                        showIcon={false}
+                        customStyles={{
+                            dateIcon: {
+                                position: 'absolute',
+                                left: 0,
+                                top: 4,
+                                marginLeft: 0
+                            },
+                            dateInput: {
+                                marginLeft: 36
+                            }
+                            // ... You can check the source to find the other keys. {(durationFormat) => {this.changedur({date: durationFormat})}}
+                        }}
+                        onDateChange={(durationFormat) => this.setState({durationFormat})}/>
+
+                    <Text style={styles.statictextDescriptors}>Due:</Text>
+                    <DatePicker
+                        style={{width: 200}}
+                        date={this.state.due}
+                        mode="datetime"
+                        placeholder="select date"
+                        format="YYYY-MM-DD HH:mm"
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                        showIcon={false}
+                        customStyles={{
+                            dateIcon: {
+                                position: 'absolute',
+                                left: 0,
+                                top: 4,
+                                marginLeft: 0
+                            },
+                            dateInput: {
+                                marginLeft: 36
+                            }
+                            // ... You can check the source to find the other keys. {(durationFormat) => {this.changedur({date: durationFormat})}}
+                        }}
+                        onDateChange={(due) => this.setState({due})}/>
+                    
                 </View>
-                <ActionButton buttonColor="#EADCD9" onPress={this.editEvent}/>
+                <ActionButton buttonColor="#EADCD9" onPress={this.updateTask}/>
 
             </View>
-        );
+        ); 
     }
 }
 
