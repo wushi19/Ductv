@@ -3,7 +3,7 @@ import { Text, View, Alert, StyleSheet, AsyncStorage, StatusBar, ImageBackground
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
-import bkg from '../images/yellowbkg.jpg';
+import bkg from '../images/loginbkg.jpg';
 
 const { width: WIDTH } = Dimensions.get('window');
 
@@ -74,7 +74,7 @@ export default class moreInfoEvent extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <ImageBackground source={bkg} style={styles.container}>
                 <StatusBar barStyle="light-content" />
                 <View style={styles.eventContainer}>
 
@@ -105,7 +105,7 @@ export default class moreInfoEvent extends React.Component {
                     renderIcon={active => active ? (<Icon name="md-create" style={styles.actionButtonIcon} />) : (<Icon name="md-create" style={styles.actionButtonIcon} />)}
                 />
 
-            </View>
+            </ImageBackground>
         );
     }
 }
