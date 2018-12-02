@@ -77,8 +77,8 @@ export default class Login extends React.Component {
 
         return (
             <GestureRecognizer
-                onSwipeLeft={(state) => Actions.calendar()}
-                onSwipeRight={(state) => Actions.todolist()}
+                onSwipeRight={(state) => Actions.calendar()}
+                onSwipeLeft={(state) => Actions.todolist()}
                 config={config}
                 style={{
                     flex: 1,
