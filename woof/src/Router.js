@@ -16,9 +16,9 @@ import editTask from "./pages/editTask";
 import userhome from "./pages/userhome";
 import {Text} from "react-native-elements";
 
-const TabIcon = ({ selected}) => {
+const TabIcon = ({ selected, title}) => {
     return (
-        <Text style={{color: selected ? 'red' :'black'}}> </Text>
+        <Text style={{color: selected ? 'white' :'white'}}> {title} </Text>
     );
 }
 

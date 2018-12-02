@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2dcd7901-2f0b-4906-83a1-4fe0e6b4889f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/woof/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/woof/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/woof/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/woof/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/woof/src/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/woof/src/Router.js" afterDir="false" />
-    </list>
+    <list default="true" id="2dcd7901-2f0b-4906-83a1-4fe0e6b4889f" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -77,7 +72,7 @@
         <entry file="file://$PROJECT_DIR$/woof/src/pages/Login.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-372">
-              <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
+              <caret line="90" selection-start-line="90" selection-end-line="90" />
               <folding>
                 <element signature="e#103#144#0" expanded="true" />
               </folding>
@@ -89,7 +84,7 @@
         <entry file="file://$PROJECT_DIR$/woof/src/pages/userhome.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="413">
-              <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
+              <caret line="89" selection-start-line="89" selection-end-line="89" />
               <folding>
                 <element signature="e#10#51#0" expanded="true" />
               </folding>
@@ -100,8 +95,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/woof/src/Router.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="610">
-              <caret line="53" column="32" lean-forward="true" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
+            <state relative-caret-position="179">
+              <caret line="18" selection-start-line="18" selection-end-line="19" selection-end-column="12" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -123,8 +118,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/woof/src/pages/EnterTaskScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="78" column="2" lean-forward="true" selection-start-line="78" selection-start-column="2" selection-end-line="78" selection-end-column="2" />
+            <state relative-caret-position="203">
+              <caret line="66" column="2" selection-start-line="66" selection-start-column="2" selection-end-line="66" selection-end-column="2" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -136,7 +131,7 @@
         <entry file="file://$PROJECT_DIR$/woof/src/pages/Home.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="744">
-              <caret line="93" column="24" lean-forward="true" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
+              <caret line="93" column="24" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
               <folding>
                 <element signature="e#9#50#0" expanded="true" />
               </folding>
@@ -147,8 +142,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/woof/src/pages/todolist.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-39">
-              <caret line="180" column="21" selection-start-line="180" selection-start-column="21" selection-end-line="180" selection-end-column="21" />
+            <state relative-caret-position="141">
+              <caret line="192" column="21" selection-start-line="192" selection-start-column="21" selection-end-line="192" selection-end-column="21" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -265,8 +260,8 @@
     <dismissed value="$PROJECT_DIR$/woof/package.json" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="119" />
-    <option name="y" value="23" />
+    <option name="x" value="-19" />
+    <option name="y" value="25" />
     <option name="width" value="1148" />
     <option name="height" value="1122" />
   </component>
@@ -446,15 +441,15 @@
       <workItem from="1541934283568" duration="5293000" />
       <workItem from="1542080219996" duration="3698000" />
       <workItem from="1542084104255" duration="239000" />
-      <workItem from="1543696348932" duration="8370000" />
+      <workItem from="1543696348932" duration="8613000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68289000" />
+    <option name="totallyTimeSpent" value="68532000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-100" y="28" width="1148" height="1122" extended-state="0" />
+    <frame x="119" y="23" width="1148" height="1122" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25998226" />
@@ -665,8 +660,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/woof/src/pages/todolist.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-39">
-          <caret line="180" column="21" selection-start-line="180" selection-start-column="21" selection-end-line="180" selection-end-column="21" />
+        <state relative-caret-position="141">
+          <caret line="192" column="21" selection-start-line="192" selection-start-column="21" selection-end-line="192" selection-end-column="21" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -684,8 +679,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/woof/src/pages/EnterTaskScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="78" column="2" lean-forward="true" selection-start-line="78" selection-start-column="2" selection-end-line="78" selection-end-column="2" />
+        <state relative-caret-position="203">
+          <caret line="66" column="2" selection-start-line="66" selection-start-column="2" selection-end-line="66" selection-end-column="2" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -695,7 +690,7 @@
     <entry file="file://$PROJECT_DIR$/woof/src/pages/Home.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="744">
-          <caret line="93" column="24" lean-forward="true" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
+          <caret line="93" column="24" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
           <folding>
             <element signature="e#9#50#0" expanded="true" />
           </folding>
@@ -705,7 +700,7 @@
     <entry file="file://$PROJECT_DIR$/woof/src/pages/Login.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-372">
-          <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
+          <caret line="90" selection-start-line="90" selection-end-line="90" />
           <folding>
             <element signature="e#103#144#0" expanded="true" />
           </folding>
@@ -715,7 +710,7 @@
     <entry file="file://$PROJECT_DIR$/woof/src/pages/userhome.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="413">
-          <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
+          <caret line="89" selection-start-line="89" selection-end-line="89" />
           <folding>
             <element signature="e#10#51#0" expanded="true" />
           </folding>
@@ -724,8 +719,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/woof/src/Router.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="610">
-          <caret line="53" column="32" lean-forward="true" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
+        <state relative-caret-position="179">
+          <caret line="18" selection-start-line="18" selection-end-line="19" selection-end-column="12" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

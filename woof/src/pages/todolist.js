@@ -182,19 +182,9 @@ export default class todolist extends React.Component {
             return (
 
                 <View style={styles.container}>
-                    <GestureRecognizer
-                        onSwipeLeft={(state) => Actions.userhome()}
-                        onSwipeRight={(state) => Actions.calendar()}
-                        config={config}
-                        style={{
-                            flex: 1,
-                            backgroundColor: '#fff'
-                        }}
-                    >
                     <StatusBar barStyle="light-content" />
                     <Text style={styles.title}>To Do</Text>
-                    </GestureRecognizer>
-                    {/* <Text style={styles.time}>{this.state.curTime}</Text> */}
+                    <Text style={styles.time}>{this.state.curTime}</Text>
                     <ScrollView style={styles.mostImportantScroll}>
                         <FlatList
                             data={this.state.dataSource}
