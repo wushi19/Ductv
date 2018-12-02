@@ -103,8 +103,7 @@ export default class editTask extends React.Component {
             .catch((error) => {
                 console.error(error);
             });
-            //alert("Task successfully updated!");
-            alert(this.state.due + '\n' + this.props.due)
+            alert("Task successfully updated!");
     }
     
     render() {
