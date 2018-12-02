@@ -23,8 +23,8 @@ import {
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
-import bgImage from '../images/loginbkg.jpg'
-import logo from '../images/homelogo.png'
+import bgImage from '../images/signupbkg.jpg'
+import logo from '../images/logo.png'
 
 const { width: WIDTH } = Dimensions.get('window');
 
@@ -212,9 +212,10 @@ export default class signUp extends React.Component {
     return (
       <ImageBackground source={bgImage} style={styles.backgroundContainer}>
 
-        <View style={styles.logoContainer}>
-          <Image source={logo} style={styles.logo} />
-        </View>
+          <View style={styles.logoContainer}>
+              <Image source={logo} style={styles.logo} />
+              <Text style={styles.SignupText}>Sign Up</Text>
+          </View>
 
         <View style={styles.inputContainer}>
           <TextInput
@@ -333,4 +334,13 @@ const styles = StyleSheet.create({
       backgroundColor: '#413a5d',
       opacity: 0.8,
   },
+    SignupText: {
+        fontFamily: 'Montserrat-ExtraLight',
+        color: 'white',
+        fontSize: 40,
+        justifyContent: 'center',
+        fontWeight: '500',
+        marginTop: 10,
+        // opacity: ,
+    },
 });
