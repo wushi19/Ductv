@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text, View, Alert, StyleSheet, ScrollView, AsyncStorage, StatusBar, ImageBackground, TextInput, Dimensions} from 'react-native';
+import { Text, View, Alert, StyleSheet, ScrollView, AsyncStorage, StatusBar, ImageBackground, TextInput, Dimensions } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import bkg from '../images/yellowbkg.jpg';
 import DatePicker from 'react-native-datepicker';
 
@@ -54,21 +54,21 @@ export default class editEvent extends React.Component {
         return fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/?format=json')
             .then((response) => response.json())
             .then((responseJson) => {
-              this.setState({
-                   isLoading: false,
-                   dataSource: responseJson
-               })
+                this.setState({
+                    isLoading: false,
+                    dataSource: responseJson
+                })
             })
             .catch((error) => {
-               console.log(error)
+                console.log(error)
             });
     }
 
-    updateEvent = () =>{
+    updateEvent = () => {
         this.tasktest();
     }
 
-    tasktest = () =>{
+    tasktest = () => {
         fetch(this.state.url, {
             method: 'PATCH',
             headers: {
@@ -86,18 +86,19 @@ export default class editEvent extends React.Component {
             .then((response) => response.json())
             .then((responseJson) => {
 
-                
+
             })
             .catch((error) => {
                 console.error(error);
             });
-            alert("Event successfully updated!");
+        alert("Event successfully updated!");
+        Actions.userhome();
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <StatusBar barStyle="light-content"/>
+                <StatusBar barStyle="light-content" />
                 <ScrollView style={styles.eventContainer}>
 
                     <Text style={styles.title}>Event Information</Text>
@@ -108,9 +109,9 @@ export default class editEvent extends React.Component {
                         placeholder={this.props.header}
                         // secureTextEntry={true}
                         placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
-                        autoCapitalize = 'none'
+                        autoCapitalize='none'
                         underLineColorAndroid='transparent'
-                        onChangeText={(header) => this.setState({header})}
+                        onChangeText={(header) => this.setState({ header })}
                         value={this.state.header}
                     />
 
@@ -120,7 +121,7 @@ export default class editEvent extends React.Component {
                         placeholder={this.props.loc}
                         // secureTextEntry={true}
                         placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
-                        autoCapitalize = 'none'
+                        autoCapitalize='none'
                         underLineColorAndroid='transparent'
                         onChangeText={(location) => this.setState({ location })}
                         value={this.state.location}
@@ -132,7 +133,7 @@ export default class editEvent extends React.Component {
                         placehol der={this.props.desc}
                         // secureTextEntry={true}
                         placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
-                        autoCapitalize = 'none'
+                        autoCapitalize='none'
                         underLineColorAndroid='transparent'
                         onChangeText={(description) => this.setState({ description })}
                         value={this.state.description}
@@ -140,7 +141,7 @@ export default class editEvent extends React.Component {
 
                     <Text style={styles.statictextDescriptors}>Date:</Text>
                     <DatePicker
-                        style={{width: 200}}
+                        style={{ width: 200 }}
                         date={this.state.date}
                         mode="date"
                         placeholder={this.state.date}
@@ -162,12 +163,12 @@ export default class editEvent extends React.Component {
                             }
                             // ... You can check the source to find the other keys.
                         }}
-                        onDateChange={(date) => {this.setState({date: date})}}
+                        onDateChange={(date) => { this.setState({ date: date }) }}
                     />
 
                     <Text style={styles.statictextDescriptors}>Start Time:</Text>
                     <DatePicker
-                        style={{width: 200}}
+                        style={{ width: 200 }}
                         date={this.state.startTime}
                         mode="time"
                         placeholder={this.state.startTime}
@@ -191,7 +192,7 @@ export default class editEvent extends React.Component {
 
                     <Text style={styles.statictextDescriptors}>End Time:</Text>
                     <DatePicker
-                        style={{width: 200}}
+                        style={{ width: 200 }}
                         date={this.state.endtime}
                         mode="time"
                         placeholder={this.state.endtime}
@@ -214,7 +215,11 @@ export default class editEvent extends React.Component {
                     />
 
                 </ScrollView>
-                <ActionButton buttonColor="#EADCD9" onPress={this.updateEvent}/>
+                <ActionButton
+                    buttonColor="#EADCD9"
+                    onPress={this.updateEvent}
+                    renderIcon={active => active ? (<Icon name="md-create" style={styles.actionButtonIcon} />) : (<Icon name="ios-done-all" style={styles.actionButtonIcon} />)}
+                />
 
             </View>
         );
@@ -226,19 +231,20 @@ const styles = StyleSheet.create({
         flex: 1,
         width: null,
         height: null,
-//        justifyContent: 'center',
+        //        justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#7B6F92',
     },
     title: {
-        color: '#413A5D',
-        fontSize: 36,
+        color: '#fff',
+        fontSize: 30,
         marginTop: 60,
         marginBottom: 30,
         fontWeight: '300',
         width: WIDTH - 55,
         paddingLeft: 45,
         marginHorizontal: 25,
+        fontFamily: 'Montserrat-ExtraLight',
     },
     eventContainer: {
         flex: 1,
@@ -249,26 +255,18 @@ const styles = StyleSheet.create({
         fontSize: 26,
         marginTop: 18,
         marginBottom: 15,
+        fontFamily: 'Montserrat-ExtraLight',
     },
     statictextDescriptors: {
-        color: '#413A5D',
+        color: '#fff',
         fontSize: 15,
         marginTop: 10,
         marginBottom: 5,
         width: WIDTH - 55,
         paddingLeft: 20,
         marginHorizontal: 25,
+        fontFamily: 'Montserrat-ExtraLight',
     },
-    input: {
-      width: WIDTH - 90, //left-right text input size
-      height: 40,         //up-down text input size
-      borderRadius: 20,
-      fontSize: 16,
-      paddingLeft: 20,  //inside text paddinging
-      backgroundColor: 'rgba(0,0,0,0.35)',
-      color: '#EADCD9',
-      marginHorizontal: 40,
-  },
     input: {
         width: WIDTH - 90, //left-right text input size
         height: 40,         //up-down text input size
@@ -279,5 +277,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.35)',
         color: '#EADCD9',
         marginHorizontal: 40,
+        fontFamily: 'Montserrat-ExtraLight',
+    },
+    actionButtonIcon: {
+        fontSize: 30,
+        color: '#7B6F92',
     },
 });
