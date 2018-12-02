@@ -21,7 +21,7 @@ import {
   StatusBar,
 } from 'react-native';
 import DatePicker from 'react-native-datepicker'
-
+import bkg from '../images/loginbkg.jpg'
 
 const { width: WIDTH } = Dimensions.get('window');
 
@@ -133,7 +133,7 @@ export default class EnterTaskScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <ImageBackground source={bkg} style={styles.container} contentContainerStyle={styles.contentContainer}>
         <StatusBar barStyle="light-content" />
         <Text style={styles.getStartedText}>Task Information</Text>
 
@@ -143,7 +143,7 @@ export default class EnterTaskScreen extends React.Component {
             style={styles.input}
             placeholder={'Task Name'}
             secureTextEntry={false}
-            placeholderTextColor={'rgba(100, 100, 100, 0.7)'}
+            placeholderTextColor={'#fff'}
             onChangeText={(taskname) => this.setState({ taskname })}
             value={this.state.taskname}
           />
@@ -151,7 +151,7 @@ export default class EnterTaskScreen extends React.Component {
             style={styles.input}
             placeholder={'Description'}
             secureTextEntry={false}
-            placeholderTextColor={'rgba(100, 100, 100, 0.7)'}
+            placeholderTextColor={'#fff'}
             onChangeText={(taskdescription) => this.setState({ taskdescription })}
             value={this.state.taskdescription}
           />
@@ -203,14 +203,14 @@ export default class EnterTaskScreen extends React.Component {
 
           {/* <Image source={require('../images/nimportant.png')} style={{width: 30, height: 30}} /> */}
           <Slider
-            style={{ width: 200, paddingLeft: 100, }}
+            style={{ width: 168, paddingLeft: 100 }}
             minimumValue={1}
             maximumValue={5}
             step={1}
             onValueChange={(priority) => this.setState({ priority })}
             value={this.state.priority}
           />
-          {/* <Image source={require('../images/vimportant.png')} style={{width: 30, height: 30}} /> */}
+          <Image source={require('../images/vimportant.png')} style={{ width: 30, height: 30, marginLeft: 12, marginTop: 5 }} />
         </View>
 
         <View style={{ flexDirection: 'row', paddingLeft: 40 }}>
@@ -279,44 +279,65 @@ export default class EnterTaskScreen extends React.Component {
 
         </View>
 
-        <View style={styles.addButtonContainer}>
-          <Button
+        <View style={{ flexDirection: 'row', paddingLeft: 40 }}>
+          <TouchableOpacity
             onPress={this.taskbarr}
-            title="ADD TASK"
-            color="#000000"
-          />
+            style={styles.btnLogin}
+          >
+            <Text style={styles.btnLoginText}> Add Event </Text>
+          </TouchableOpacity>
         </View>
 
-      </ScrollView>
+      </ImageBackground>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  btnLogin: {
+    width: WIDTH - 70,
+    height: 60,
+    borderRadius: 45,
+    justifyContent: 'center',
+    marginTop: 100,
+    backgroundColor: '#413A5D',
+    opacity: 0.8,
+},
+
+btnLoginText: {
+    textAlign: 'center',
+    fontFamily: 'Montserrat-ExtraLight',
+    color: 'white',
+    fontSize: 20,
+    justifyContent: 'center',
+    opacity: 1,
+},
   getStartedText: {
     textAlign: 'center',
     color: '#fff',
     fontSize: 36,
     marginTop: 60,
+    marginBottom: 10,
     fontWeight: '300',
     fontFamily: 'Montserrat-ExtraLight',
   },
   inputContainer: {
-    marginTop: 10,
+    marginTop: 40,
+    marginBottom: 20,
     alignItems: 'center',
     fontFamily: 'Montserrat-ExtraLight',
   },
   input: {
     width: WIDTH - 55,
     height: 45,
-    borderColor: 'rgba(0,0,0,1)',
+    borderColor: 'rgba(0,0,0,0.3)',
     fontSize: 16,
     paddingLeft: 45,
-    backgroundColor: 'rgba(0,0,0,0.1)',
-    color: 'rgba(0, 0, 0, 1)',
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    color: '#fff',
     marginHorizontal: 25,
     borderRadius: 45,
-    marginTop: 10,
+    marginTop: 5,
     marginBottom: 10,
     fontFamily: 'Montserrat-ExtraLight',
   },
@@ -326,10 +347,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat-ExtraLight',
   },
   addButtonContainer: {
-    paddingTop: 50
+    paddingTop: 50,
+    fontFamily: 'Montserrat-ExtraLight'
   },
   container: {
-    flex: 0,
+    flex: 1,
     backgroundColor: '#7B6F92',
   },
   developmentModeText: {
