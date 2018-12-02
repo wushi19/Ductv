@@ -215,20 +215,7 @@ export default class todolist extends React.Component {
                         />
                     
                     </ScrollView>
-
-                    <ActionButton buttonColor="#C7AFA3">
-                        <ActionButton.Item buttonColor='#413A5D' title="Go Home" onPress={this.goHome}>
-                            <Icon name="md-home" style={styles.actionButtonIcon} size={30} color='#fff'/>
-                        </ActionButton.Item>
-                        <ActionButton.Item buttonColor='#413A5D' title="Add New Task" onPress={this.enterTask}>
-                            <Icon name="md-create" style={styles.actionButtonIcon} size={30} color='#fff'/>
-                        </ActionButton.Item>
-                        <ActionButton.Item buttonColor='#413A5D' title="Edit Task" onPress={this.editTask}>
-                            <Icon name="md-cut" style={styles.actionButtonIcon} size={30} color='#fff'/>
-                        </ActionButton.Item>
-                    </ActionButton>
-                
-
+            
                 </View>
             );
         }
