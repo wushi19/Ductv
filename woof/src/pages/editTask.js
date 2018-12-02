@@ -3,7 +3,7 @@ import {Text, View, Alert, StyleSheet, AsyncStorage, StatusBar, ImageBackground,
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Actions} from 'react-native-router-flux';
-import bkg from '../images/yellowbkg.jpg';
+import bkg from '../images/loginbkg.jpg';
 import DatePicker from 'react-native-datepicker'
 
 const { width: WIDTH } = Dimensions.get('window');
@@ -103,12 +103,12 @@ export default class editTask extends React.Component {
             .catch((error) => {
                 console.error(error);
             });
-            alert("Task successfully updated!");
+            Actions.userhome();
     }
     
     render() {
         return (
-            <View style={styles.container}>
+            <ImageBackground source={bkg} style={styles.container}>
                 <StatusBar barStyle="light-content"/>
                 <View style={styles.eventContainer}>
 
@@ -140,7 +140,7 @@ export default class editTask extends React.Component {
 
                     <Text style={styles.statictextDescriptors}>Priority:</Text>
                     <Slider
-                        style={{width: 200, paddingLeft: 100,}}
+                        style={{ width: 168, marginLeft: 45 }}
                         minimumValue={1}
                         maximumValue={5}
                         step={1}
@@ -153,6 +153,7 @@ export default class editTask extends React.Component {
                         style={{width: 200}}
                         date={this.state.durationFormat}
                         mode="time"
+                        //color ="#fff"
                         placeholder="select date"
                         confirmBtnText="Confirm"
                         cancelBtnText="Cancel"
@@ -165,9 +166,16 @@ export default class editTask extends React.Component {
                                 marginLeft: 0
                             },
                             dateInput: {
-                                marginLeft: 36
+                                marginLeft: 48,
+                                color: '#fff',
+                                height: 45,
+                                borderRadius: 45,
+                                fontSize: 16,
+                                marginHorizontal: 25,
+                                paddingLeft: 10,
+                                paddingRight: 10,
+                        
                             }
-                            // ... You can check the source to find the other keys. {(durationFormat) => {this.changedur({date: durationFormat})}}
                         }}
                         onDateChange={(durationFormat) => this.setState({durationFormat})}/>
 
@@ -189,16 +197,28 @@ export default class editTask extends React.Component {
                                 marginLeft: 0
                             },
                             dateInput: {
-                                marginLeft: 36
+                                marginLeft: 48,
+                                // width: WIDTH,
+                                color: '#fff',
+                                height: 45,
+                                borderRadius: 100,
+                                fontSize: 16,
+                                marginHorizontal: 25,
+                                paddingLeft: 10,
+                                paddingRight: 10,
                             }
                             // ... You can check the source to find the other keys. {(durationFormat) => {this.changedur({date: durationFormat})}}
                         }}
                         onDateChange={(due) => this.setState({due})}/>
                     
                 </View>
-                <ActionButton buttonColor="#EADCD9" onPress={this.updateTask}/>
+                <ActionButton 
+                buttonColor="#EADCD9" 
+                onPress={this.updateTask} 
+                renderIcon={active => active ? (<Icon name="md-create" style={styles.actionButtonIcon} />) : (<Icon name="ios-done-all" style={styles.actionButtonIcon} />)}
+                />
 
-            </View>
+            </ImageBackground>
         ); 
     }
 }
@@ -212,9 +232,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#7B6F92',
     },
+    actionButtonIcon: {
+        fontSize: 30,
+        color: '#7B6F92',
+    },
     title: {
-        color: '#413A5D',
-        fontSize: 36,
+        fontFamily: 'Montserrat-ExtraLight',
+        color: '#fff',
+        fontSize: 30,
         marginTop: 60,
         marginBottom: 30,
         fontWeight: '300',
@@ -231,15 +256,17 @@ const styles = StyleSheet.create({
         fontSize: 26,
         marginTop: 18,
         marginBottom: 15,
+        fontFamily: 'Montserrat-ExtraLight',
     },
     statictextDescriptors: {
-        color: '#413A5D',
+        color: '#fff',
         fontSize: 15,
         marginTop: 10,
         marginBottom: 5,
         width: WIDTH - 55,
         paddingLeft: 20,
         marginHorizontal: 25,
+        fontFamily: 'Montserrat-ExtraLight',
     },
     input: {
       width: WIDTH - 90, //left-right text input size
@@ -250,5 +277,6 @@ const styles = StyleSheet.create({
       backgroundColor: 'rgba(0,0,0,0.35)',
       color: '#EADCD9',
       marginHorizontal: 40,
+      fontFamily: 'Montserrat-ExtraLight',
   },
 });
