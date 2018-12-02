@@ -23,7 +23,7 @@ import {
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
-import bgImage from '../images/bki 2.jpg'
+import bgImage from '../images/loginbkg.jpg'
 import logo from '../images/homelogo.png'
 
 const { width: WIDTH } = Dimensions.get('window');
@@ -224,6 +224,7 @@ export default class signUp extends React.Component {
             underLineColorAndroid='transparent'
             onChangeText={(username) => this.setState({ username })}
             value={this.state.username}
+            fontFamily= 'Montserrat-ExtraLight'
           />
         </View>
 
@@ -236,10 +237,11 @@ export default class signUp extends React.Component {
             underLineColorAndroid='transparent'
             onChangeText={(email) => this.setState({ email })}
             value={this.state.email}
+            fontFamily= 'Montserrat-ExtraLight'
           />
         </View>
 
-        {/* <View style={styles.inputContainer}>
+        <View style={styles.inputContainer}>
          <TextInput
              style={styles.input}
              placeholder={'Password'}
@@ -248,6 +250,7 @@ export default class signUp extends React.Component {
              underLineColorAndroid='transparent'
              onChangeText={(password) => this.setState({ password })}
              value={this.state.password}
+             fontFamily= 'Montserrat-ExtraLight'
            />
          </View>
          <View style={styles.inputContainer}>
@@ -259,8 +262,9 @@ export default class signUp extends React.Component {
              underLineColorAndroid='transparent'
              onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
              value={this.state.confirmPassword}
+             fontFamily= 'Montserrat-ExtraLight'
            />
-         </View> */}
+         </View>
 
         <TouchableOpacity style={styles.btnLogin}>
           <Button
@@ -269,6 +273,7 @@ export default class signUp extends React.Component {
             fontSize='16'
             //onPress={this.userLogin.bind(this)}
             onPress={this.handleSubmit}
+            fontFamily= 'Montserrat-ExtraLight'
           />
         </TouchableOpacity>
 
@@ -294,6 +299,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.35)',
     color: 'rgba(255, 255, 255, 0.7)',
     marginHorizontal: 25, //padding on left
+    fontFamily: 'Montserrat-ExtraLight'
   },
   logoContainer: {
     alignItems: 'center',

@@ -110,6 +110,7 @@ export default class Login extends React.Component {
                         onChangeText={(email) => this.setState({ email })}
                         value={this.state.email}
                         marginBottom={10}
+                        fontFamily= 'Montserrat-ExtraLight'
                     />
                     <TextInput
                         style={styles.input}
@@ -120,6 +121,7 @@ export default class Login extends React.Component {
                         underLineColorAndroid='transparent'
                         onChangeText={(email) => this.setState({ email })}
                         value={this.state.email}
+                        fontFamily= 'Montserrat-ExtraLight'
                     />
                 </View>
 
