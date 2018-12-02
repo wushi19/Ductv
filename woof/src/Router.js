@@ -14,86 +14,79 @@ import addEvent from "./pages/addEvent";
 import moreInfoEvent from "./pages/moreInfoEvent";
 import editTask from "./pages/editTask";
 import userhome from "./pages/userhome";
+import {Text} from "react-native-elements";
+
+const TabIcon = ({ selected}) => {
+    return (
+        <Text style={{color: selected ? 'red' :'black'}}> </Text>
+    );
+}
 
 export default class Routes extends Component {
 	render() {
 		return (
 			<Router>
-				<Stack key="root" hideNavBar={true}>
-					{/* <Scene
-						key="startPage"
-						component={startPage}
-						title="startPage"
-						initial={true}
-						hideNavBar={true}
-					/> */}
+                <Scene key="root">
+					<Scene key="Login" initial component={Login} hideNavBar />
+					<Scene key="tabbar" tabs={true} hideNavBar={true} tabBarStyle={{backgroundColor: '#c58ff7'}}>
+						<Scene key="userhome" title="Home" icon={TabIcon} hideNavBar>
+							<Scene component={userhome} />
+						</Scene>
 
-					<Scene
-						key="login"
-						component={Login}
-						title="Login"
-						initial={true}
-						hideNavBar={true}
-					/>
+						<Scene key="todolist" title="To Do List" icon={TabIcon} hideNavBar>
+							<Scene component={todolist} />
+						</Scene>
 
-					<Scene
-						key="signUp"
-						component={signUp}
-						title="signUp"
-					/>
+						<Scene key="calendar" title="Calendar" icon={TabIcon} hideNavBar>
+							<Scene component={calendar} />
+						</Scene>
+					</Scene>
 
-					<Scene
-						key="home"
-						component={home}
-						title="home"
-					/>
-					<Scene
-						key="calendar"
-						component={calendar}
-						title="calendar"
-					/>
-					<Scene
-						key="enterTask"
-						component={enterTask}
-						title="enterTask"
-					/>
-					<Scene
-						key="todolist"
-						component={todolist}
-						title="todolist"
-					/>
-					<Scene
-						key="testAsyncStorage"
-						component={testAsyncStorage}
-						title="testAsyncStorage"
-					/>
-					<Scene
-						key="editEvent"
-						component={editEvent}
-						title="editEvent"
-					/>
-					<Scene
-						key="addEvent"
-						component={addEvent}
-						title="addEvent"
-					/>
-					<Scene
-						key="moreInfoEvent"
-						component={moreInfoEvent}
-						title="moreInfoEvent"
-					/>
-					<Scene
-						key="editTask"
-						component={editTask}
-						title="editTask"
-					/>
-					<Scene
-						key="userhome"
-						component={userhome}
-						title="userhome"
-					/>
-				</Stack>
+				<Scene
+					key="signUp"
+					component={signUp}
+					title="signUp"
+				/>
+
+				<Scene
+					key="home"
+					component={home}
+					title="home"
+				/>
+
+				<Scene
+					key="enterTask"
+					component={enterTask}
+					title="enterTask"
+				/>
+
+				<Scene
+					key="testAsyncStorage"
+					component={testAsyncStorage}
+					title="testAsyncStorage"
+				/>
+				<Scene
+					key="editEvent"
+					component={editEvent}
+					title="editEvent"
+				/>
+				<Scene
+					key="addEvent"
+					component={addEvent}
+					title="addEvent"
+				/>
+				<Scene
+					key="moreInfoEvent"
+					component={moreInfoEvent}
+					title="moreInfoEvent"
+				/>
+				<Scene
+					key="editTask"
+					component={editTask}
+					title="editTask"
+				/>
+				</Scene>
 			</Router>
-		)
+		);
 	}
 }
