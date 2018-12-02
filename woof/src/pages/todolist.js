@@ -1,11 +1,11 @@
 import React from 'react';
-import { Alert, StyleSheet, AsyncStorage, StatusBar, ScrollView, FlatList, TouchableOpacity} from 'react-native';
+import { Alert, StyleSheet, AsyncStorage, StatusBar, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import { Text, View, SwipeRow, Button } from 'native-base';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
 import Moment from 'react-moment';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 
 
 // const getuserId = async () => {
@@ -56,7 +56,7 @@ export default class todolist extends React.Component {
     }
 
     componentDidMount() {
-        setInterval(function(){this.setState({curTime: new  Date().toLocaleString()});}.bind(this), 1000);
+        setInterval(function () { this.setState({ curTime: new Date().toLocaleString() }); }.bind(this), 1000);
         return fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/?format=json')
             .then((response) => response.json())
             .then((responseJson) => {
@@ -96,7 +96,7 @@ export default class todolist extends React.Component {
         Actions.enterTask()
     }
 
-    editTask(){
+    editTask() {
         Actions.editTask()
     }
 
@@ -126,8 +126,8 @@ export default class todolist extends React.Component {
 
     deleteData(taskId) {
         var url = "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/";
-        return fetch(url + '/' + taskId +'/', {
-          method: 'DELETE'
+        return fetch(url + '/' + taskId + '/', {
+            method: 'DELETE'
         })
     }
 
@@ -188,32 +188,35 @@ export default class todolist extends React.Component {
                     <ScrollView style={styles.mostImportantScroll}>
                         <FlatList
                             data={this.state.dataSource}
-                            keyExtrator = {this._keyExtractor}
-                            renderItem={({item}) => 
-                            
-                            <SwipeRow
-                                leftOpenValue={100}
-                                rightOpenValue={-100}
-                                left={
-                                    <Button success onPress={() => this.seeTask(item)}>
-                                        <Text> edit </Text>
-                                    </Button>
-                                }
-                                body={
-                                    <Text style={{paddingLeft: 15, fontWeight: 'bold'}}>
-                                        {item.header}
-                                        <Text style={{fontWeight: 'normal'}}> {item.description} </Text>
-                                    </Text>
-                                }
-                                right={
-                                    <Button danger onPress={() => this.deleteData(item.id)
-                                        .then(this.updateData())}>
-                                        <Text> delete </Text>
-                                    </Button>
-                                }
-                            /> }
+                            keyExtrator={this._keyExtractor}
+                            renderItem={({ item }) =>
+
+                                <SwipeRow
+                                    leftOpenValue={100}
+                                    rightOpenValue={-100}
+                                    left={
+                                        <Button success onPress={() => this.seeTask(item)}>
+                                            <Text> edit </Text>
+                                        </Button>
+                                    }
+                                    body={
+                                        <Text style={{ paddingLeft: 15, fontWeight: 'bold' }}>
+                                            {item.header}
+                                            <Text style={{ fontWeight: 'normal' }}> {item.description} </Text>
+                                        </Text>
+                                    }
+                                    right={
+                                        <Button danger onPress={() => this.deleteData(item.id)
+                                            .then(this.updateData())}>
+                                            <Text> delete </Text>
+                                        </Button>
+                                    }
+                                />}
                         />
                     </ScrollView>
+
+                    <ActionButton buttonColor='#413A5D' title="Add New Task" onPress={this.enterTask} />
+                    
                 </View>
             );
         }
