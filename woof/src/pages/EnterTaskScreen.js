@@ -122,7 +122,7 @@ export default class EnterTaskScreen extends React.Component {
           <Text style={{ paddingTop: 10, fontFamily: 'Montserrat-ExtraLight', color: '#fff' }}>Duration: </Text>
 
           <DatePicker
-            style={{ width: 211, alignItems: 'center' }}
+            style={{ width: 253 }}
             date={this.state.duration}
             mode="time"
             placeholder="select date"
@@ -130,19 +130,15 @@ export default class EnterTaskScreen extends React.Component {
             cancelBtnText="Cancel"
             iconSource={require('../images/stopwatch.png')}
             customStyles={{
-              dateInput: {
-                marginLeft: 12,
-                alignItems: 'center'
-              },
               dateIcon: {
-                position: 'absolute',
-               left: 0,
-               top: 4,
-               marginLeft: 0
-             },
-             dateInput: {
-               marginLeft: 36
-             }
+                //position: 'absolute',
+                left: 0,
+                top: 4,
+                marginLeft: 11
+              },
+              dateInput: {
+                marginLeft: 12
+              }
              // ... You can check the source to find the other keys. {(durationFormat) => {this.changedur({date: durationFormat})}}
            }}
            onDateChange={(duration) => this.setState({duration})}/>

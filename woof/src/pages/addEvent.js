@@ -1,27 +1,27 @@
 import React from 'react';
 import {
-    AsyncStorage,
-    Alert,
-    Component,
-    Image,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-    ImageBackground,
-    Dimensions,
-    TextInput,
-    Button,
-    NavigatorIOS,
-    DatePickerIOS,
-    DatePickerAndroid,
-    CheckBox,
-    Slider
+  Alert,
+  Component,
+  Image,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ImageBackground,
+  Dimensions,
+  TextInput,
+  Button,
+  NavigatorIOS,
+  DatePickerIOS,
+  DatePickerAndroid,
+  Slider,
+  StatusBar,
 } from 'react-native';
 import DatePicker from 'react-native-datepicker'
-import {Actions} from 'react-native-router-flux';
+import bkg from '../images/loginbkg.jpg'
+import { CheckBox } from 'react-native-elements'
 
 const { width: WIDTH } = Dimensions.get('window');
 
@@ -29,196 +29,131 @@ var moment = require('moment');
 
 export default class addEvent extends React.Component {
 
-    static navigationOptions = {
-        title: 'EnterEvents',
-    };
+  constructor(props) {
+    super(props);
+    this.setDate = this.setDate.bind(this);
+    this.state = {
 
-    constructor(props) {
-        super(props);
-        this.setDate = this.setDate.bind(this);
-        this.state = {
-            header: 'header',
-            calendar: 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/calendar/1/',
-            location: '',
-            recurring: false,
-            private: false
-        }
+      chosenDate: new Date(),
+      dated: new Date(),
+      timed: '00:00',
+      showDatePicker: false,
+      taskname: '',
+      taskdescription: '',
+      tasklocation: '',
+      private: false,
+      recurring: false,
+      date: null,
+      startTime: null,
+      endtime: null,
+      priority: 1,
+      chosenpri: 1,
+      due: null,
+      updated: moment(new Date()).format("YYYY-MM-DD") + "T" + moment(new Date()).format("hh:mm:ss"),
+      duration: '00:30',
+      calendar: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/calendar/1/",
+      chosendur: '30',
+      chosendue: null,
+      checkdur: false,
+      checkpri: false,
+      checkdate: false,
+      checktime: false
     }
-    setDate(newDate) {
-        this.setState({ chosenDate: newDate })
-    }
+  }
 
-    taskbarr = () =>{
-        if(this.state.taskname == ''){
-            Alert.alert("Please enter Event Name.");
-        } else{
-            this.tasktest();
-        }
+  setDate(newDate) {
+    this.setState({ chosenDate: newDate })
+  }
+
+  taskbarr = () => {
+    if (this.state.taskname == '') {
+      Alert.alert("Please enter an Event Name.");
+    } else if(this.state.startTime == null || this.state.endtime == null || this.state.date == null) {
+        Alert.alert("Please enter start/end time.")
+    }else{
+        this.state.startTime = this.state.date + "T" + this.state.startTime + ":00-05:00"
+        this.state.endtime = this.state.date + "T" + this.state.endtime + ":00-05:00"
+      this.tasktest()
+      this.props.navigation.navigate('calendar')
     }
-    setBoolean(recurring){
-        this.setState({
-            recurring: !this.state.recurring
+  };
+
+  tasktest = () =>{
+    fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            header: this.state.taskname,
+            description: this.state.taskdescription,
+            startTime: this.state.startTime,
+            endtime: this.state.endtime,
+            recurring: this.state.recurring,
+            private: this.state.private,
+            calendar: this.state.calendar,
+            created: this.state.updated,
+            updated: this.state.updated,
+            location: this.state.tasklocation,
+        }),
+    })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            Alert.alert("Event Successfully Added.");
         })
-    }
+        .catch((error) => {
+            console.error(error);
+        });
+}
 
-    CheckBoxTest()
-    {
-        this.setState({
-            check: !this.state.recurring
-        })
-        alert("The value is " + !this.state.recurring)
-    }
 
-    CheckBoxTestSecond()
-    {
-        this.setState({
-            check: !this.state.p
-        })
-        alert("The value is " + !this.state.private)
-    }
+  render() {
+    return (
+      <ImageBackground source={bkg} style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <StatusBar barStyle="light-content" />
+        <Text style={styles.getStartedText}>Event Information</Text>
 
-    tasktest = () =>{
-        fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                header: this.state.taskname,
-                description: this.state.taskdescription,
-                startTime: this.state.startTime,
-                endtime: this.state.endtime,
-                recurring: this.state.recurring,
-                private: this.state.private,
-                calendar: this.state.calendar,
-                created: this.state.created,
-                update: this.state.updated,
-                location: this.state.location,
-            }),
-        })
-            .then((response) => response.json())
-            .then((responseJson) => {
-
-                Alert.alert("Event Successfully Added.");
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }
-    render() {
-        return (
-            <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-                <Text style={styles.getStartedText}>Enter Events</Text>
-
-                <View style={styles.inputContainer}>
-
-                    <TextInput
-                        id={'tasknames'}
-                        style={styles.input}
-                        placeholder={'Event Name'}
-                        secureTextEntry={false}
-                        placeholderTextColor={'rgba(100, 100, 100, 0.7)'}
-                        onChangeText={(taskname) => this.setState({ taskname })}
-                        value={this.state.taskname}/>
-
-                    <TextInput
-                        style={styles.input}
-                        placeholder={'Event Description(Optional)'}
-                        secureTextEntry={false}
-                        placeholderTextColor={'rgba(100, 100, 100, 0.7)'}
-                        multiline={true}
-                        onChangeText={(taskdescription) => this.setState({ taskdescription })}
-                        value={this.state.taskdescription}/>
-
-                    <TextInput
-                        id={'location'}
-                        style={styles.input}
-                        placeholder={'Location'}
-                        secureTextEntry={false}
-                        placeholderTextColor={'rgba(100, 100, 100, 0.7)'}
-                        onChangeText={(location) => this.setState({ location })}
-                        value={this.state.location}/>
-
-                    <View style = {{flexDirection: 'row', paddingLeft: 0, paddingTop: 0}}>
-                        <CheckBox
-                            onIconPress={this.setBoolean}
-                            title="recurring"
-                            value={this.state.recurring}
-                            onChange = {() => this.CheckBoxTest()}/>
-                        <Text>Recurring Event?</Text>
-                    </View>
-
-                    <View style = {{flexDirection: 'row', paddingLeft: 0, paddingTop: 0}}>
-                        <CheckBox
-                            onIconPress={this.setBoolean}
-                            title="private"
-                            value={this.state.private}
-                            onChange = {() => this.CheckBoxTestSecond()}/>
-                        <Text>Private Event?</Text>
-                    </View>
-                </View>
-
-                <View style = {{flexDirection: 'row', paddingLeft: 10, paddingTop: 10}}>
-                    <CheckBox
-                        onIconPress={this.setDate}
-                        title="checkdur"
-                        checked={this.state.checkdur}/>
-                    <DatePicker
-                        style={{width: 200}}
-                        date={this.state.duration}
-                        mode="time"
-                        placeholder="select date"
-                        confirmBtnText="Confirm"
-                        cancelBtnText="Cancel"
-                        iconSource={require('../images/stopwatch.png')}
-                        customStyles={{
-                            dateIcon: {
-                                position: 'absolute',
-                                left: 0,
-                                top: 4,
-                                marginLeft: 0
-                            },
-                            dateInput: {
-                                marginLeft: 36
-                            }
-                            // ... You can check the source to find the other keys.
-                        }}
-                        onDateChange={(date) => {this.setState({duration: duration})}}/>
-                    <Text style={{paddingTop: 10}}>  Duration?</Text>
-                </View>
-
-                <View style = {{flexDirection: 'row', paddingLeft: 10}}>
-                    <CheckBox
-                        onIconPress={this.setDate}
-                        title="checkpri"
-                        checked={this.state.checkpri}/>
-                    <Image source={require('../images/nimportant.png')} style={{width: 30, height: 30}} />
-                    <Slider
-                        style={{width: 140}}
-                        minimumValue={1}
-                        maximumValue={5}
-                        step={1}
-                        onValueChange={(priority) => this.setState({ priority })}
-                        value={this.state.priority}/>
-                    <Image source={require('../images/vimportant.png')} style={{width: 30, height: 30}} />
-                    <Text style={{paddingTop: 10}}>  Priority?</Text>
-                </View>
-
-                <View style = {{flexDirection: 'row', paddingLeft: 10}}>
-                    <CheckBox
-                        onIconPress={this.setDate}
-                        title="checkdate"
-                        checked={this.state.checkdate}/>
-                    <DatePicker
-                        style={{width: 200}}
+        <View style={styles.inputContainer}>
+          <TextInput
+            id={'tasknames'}
+            style={styles.input}
+            placeholder={'Task Name'}
+            secureTextEntry={false}
+            placeholderTextColor={'#fff'}
+            onChangeText={(taskname) => this.setState({ taskname })}
+            value={this.state.taskname}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder={'Description'}
+            secureTextEntry={false}
+            placeholderTextColor={'#fff'}
+            onChangeText={(taskdescription) => this.setState({ taskdescription })}
+            value={this.state.taskdescription}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder={'Location'}
+            secureTextEntry={false}
+            placeholderTextColor={'#fff'}
+            onChangeText={(tasklocation) => this.setState({ tasklocation })}
+            value={this.state.tasklocation}
+          />
+        </View>
+        
+        <View style={{ flexDirection: 'row', paddingLeft: 40 }}>
+        <Text style={{ paddingTop: 10, fontFamily: 'Montserrat-ExtraLight', color: '#fff' }}>Date:</Text>
+        <DatePicker
+                        style={{ width: 245, alignItems: 'center' }}
                         date={this.state.date}
                         mode="date"
-                        placeholder="select date"
+                        placeholder={this.state.date}
                         format="YYYY-MM-DD"
                         minDate="2016-05-01"
                         maxDate="2029-12-31"
                         confirmBtnText="Confirm"
                         cancelBtnText="Cancel"
+                        showIcon={false}
                         customStyles={{
                             dateIcon: {
                                 position: 'absolute',
@@ -227,28 +162,23 @@ export default class addEvent extends React.Component {
                                 marginLeft: 0
                             },
                             dateInput: {
-                                marginLeft: 36
+                                marginLeft: 74
                             }
                             // ... You can check the source to find the other keys.
                         }}
-                        onDateChange={(date) => {this.setState({date: date})}}/>
-                    <Text style={{paddingTop: 10}}>  Due Date?</Text>
-                </View>
-
-                <View style = {{flexDirection: 'row', paddingLeft: 10}}>
-                    <CheckBox
-                        onIconPress={this.setDate}
-                        title="checktime"
-                        checked={this.state.checktime}/>
-
+                        onDateChange={(date) => { this.setState({ date: date }) }}
+                    />
+         </View>
+         <View style={{ flexDirection: 'row', paddingLeft: 40 }}>              
+                    <Text style={{ paddingTop: 10, fontFamily: 'Montserrat-ExtraLight', color: '#fff' }}>Start Time:</Text>
                     <DatePicker
-                        style={{width: 200}}
-                        date={this.state.date}
+                        style={{ width: 207, alignItems: 'center' }}
+                        date={this.state.startTime}
                         mode="time"
-                        placeholder="select date"
+                        placeholder={this.state.startTime}
                         confirmBtnText="Confirm"
                         cancelBtnText="Cancel"
-                        iconSource={require('../images/clock.png')}
+                        showIcon={false}
                         customStyles={{
                             dateIcon: {
                                 position: 'absolute',
@@ -261,136 +191,210 @@ export default class addEvent extends React.Component {
                             }
                             // ... You can check the source to find the other keys.
                         }}
-                        onDateChange={(date) => {this.setState({duration: date})}}/>
-                    <Text style={{paddingTop: 10}}>  Due Time?</Text>
-                </View>
+                        onDateChange={(startTime) => this.setState({ startTime })}
+                    />
+        </View>
+        <View style={{ flexDirection: 'row', paddingLeft: 40 }}>              
+                    <Text style={{ paddingTop: 10, fontFamily: 'Montserrat-ExtraLight', color: '#fff' }}>End Time:</Text>
+                    <DatePicker
+                        style={{ width: 211, alignItems: 'center' }}
+                        date={this.state.endtime}
+                        mode="time"
+                        placeholder={this.state.endtime}
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                        showIcon={false}
+                        customStyles={{
+                            dateIcon: {
+                                position: 'absolute',
+                                left: 0,
+                                top: 4,
+                                marginLeft: 0
+                            },
+                            dateInput: {
+                                marginLeft: 41
+                            }
+                    // ... You can check the source to find the other keys.
+               }}
+                onDateChange={(endtime) => this.setState({ endtime })}
+            />
+        </View>
+        
+        <View style={{ flexDirection: 'row', paddingLeft: 40 }}>
+            <CheckBox
+                containerStyle= { backgroundColor= 'transparent' }
+                textStyle={color= '#fff'}
+                fontFamily='Montserrat-ExtraLight'
+                title='Recurring?'
+                checked={this.state.recurring}
+                onPress={() => this.setState({recurring: !this.state.recurring})}
+            />
 
-                <View style={styles.addButtonContainer}>
-                    <Button
-                        onPress={this.taskbarr}
-                        title="ADD Event"
-                        color="#000000"/>
-                </View>
-            </ScrollView>
-        );
-    }
+            <CheckBox
+                textStyle={color= '#fff'}
+                fontFamily='Montserrat-ExtraLight'
+                title='Private?'
+                checked={this.state.private}
+                onPress={() => this.setState({private: !this.state.private})}
+            />
+        </View>
+
+        <View style={{ flexDirection: 'row', paddingLeft: 40 }}>
+          <TouchableOpacity
+            onPress={this.taskbarr}
+            style={styles.btnLogin}
+          >
+            <Text style={styles.btnLoginText}> Add Event </Text>
+          </TouchableOpacity>
+        </View>
+
+      </ImageBackground>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#7B6F92',
-    },
-    getStartedText: {
-        paddingTop: 10,
-        fontSize: 20,
-        color: 'rgba(50, 50, 50, 1)',
-        lineHeight: 24,
-        textAlign: 'center',
-    },
-    inputContainer: {
-        marginTop: 10,
-        alignItems: 'center',
-    },
-    input: {
-        width: WIDTH - 55,
-        height: 45,
-        borderColor: 'rgba(0,0,0,1)',
-        fontSize: 16,
-        paddingLeft: 45,
-        backgroundColor: 'rgba(0,0,0,0.1)',
-        color: 'rgba(0, 0, 0, 1)',
-        marginHorizontal: 25,
-    },
-    dateContainer: {
-        flex: 1,
-        justifyContent: 'center'
-    },
-    addButtonContainer: {
-        paddingTop: 50
-    },
-    container: {
-        flex: 0,
-        backgroundColor: '#FFF',
-    },
-    developmentModeText: {
-        marginBottom: 20,
-        color: 'rgba(0,0,0,0.4)',
-        fontSize: 14,
-        lineHeight: 19,
-        textAlign: 'center',
-    },
-    contentContainer: {
-        paddingTop: 0,
-    },
-    welcomeContainer: {
-        alignItems: 'center',
-        marginTop: 10,
-        marginBottom: 20,
-    },
-    welcomeImage: {
-        width: 100,
-        height: 80,
-        resizeMode: 'contain',
-        marginTop: 3,
-        marginLeft: -10,
-    },
-    getStartedContainer: {
-        alignItems: 'center',
-        marginHorizontal: 50,
-    },
-    homeScreenFilename: {
-        marginVertical: 7,
-    },
-    codeHighlightText: {
-        color: 'rgba(96,100,109, 0.8)',
-    },
-    codeHighlightContainer: {
-        backgroundColor: 'rgba(0,0,0,0.05)',
-        borderRadius: 3,
-        paddingHorizontal: 4,
-    },
-    tabBarInfoContainer: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        ...Platform.select({
-            ios: {
-                shadowColor: 'black',
-                shadowOffset: { height: -3 },
-                shadowOpacity: 0.1,
-                shadowRadius: 3,
-            },
-            android: {
-                elevation: 20,
-            },
-        }),
-        alignItems: 'center',
-        backgroundColor: '#fbfbfb',
-        paddingVertical: 20,
-    },
-    tabBarInfoText: {
-        fontSize: 17,
-        color: 'rgba(96,100,109, 1)',
-        textAlign: 'center',
-    },
-    navigationFilename: {
-        marginTop: 5,
-    },
-    helpContainer: {
-        marginTop: 15,
-        alignItems: 'center',
-    },
-    helpLink: {
-        paddingVertical: 15,
-    },
-    helpLinkText: {
-        fontSize: 14,
-        color: '#2e78b7',
-    },
+  btnLogin: {
+    width: WIDTH - 70,
+    height: 60,
+    borderRadius: 45,
+    justifyContent: 'center',
+    marginTop: 1,
+    backgroundColor: '#413A5D',
+    opacity: 0.8,
+},
+
+btnLoginText: {
+    textAlign: 'center',
+    fontFamily: 'Montserrat-ExtraLight',
+    color: 'white',
+    fontSize: 20,
+    justifyContent: 'center',
+    opacity: 1,
+},
+  getStartedText: {
+    textAlign: 'center',
+    color: '#fff',
+    fontSize: 36,
+    marginTop: 60,
+    marginBottom: 10,
+    fontWeight: '300',
+    fontFamily: 'Montserrat-ExtraLight',
+  },
+  inputContainer: {
+    marginTop: 40,
+    marginBottom: 20,
+    alignItems: 'center',
+    fontFamily: 'Montserrat-ExtraLight',
+  },
+  input: {
+    width: WIDTH - 55,
+    height: 45,
+    borderColor: 'rgba(0,0,0,0.3)',
+    fontSize: 16,
+    paddingLeft: 45,
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    color: '#fff',
+    marginHorizontal: 25,
+    borderRadius: 45,
+    marginTop: 5,
+    marginBottom: 10,
+    fontFamily: 'Montserrat-ExtraLight',
+  },
+  dateContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    fontFamily: 'Montserrat-ExtraLight',
+  },
+  addButtonContainer: {
+    paddingTop: 50,
+    fontFamily: 'Montserrat-ExtraLight'
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#7B6F92',
+  },
+  developmentModeText: {
+    marginBottom: 20,
+    color: 'rgba(0,0,0,0.4)',
+    fontSize: 14,
+    lineHeight: 19,
+    textAlign: 'center',
+    fontFamily: 'Montserrat-ExtraLight',
+  },
+  contentContainer: {
+    paddingTop: 0,
+  },
+  welcomeContainer: {
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  welcomeImage: {
+    width: 100,
+    height: 80,
+    resizeMode: 'contain',
+    marginTop: 3,
+    marginLeft: -10,
+  },
+  getStartedContainer: {
+    alignItems: 'center',
+    marginHorizontal: 50,
+  },
+  homeScreenFilename: {
+    marginVertical: 7,
+  },
+  codeHighlightText: {
+    color: 'rgba(96,100,109, 0.8)',
+    fontFamily: 'Montserrat-ExtraLight',
+  },
+  codeHighlightContainer: {
+    backgroundColor: 'rgba(0,0,0,0.05)',
+    borderRadius: 3,
+    paddingHorizontal: 4,
+    fontFamily: 'Montserrat-ExtraLight',
+  },
+  tabBarInfoContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    ...Platform.select({
+      ios: {
+        shadowColor: 'black',
+        shadowOffset: { height: -3 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+      },
+      android: {
+        elevation: 20,
+      },
+    }),
+    alignItems: 'center',
+    backgroundColor: '#fbfbfb',
+    paddingVertical: 20,
+  },
+  tabBarInfoText: {
+    fontSize: 17,
+    color: 'rgba(96,100,109, 1)',
+    textAlign: 'center',
+    fontFamily: 'Montserrat-ExtraLight',
+  },
+  navigationFilename: {
+    marginTop: 5,
+  },
+  helpContainer: {
+    marginTop: 15,
+    alignItems: 'center',
+  },
+  helpLink: {
+    paddingVertical: 15,
+  },
+  helpLinkText: {
+    fontSize: 14,
+    color: '#2e78b7',
+    fontFamily: 'Montserrat-ExtraLight',
+  },
 });
 
 module.exports = addEvent;
