@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, StyleSheet, AsyncStorage, StatusBar, ScrollView, FlatList } from 'react-native';
+import { Alert, StyleSheet, AsyncStorage, StatusBar, ScrollView, FlatList, TouchableOpacity} from 'react-native';
 import { Text, View, SwipeRow, Button } from 'native-base';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -145,6 +145,18 @@ export default class todolist extends React.Component {
             });
     }
 
+    seeTask(task) {
+        Actions.editTask({
+            header: task.header,
+            description: task.description,
+            priority: task.priority,
+            duration: task.duration,
+            due: task.due,
+            id: task.id,
+            url: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/" + task.id + "/"
+        });
+
+    }
     render() {
 
         if (this.state.isLoading) {
@@ -181,17 +193,20 @@ export default class todolist extends React.Component {
                     >
                     <StatusBar barStyle="light-content" />
                     <Text style={styles.title}>To Do</Text>
+                    </GestureRecognizer>
                     {/* <Text style={styles.time}>{this.state.curTime}</Text> */}
                     <ScrollView style={styles.mostImportantScroll}>
                         <FlatList
                             data={this.state.dataSource}
                             keyExtrator = {this._keyExtractor}
-                            renderItem={({item}) => <SwipeRow
-                                leftOpenValue={75}
-                                rightOpenValue={-75}
+                            renderItem={({item}) => 
+                            
+                            <SwipeRow
+                                leftOpenValue={100}
+                                rightOpenValue={-100}
                                 left={
-                                    <Button success onPress={() => alert(item.header)}>
-                                        <Text> left </Text>
+                                    <Button success onPress={() => this.seeTask(item)}>
+                                        <Text> edit </Text>
                                     </Button>
                                 }
                                 body={
@@ -206,8 +221,9 @@ export default class todolist extends React.Component {
                                         <Text> delete </Text>
                                     </Button>
                                 }
-                            />}
+                            /> }
                         />
+                    
                     </ScrollView>
 
                     <ActionButton buttonColor="#C7AFA3">
@@ -221,7 +237,7 @@ export default class todolist extends React.Component {
                             <Icon name="md-cut" style={styles.actionButtonIcon} size={30} color='#fff'/>
                         </ActionButton.Item>
                     </ActionButton>
-                </GestureRecognizer>
+                
 
                 </View>
             );

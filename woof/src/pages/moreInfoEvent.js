@@ -1,9 +1,11 @@
 import React from 'react';
-import {Text, View, Alert, StyleSheet, AsyncStorage, StatusBar, ImageBackground} from 'react-native';
+import { Text, View, Alert, StyleSheet, AsyncStorage, StatusBar, ImageBackground, Dimensions } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import bkg from '../images/yellowbkg.jpg';
+
+const { width: WIDTH } = Dimensions.get('window');
 
 export default class moreInfoEvent extends React.Component {
 
@@ -67,37 +69,41 @@ export default class moreInfoEvent extends React.Component {
             })
             .catch((error) => {
                 console.log(error)
-            }); 
+            });
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <StatusBar barStyle="light-content"/>
+                <StatusBar barStyle="light-content" />
                 <View style={styles.eventContainer}>
 
                     <Text style={styles.title}>Event Information</Text>
 
                     <Text style={styles.statictextDescriptors}>Event:</Text>
-                    <Text>{this.props.header}</Text>
+                    <Text style={styles.statictextresult}>{this.props.header}</Text>
 
                     <Text style={styles.statictextDescriptors}>Location:</Text>
-                    <Text>{this.props.loc}</Text>
+                    <Text style={styles.statictextresult}>{this.props.loc}</Text>
 
                     <Text style={styles.statictextDescriptors}>Date:</Text>
-                    <Text>{this.props.date}</Text>
-                    
+                    <Text style={styles.statictextresult}>{this.props.date}</Text>
+
                     <Text style={styles.statictextDescriptors}>Start Time:</Text>
-                    <Text>{this.state.startTime}</Text>
+                    <Text style={styles.statictextresult}>{this.state.startTime}</Text>
 
                     <Text style={styles.statictextDescriptors}>End Time:</Text>
-                    <Text>{this.state.endTime}</Text>
+                    <Text style={styles.statictextresult}>{this.state.endTime}</Text>
 
                     <Text style={styles.statictextDescriptors}>Details:</Text>
-                    <Text>{this.props.desc}</Text>
+                    <Text style={styles.statictextresult}>{this.props.desc}</Text>
 
                 </View>
-                <ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => {Actions.editEvent(this.state)}}/>
+                <ActionButton
+                    buttonColor="#EADCD9"
+                    onPress={() => { Actions.editEvent(this.state) }}
+                    renderIcon={active => active ? (<Icon name="md-create" style={styles.actionButtonIcon} />) : (<Icon name="md-create" style={styles.actionButtonIcon} />)}
+                />
 
             </View>
         );
@@ -109,16 +115,20 @@ const styles = StyleSheet.create({
         flex: 1,
         width: null,
         height: null,
-//        justifyContent: 'center',
+        //        justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#7B6F92',
     },
     title: {
         color: '#fff',
-        fontSize: 36,
+        fontSize: 28,
         marginTop: 60,
         marginBottom: 30,
-        fontWeight: '300'
+        fontWeight: 'bold',
+        width: WIDTH - 55,
+        paddingLeft: 45,
+        marginHorizontal: 25,
+        fontFamily: 'Montserrat-ExtraLight',
     },
     eventContainer: {
         flex: 1,
@@ -129,11 +139,32 @@ const styles = StyleSheet.create({
         fontSize: 26,
         marginTop: 18,
         marginBottom: 15,
+        alignItems: 'center',
+        fontFamily: 'Montserrat-ExtraLight',
     },
     statictextDescriptors: {
         color: '#fff',
         fontSize: 15,
         marginTop: 10,
         marginBottom: 5,
+        width: WIDTH - 55,
+        paddingLeft: 20,
+        marginHorizontal: 25,
+        fontWeight: 'bold',
+        fontFamily: 'Montserrat-ExtraLight',
+    },
+    actionButtonIcon: {
+        fontSize: 30,
+        color: '#7B6F92',
+    },
+    statictextresult:{
+        color: '#fff',
+        fontSize: 15,
+        marginTop: 10,
+        marginBottom: 5,
+        width: WIDTH - 55,
+        paddingLeft: 20,
+        marginHorizontal: 25,
+        fontFamily: 'Montserrat-ExtraLight',
     }
 });
