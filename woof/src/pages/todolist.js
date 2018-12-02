@@ -213,13 +213,10 @@ export default class todolist extends React.Component {
                                 }
                             /> }
                         />
-                    
                     </ScrollView>
-            
                 </View>
             );
         }
-
     }
 }
 
