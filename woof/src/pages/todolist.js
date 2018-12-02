@@ -183,8 +183,8 @@ export default class todolist extends React.Component {
 
                 <View style={styles.container}>
                     <GestureRecognizer
-                        onSwipeLeft={(state) => Actions.userhome()}
-                        onSwipeRight={(state) => Actions.calendar()}
+                        onSwipeRight={(state) => Actions.userhome()}
+                        onSwipeLeft={(state) => Actions.calendar()}
                         config={config}
                         >
                     <StatusBar barStyle="light-content" />
