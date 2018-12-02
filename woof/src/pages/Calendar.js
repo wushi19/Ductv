@@ -220,7 +220,7 @@ export default class AgendaScreen extends Component {
                     total = total + today[i].duration
                 }
             }
-            total = total + tasks.peek().duration
+            total = total + Math.min(tasks.peek().duration, 299)
             if (total < 300) {
                 var t = tasks.dequeue()
                 var dupe = false
