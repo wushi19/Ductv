@@ -3,7 +3,7 @@ import { Text, View, Alert, StyleSheet, ScrollView, AsyncStorage, StatusBar, Ima
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
-import bkg from '../images/yellowbkg.jpg';
+import bkg from '../images/loginbkg.jpg';
 import DatePicker from 'react-native-datepicker';
 
 const { width: WIDTH } = Dimensions.get('window');
@@ -97,7 +97,7 @@ export default class editEvent extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <ImageBackground source={bkg} style={styles.container}>
                 <StatusBar barStyle="light-content" />
                 <ScrollView style={styles.eventContainer}>
 
@@ -159,7 +159,14 @@ export default class editEvent extends React.Component {
                                 marginLeft: 0
                             },
                             dateInput: {
-                                marginLeft: 36
+                                marginLeft: 48,
+                                color: '#fff',
+                                height: 45,
+                                borderRadius: 45,
+                                fontSize: 16,
+                                marginHorizontal: 25,
+                                paddingLeft: 10,
+                                paddingRight: 10,
                             }
                             // ... You can check the source to find the other keys.
                         }}
@@ -183,7 +190,14 @@ export default class editEvent extends React.Component {
                                 marginLeft: 0
                             },
                             dateInput: {
-                                marginLeft: 36
+                                marginLeft: 48,
+                                color: '#fff',
+                                height: 45,
+                                borderRadius: 45,
+                                fontSize: 16,
+                                marginHorizontal: 25,
+                                paddingLeft: 10,
+                                paddingRight: 10,
                             }
                             // ... You can check the source to find the other keys.
                         }}
@@ -207,7 +221,14 @@ export default class editEvent extends React.Component {
                                 marginLeft: 0
                             },
                             dateInput: {
-                                marginLeft: 36
+                                marginLeft: 48,
+                                color: '#fff',
+                                height: 45,
+                                borderRadius: 45,
+                                fontSize: 16,
+                                marginHorizontal: 25,
+                                paddingLeft: 10,
+                                paddingRight: 10,
                             }
                             // ... You can check the source to find the other keys.
                         }}
@@ -221,7 +242,7 @@ export default class editEvent extends React.Component {
                     renderIcon={active => active ? (<Icon name="md-create" style={styles.actionButtonIcon} />) : (<Icon name="ios-done-all" style={styles.actionButtonIcon} />)}
                 />
 
-            </View>
+            </ImageBackground>
         );
     }
 }

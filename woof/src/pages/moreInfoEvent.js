@@ -124,7 +124,6 @@ const styles = StyleSheet.create({
         fontSize: 28,
         marginTop: 60,
         marginBottom: 30,
-        fontWeight: 'bold',
         width: WIDTH - 55,
         paddingLeft: 45,
         marginHorizontal: 25,
@@ -144,13 +143,12 @@ const styles = StyleSheet.create({
     },
     statictextDescriptors: {
         color: '#fff',
-        fontSize: 15,
+        fontSize: 18,
         marginTop: 10,
         marginBottom: 5,
         width: WIDTH - 55,
         paddingLeft: 20,
         marginHorizontal: 25,
-        fontWeight: 'bold',
         fontFamily: 'Montserrat-ExtraLight',
     },
     actionButtonIcon: {
