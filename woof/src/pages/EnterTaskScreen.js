@@ -28,11 +28,12 @@ const { width: WIDTH } = Dimensions.get('window');
 var moment = require('moment');
 
 export default class EnterTaskScreen extends React.Component {
+
   constructor(props) {
     super(props);
     this.setDate = this.setDate.bind(this);
     this.state = {
-      
+
       chosenDate: new Date(),
       dated: new Date(),
       timed: '00:00',
@@ -55,80 +56,80 @@ export default class EnterTaskScreen extends React.Component {
     this.setState({ chosenDate: newDate })
   }
 
-  taskbarr = () =>{
-      if(this.state.taskname == ''){
-          Alert.alert("Please enter Task Name.");
-      } else{
-          if(this.state.checkdur){
-              var len = this.state.duration.length;
-              this.state.chosendur = parseInt(this.state.duration.substring(len-2, len), 10);
-              this.state.chosendur += parseInt(this.state.duration.substring(0, len-3), 10) * 60;
-          } 
-          if(this.state.checkpri) this.state.chosenpri =  this.state.priority;
-          if(this.state.checkdate) {
-              if(this.state.checktime){
-                  this.state.chosendue = this.state.dated + ' ' + this.state.timed;
-              } else{
-                  this.state.chosendue = this.state.dated + ' 00:00';
-              }
-          }
-          this.tasktest()
-          this.props.navigation.navigate('todolist')
+  taskbarr = () => {
+    if (this.state.taskname == '') {
+      Alert.alert("Please enter Task Name.");
+    } else {
+      if (this.state.checkdur) {
+        var len = this.state.duration.length;
+        this.state.chosendur = parseInt(this.state.duration.substring(len - 2, len), 10);
+        this.state.chosendur += parseInt(this.state.duration.substring(0, len - 3), 10) * 60;
       }
+      if (this.state.checkpri) this.state.chosenpri = this.state.priority;
+      if (this.state.checkdate) {
+        if (this.state.checktime) {
+          this.state.chosendue = this.state.dated + ' ' + this.state.timed;
+        } else {
+          this.state.chosendue = this.state.dated + ' 00:00';
+        }
+      }
+      this.tasktest()
+      this.props.navigation.navigate('todolist')
+    }
   };
-  
-  changedur(){
+
+  changedur() {
     this.setState({
-        checkdur: !this.state.checkdur
+      checkdur: !this.state.checkdur
     })
-      alert("button did a change to " + !this.state.checkdur)
+    alert("button did a change to " + !this.state.checkdur)
   }
 
-  changepri(){
+  changepri() {
     this.setState({
-        checkpri: !this.state.checkpri
+      checkpri: !this.state.checkpri
     })
-      alert("button did a change to " + !this.state.checkpri)
+    alert("button did a change to " + !this.state.checkpri)
   }
 
-  changedate(){
+  changedate() {
     this.setState({
-        checkdate: !this.state.checkdate
+      checkdate: !this.state.checkdate
     })
-      alert("button did a change to " + !this.state.checkdate)
+    alert("button did a change to " + !this.state.checkdate)
   }
 
-  changetime(){
+  changetime() {
     this.setState({
-        checktime: !this.state.checktime
+      checktime: !this.state.checktime
     })
-      alert("button did a change to " + !this.state.checktime)
+    alert("button did a change to " + !this.state.checktime)
   }
 
-tasktest = () =>{
+  tasktest = () => {
     fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      header: this.state.taskname,
-      description: this.state.taskdescription,
-      priority: this.state.chosenpri,
-      duration: this.state.chosendur,
-      due: this.state.chosendue,
-      owner: 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/profile/1/',
-    }),
-})
-  .then((response) => response.json())
-  .then((responseJson) => {
-Alert.alert("Task Successfully Added.");
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        header: this.state.taskname,
+        description: this.state.taskdescription,
+        priority: this.state.chosenpri,
+        duration: this.state.chosendur,
+        due: this.state.chosendue,
+        owner: 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/profile/1/',
+      }),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        Alert.alert("Task Successfully Added.");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
-}
+  }
 
   render() {
     return (
@@ -156,17 +157,17 @@ Alert.alert("Task Successfully Added.");
           />
         </View>
 
-        <View style = {{flexDirection: 'row', paddingLeft: 40}}>
+        <View style={{ flexDirection: 'row', paddingLeft: 40 }}>
           <CheckBox
             onChange={this.changedur.bind(this)}
             title="checkdur"
             checked={this.state.checkdur}
           />
 
-          <Text style={{paddingTop: 10, fontFamily: 'Montserrat-ExtraLight', color: '#fff'}}>Duration: </Text>
+          <Text style={{ paddingTop: 10, fontFamily: 'Montserrat-ExtraLight', color: '#fff' }}>Duration: </Text>
 
           <DatePicker
-            style={{width: 211, alignItems: 'center'}}
+            style={{ width: 211, alignItems: 'center' }}
             date={this.state.duration}
             mode="time"
             placeholder="select date"
@@ -186,23 +187,23 @@ Alert.alert("Task Successfully Added.");
               }
               // ... You can check the source to find the other keys.
             }}
-            onDateChange={(date) => {this.setState({duration: date})}}
+            onDateChange={(date) => { this.setState({ duration: date }) }}
           />
         </View>
-        
-        <View style = {{flexDirection: 'row', paddingLeft: 40}}>
-          
+
+        <View style={{ flexDirection: 'row', paddingLeft: 40 }}>
+
           <CheckBox
             onChange={this.changepri.bind(this)}
             title="checkpri"
             checked={this.state.checkpri}
           />
 
-          <Text style={{paddingTop: 10, fontFamily: 'Montserrat-ExtraLight', color: '#fff', paddingRight: 25}}>Priority:</Text>
+          <Text style={{ paddingTop: 10, fontFamily: 'Montserrat-ExtraLight', color: '#fff', paddingRight: 25 }}>Priority:</Text>
 
           {/* <Image source={require('../images/nimportant.png')} style={{width: 30, height: 30}} /> */}
           <Slider
-            style={{width: 200, paddingLeft: 100,}}
+            style={{ width: 200, paddingLeft: 100, }}
             minimumValue={1}
             maximumValue={5}
             step={1}
@@ -212,15 +213,15 @@ Alert.alert("Task Successfully Added.");
           {/* <Image source={require('../images/vimportant.png')} style={{width: 30, height: 30}} /> */}
         </View>
 
-        <View style = {{flexDirection: 'row', paddingLeft: 40}}>
+        <View style={{ flexDirection: 'row', paddingLeft: 40 }}>
           <CheckBox
             onChange={this.changedate.bind(this)}
             title="checkdate"
             checked={this.state.checkdate}
           />
-          <Text style={{paddingTop: 10, fontFamily: 'Montserrat-ExtraLight', color: '#fff'}}>Date: {"\n"}</Text>
+          <Text style={{ paddingTop: 10, fontFamily: 'Montserrat-ExtraLight', color: '#fff' }}>Date: {"\n"}</Text>
           <DatePicker
-            style={{width: 250}}
+            style={{ width: 250 }}
             date={this.state.dated}
             mode="date"
             placeholder="select date"
@@ -241,20 +242,20 @@ Alert.alert("Task Successfully Added.");
               }
               // ... You can check the source to find the other keys.
             }}
-            onDateChange={(date) => {this.setState({dated: date})}}
+            onDateChange={(date) => { this.setState({ dated: date }) }}
           />
         </View>
-        
 
-        <View style = {{flexDirection: 'row', paddingLeft: 40}}>
+
+        <View style={{ flexDirection: 'row', paddingLeft: 40 }}>
           <CheckBox
             onChange={this.changetime.bind(this)}
             title="checktime"
             checked={this.state.checktime}
           />
-          <Text style={{paddingTop: 10, fontFamily: 'Montserrat-ExtraLight', color: '#fff'}}>Time:</Text>
+          <Text style={{ paddingTop: 10, fontFamily: 'Montserrat-ExtraLight', color: '#fff' }}>Time:</Text>
           <DatePicker
-            style={{width: 253}}
+            style={{ width: 253 }}
             date={this.state.timed}
             mode="time"
             placeholder="select date"
@@ -273,11 +274,11 @@ Alert.alert("Task Successfully Added.");
               }
               // ... You can check the source to find the other keys.
             }}
-            onDateChange={(date) => {this.setState({timed: date})}}
+            onDateChange={(date) => { this.setState({ timed: date }) }}
           />
-          
+
         </View>
-        
+
         <View style={styles.addButtonContainer}>
           <Button
             onPress={this.taskbarr}

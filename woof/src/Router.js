@@ -44,44 +44,52 @@ export default class Routes extends Component {
 
 				<Scene
 					key="signUp"
+					hideNavBar
 					component={signUp}
 					title="signUp"
 				/>
 
 				<Scene
 					key="home"
+					hideNavBar
 					component={home}
 					title="home"
 				/>
 
 				<Scene
 					key="enterTask"
+					hideNavBar
 					component={enterTask}
 					title="enterTask"
 				/>
 
 				<Scene
 					key="testAsyncStorage"
+					hideNavBar
 					component={testAsyncStorage}
 					title="testAsyncStorage"
 				/>
 				<Scene
 					key="editEvent"
+					hideNavBar
 					component={editEvent}
 					title="editEvent"
 				/>
 				<Scene
 					key="addEvent"
+					hideNavBar
 					component={addEvent}
 					title="addEvent"
 				/>
 				<Scene
 					key="moreInfoEvent"
+					hideNavBar
 					component={moreInfoEvent}
 					title="moreInfoEvent"
 				/>
 				<Scene
 					key="editTask"
+					hideNavBar
 					component={editTask}
 					title="editTask"
 				/>
