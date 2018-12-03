@@ -77,8 +77,8 @@ export default class Login extends React.Component {
 
         return (
             <GestureRecognizer
-                onSwipeRight={(state) => Actions.calendar()}
-                onSwipeLeft={(state) => Actions.todolist()}
+                onSwipeRight={(state) => Actions.todolist()}
+                onSwipeLeft={(state) => Actions.calendar()}
                 config={config}
                 style={{
                     flex: 1,
@@ -130,7 +130,6 @@ const styles = StyleSheet.create({
         fontSize: 100,
         alignItems: 'center',
         justifyContent: 'center',
-        // fontWeight: 'bold',
         opacity: 1,
     },
     quoteContainer: {
@@ -140,6 +139,6 @@ const styles = StyleSheet.create({
     },
     quoteText:{
         color: 'white',
-        fontFamily: 'Montserrat-ExtraLight',
+        fontFamily: 'Montserrat-Medium',
     },
 });

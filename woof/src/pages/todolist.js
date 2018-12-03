@@ -183,8 +183,8 @@ export default class todolist extends React.Component {
 
                 <View style={styles.container}>
                     <GestureRecognizer
-                        onSwipeRight={(state) => Actions.userhome()}
-                        onSwipeLeft={(state) => Actions.calendar()}
+                        onSwipeRight={(state) => Actions.calendar()}
+                        onSwipeLeft={(state) => Actions.userhome()}
                         config={config}
                         >
                     <StatusBar barStyle="light-content" />
@@ -195,7 +195,7 @@ export default class todolist extends React.Component {
                 <ScrollView style={styles.mostImportantScroll}>
                         <FlatList
                             data={this.state.dataSource}
-                            keyExtrator={this._keyExtractor}
+                            keyExtractor={this._keyExtractor}
                             renderItem={({ item }) =>
 
                                 <SwipeRow
