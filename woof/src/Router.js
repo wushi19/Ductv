@@ -15,12 +15,25 @@ import moreInfoEvent from "./pages/moreInfoEvent";
 import editTask from "./pages/editTask";
 import userhome from "./pages/userhome";
 import {Text} from "react-native-elements";
+import {Icon} from "react-native-elements";
 
 const TabIcon = ({ selected, title}) => {
     return (
         <Text style={{color: selected ? 'white' :'white'}}> {title} </Text>
     );
 }
+
+const ToDoTabIcon = () => {
+    return <Icon name='list' size={28} type={"font-awesome"} color={'white'}  />
+};
+
+const CalendarTabIcon = () => {
+    return <Icon name='calendar' size={28} type={"font-awesome"} color={'white'}  />
+};
+
+const HomeTabIcon = () => {
+    return <Icon name='home' size={28} type={"font-awesome"} color={'white'}  />
+};
 
 export default class Routes extends Component {
 	render() {
@@ -29,15 +42,16 @@ export default class Routes extends Component {
                 <Scene key="root">
 					<Scene key="Login" initial component={Login} hideNavBar />
 					<Scene key="tabbar" tabs={true} hideNavBar={true} tabBarStyle={{backgroundColor: '#c58ff7'}}>
-						<Scene key="userhome" title="Home" icon={TabIcon} hideNavBar>
-							<Scene component={userhome} />
-						</Scene>
 
-						<Scene key="todolist" title="To Do List" icon={TabIcon} hideNavBar>
+						<Scene key="todolist" title="To Do List" icon={ToDoTabIcon} hideNavBar>
 							<Scene component={todolist} />
 						</Scene>
 
-						<Scene key="calendar" title="Calendar" icon={TabIcon} hideNavBar>
+                        <Scene key="userhome" title="Home" icon={HomeTabIcon} hideNavBar>
+                            <Scene component={userhome} />
+                        </Scene>
+
+						<Scene key="calendar" title="Calendar" icon={CalendarTabIcon} hideNavBar>
 							<Scene component={calendar} />
 						</Scene>
 					</Scene>
