@@ -222,18 +222,21 @@ export default class addEvent extends React.Component {
         
         <View style={{ flexDirection: 'row', paddingLeft: 40 }}>
             <CheckBox
-                containerStyle= { backgroundColor= 'transparent' }
-                textStyle={color= '#fff'}
                 fontFamily='Montserrat-ExtraLight'
                 title='Recurring?'
+                checkedColor='#413a5d'
+                checkedIcon='dot-circle-o'
+                uncheckedIcon='circle-o'
                 checked={this.state.recurring}
                 onPress={() => this.setState({recurring: !this.state.recurring})}
             />
 
             <CheckBox
-                textStyle={color= '#fff'}
                 fontFamily='Montserrat-ExtraLight'
                 title='Private?'
+                checkedColor='#413a5d'
+                checkedIcon='dot-circle-o'
+                uncheckedIcon='circle-o'
                 checked={this.state.private}
                 onPress={() => this.setState({private: !this.state.private})}
             />
