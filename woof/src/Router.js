@@ -41,7 +41,7 @@ export default class Routes extends Component {
 			<Router>
                 <Scene key="root">
 					<Scene key="Login" initial component={Login} hideNavBar />
-					<Scene key="tabbar" tabs={true} hideNavBar={true} tabBarStyle={{backgroundColor: '#c58ff7'}}>
+					<Scene key="tabbar" tabs={true} hideNavBar={true} tabBarStyle={{backgroundColor: '#1c1c1c'}}>
 
 						<Scene key="todolist" title="To Do List" icon={ToDoTabIcon} hideNavBar>
 							<Scene component={todolist} />
