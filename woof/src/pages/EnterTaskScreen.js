@@ -122,7 +122,7 @@ export default class EnterTaskScreen extends React.Component {
           <Text style={{ paddingTop: 10, fontFamily: 'Montserrat-ExtraLight', color: '#fff' }}>Duration: </Text>
 
           <DatePicker
-            style={{ width: 253 }}
+            style={{ width: 225 }}
             date={this.state.duration}
             mode="time"
             placeholder="select date"

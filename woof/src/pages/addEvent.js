@@ -226,6 +226,8 @@ export default class addEvent extends React.Component {
                 textStyle={color= '#fff'}
                 fontFamily='Montserrat-ExtraLight'
                 title='Recurring?'
+                checkedIcon='dot-circle-o'
+                uncheckedIcon='circle-o'
                 checked={this.state.recurring}
                 onPress={() => this.setState({recurring: !this.state.recurring})}
             />
@@ -234,6 +236,8 @@ export default class addEvent extends React.Component {
                 textStyle={color= '#fff'}
                 fontFamily='Montserrat-ExtraLight'
                 title='Private?'
+                checkedIcon='dot-circle-o'
+                uncheckedIcon='circle-o'
                 checked={this.state.private}
                 onPress={() => this.setState({private: !this.state.private})}
             />
