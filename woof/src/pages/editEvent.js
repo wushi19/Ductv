@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Alert, StyleSheet, ScrollView, AsyncStorage, StatusBar, ImageBackground, TextInput, Dimensions } from 'react-native';
+import { Text, View, Alert, StyleSheet, ScrollView, AsyncStorage, StatusBar, ImageBackground, TextInput, Dimensions, TouchableOpacity } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
@@ -21,17 +21,17 @@ export default class editEvent extends React.Component {
             url: this.props.url,
             header: this.props.header,
             description: this.props.desc,
-            startTime: this.props.startTime,
-            endtime: this.props.endTime,
-            date: this.props.date.split("-")[2] + "-" + this.props.date.split("-")[0] + "-" + this.props.date.split("-")[1],
+            sugtime: (this.props.id.toString().search(/Task/) != 0) ? 'Start Time: ' : ('Start Time:   (Suggested Time: ' + this.props.dur + ' min)'), 
+            startTime: (this.props.id.toString().search(/Task/) != 0) ? this.props.startTime : null,
+            endtime: (this.props.id.toString().search(/Task/) != 0) ? this.props.endTime : null,
+            date: (this.props.id.toString().search(/Task/) != 0) ? (this.props.date.split("-")[2] + "-" + this.props.date.split("-")[0] + "-" + this.props.date.split("-")[1]) : null,
             // recurring: null,
             // private: null, //private is res
             calendar: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/calendar/1/",
             updated: moment(new Date()).format("YYYY-MM-DD") + "T" + moment(new Date()).format("hh:mm:ss"),
-            location: this.props.loc,
+            location: (this.props.id.toString().search(/Task/) != 0) ? this.props.loc : '',
             isLoading: true,
             dataSource: null,
-            id: this.props.id,
         }
     };
 
@@ -65,7 +65,55 @@ export default class editEvent extends React.Component {
     }
 
     updateEvent = () => {
-        this.tasktest();
+        alert(this.state.dur)
+        if (this.state.taskname == '') {
+            Alert.alert("Please enter an Event Name.");
+        } else if(this.state.id.toString().search(/Task/) != 0){
+            this.tasktest();
+        } else{
+            if(this.state.startTime == null || this.state.endtime == null || this.state.date == null){
+                Alert.alert("Please enter valid start/end time");
+            }else {
+                this.tasktesttask();
+                this.deleteData(parseInt(this.state.id.substring(7)))
+            }
+        }
+    }
+
+    deleteData(taskId) {
+        var url = "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/";
+        return fetch(url + '/' + taskId + '/', {
+            method: 'DELETE'
+        })
+    }
+
+    tasktesttask = () =>{
+        fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                header: this.state.header,
+                description: this.state.description,
+                startTime: this.state.date + "T" + this.state.startTime + ":00-05:00",
+                endtime: this.state.date + "T" + this.state.endtime + ":00-05:00",
+                recurring: false,
+                private: false,
+                calendar: this.state.calendar,
+                created: this.state.updated,
+                updated: this.state.updated,
+                location: this.state.location,
+            }),
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                Alert.alert("Task Successfully Made into Event.");
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        Actions.userhome();
     }
 
     tasktest = () => {
@@ -93,6 +141,35 @@ export default class editEvent extends React.Component {
             });
         alert("Event successfully updated!");
         Actions.userhome();
+    }
+
+    deleteEvnt = () => {
+        var url = "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/";
+        return fetch(url + '/' + this.state.id + '/', {
+            method: 'DELETE'
+        })
+    }
+
+    delhep = () => {
+        this.deleteEvnt();
+        alert(this.state.header + " deleted from events")
+        Actions.userhome();
+    }
+    deleteEventbutt(){
+        if(this.props.id.toString().search(/Task/) != 0){
+            return(
+                <View style={{ flexDirection: 'row', paddingLeft: 40 }}>
+                    <TouchableOpacity
+                        onPress={this.delhep}
+                        style={styles.btnLogin}
+                    >
+                        <Text style={styles.btnLoginText}> Delete Me </Text>
+                    </TouchableOpacity>
+                </View>
+            );
+        } else{
+            return null;
+        }
     }
 
     render() {
@@ -173,7 +250,7 @@ export default class editEvent extends React.Component {
                         onDateChange={(date) => { this.setState({ date: date }) }}
                     />
 
-                    <Text style={styles.statictextDescriptors}>Start Time:</Text>
+                    <Text style={styles.statictextDescriptors}>{this.state.sugtime}</Text>
                     <DatePicker
                         style={{ width: 200 }}
                         date={this.state.startTime}
@@ -206,7 +283,7 @@ export default class editEvent extends React.Component {
 
                     <Text style={styles.statictextDescriptors}>End Time:</Text>
                     <DatePicker
-                        style={{ width: 200 }}
+                        style={{ width: 200 , marginBottom: 5}}
                         date={this.state.endtime}
                         mode="time"
                         placeholder={this.state.endtime}
@@ -234,14 +311,16 @@ export default class editEvent extends React.Component {
                         }}
                         onDateChange={(endtime) => this.setState({ endtime })}
                     />
-
+                    
+                    {this.deleteEventbutt()}
+                    
                 </ScrollView>
                 <ActionButton
                     buttonColor="#EADCD9"
                     onPress={this.updateEvent}
                     renderIcon={active => active ? (<Icon name="md-create" style={styles.actionButtonIcon} />) : (<Icon name="ios-done-all" style={styles.actionButtonIcon} />)}
                 />
-
+                
             </ImageBackground>
         );
     }
@@ -303,5 +382,22 @@ const styles = StyleSheet.create({
     actionButtonIcon: {
         fontSize: 30,
         color: '#7B6F92',
+    },
+    btnLogin: {
+        width: WIDTH - 70,
+        height: 60,
+        borderRadius: 45,
+        justifyContent: 'center',
+        marginTop: 5,
+        backgroundColor: '#413A5D',
+        opacity: 0.8,
+    },
+    btnLoginText: {
+        textAlign: 'center',
+        fontFamily: 'Montserrat-ExtraLight',
+        color: 'white',
+        fontSize: 20,
+        justifyContent: 'center',
+        opacity: 1,
     },
 });

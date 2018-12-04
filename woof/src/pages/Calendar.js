@@ -62,6 +62,7 @@ export default class AgendaScreen extends Component {
             startTime: item.startTime,
             endTime: item.endTime,
             desc: item.desc,
+            dur: item.duration,
             date: item.date,
             loc: item.loc
         })
@@ -160,9 +161,10 @@ export default class AgendaScreen extends Component {
                 const newItems = {}
                 for (var i = 0; i < data.length; i++) {
                     var header = data[i]['header'].toString()
+                    var whatis = data[i]['description'].toString()
                     tasks.queue({
                         name: header,
-                        desc: data[i]['description'],
+                        desc: whatis,
                         priority: data[i]['priority'],
                         duration: data[i]['duration'],
                         due: data[i]['due'],
@@ -237,7 +239,7 @@ export default class AgendaScreen extends Component {
                         date: strTime.slice(5, 10) + "-" + year,
                         startTime: "",
                         endTime: "",
-                        desc: t.description,
+                        desc: t.desc,
                         loc: "",
                         height: t.height,
                         duration: t.duration,

@@ -22,6 +22,8 @@ export default class moreInfoEvent extends React.Component {
             desc: this.props.desc,
             date: this.props.date,
             loc: this.props.loc,
+            dur: this.props.dur,
+            title: (this.props.id.toString().search(/Task/) != 0) ? 'Event Information' : 'Task -> Event',
             // description: "",
             // startTime: "",
             // endtime: "",
@@ -78,7 +80,7 @@ export default class moreInfoEvent extends React.Component {
                 <StatusBar barStyle="light-content" />
                 <View style={styles.eventContainer}>
 
-                    <Text style={styles.title}>Event Information</Text>
+                    <Text style={styles.title}>{this.state.title}</Text>
 
                     <Text style={styles.statictextDescriptors}>Event:</Text>
                     <Text style={styles.statictextresult}>{this.props.header}</Text>
