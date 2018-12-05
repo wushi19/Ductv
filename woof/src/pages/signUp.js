@@ -175,7 +175,7 @@ export default class signUp extends React.Component {
           var usr = JSON.stringify(responseJson);
           try {
             answer = AsyncStorage.setItem('user', usr);
-            Actions.home();
+            Actions.Login();
           } catch (error) {
             Alert.alert("Error");
           }
@@ -268,7 +268,7 @@ export default class signUp extends React.Component {
          </View>
 
           <TouchableOpacity
-              onPress={this.goHome}
+              onPress={this.handleSubmit}
               style={styles.btnLogin}
           >
               <Text style = {styles.btnSignupText}> Sign me up! </Text>
