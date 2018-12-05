@@ -154,10 +154,15 @@ export default class signUp extends React.Component {
   // }
 
   handleSubmit = () => {
-    const { username, email } = this.state;
+    const { username, email, password, confirmPassword } = this.state;
+
+    if(password != confirmPassword){
+      alert("Passwords need to match");
+    }
+
     // perform all necessary validations
-    if (username == '') {
-      alert("Username cannot be empty")
+    if (username == '' || password == '' || confirmPassword ==''|| email =='') {
+      alert("All fields must be included.")
     }
     else {
       fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/', {
