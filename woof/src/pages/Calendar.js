@@ -21,10 +21,12 @@ export default class AgendaScreen extends Component {
             tasks: new PriorityQueue(),
             markedDates: {},
             gameCount: 0
+            
         };
     }
 
     render() {
+        //setInterval(function () { this.setState({ loadItemsForMonth={this.loadItems.bind(this)}) }); }.bind(this), 1000);
         return (
             <Agenda
                 //minDate={'2018-01-01'}
@@ -56,13 +58,13 @@ export default class AgendaScreen extends Component {
 
     seeEvent(item) {
         Actions.moreInfoEvent({
+            dur: item.duration,
             id: item.id,
             url: item.url,
             header: item.name,
             startTime: item.startTime,
             endTime: item.endTime,
             desc: item.desc,
-            dur: item.duration,
             date: item.date,
             loc: item.loc
         })
@@ -106,6 +108,14 @@ export default class AgendaScreen extends Component {
                         for (var j = 0; j < items[strTime].length; j++) {
                             if (items[strTime][j]["id"] == data[i]["id"]) {
                                 dupe = true
+                                items[strTime][j]["name"] = header
+                                items[strTime][j]["date"] = strTime.slice(5, 10) + "-" + year
+                                items[strTime][j]["startTime"] = time.toISOString().split('T')[1].slice(0, -8)
+                                items[strTime][j]["endTime"] = endtime.slice(0, -8)
+                                items[strTime][j]["desc"] = data[i]["description"]
+                                items[strTime][j]["loc"] = data[i]["location"]
+                                items[strTime][j]["height"] = Math.max(60, Math.floor(len))
+                                items[strTime][j]["duration"] = Math.max(60, Math.floor(len))
                             }
                         }
                         if (!dupe) {
@@ -160,18 +170,33 @@ export default class AgendaScreen extends Component {
             }).then(function (data) {
                 const newItems = {}
                 for (var i = 0; i < data.length; i++) {
+                    var duration = Number(data[i]['duration'])
                     var header = data[i]['header'].toString()
                     var whatis = data[i]['description'].toString()
-                    tasks.queue({
-                        name: header,
-                        desc: whatis,
-                        priority: data[i]['priority'],
-                        duration: data[i]['duration'],
-                        due: data[i]['due'],
-                        height: Math.max(60, Math.floor(Number(data[i]['duration']))),
-                        id: "Task - " + data[i]['id'].toString(),
-                        die: data[i]['id'] / ((data[i]['priority'] + 1) * data[i]['duration'])
-                    });
+                    var scheduled = 0
+                    var tm = 0
+                    var TaskInd = 0
+                    while (scheduled < duration){
+                        TaskInd = TaskInd + 1
+                        if (duration - scheduled > 30){
+                            scheduled = scheduled + 30
+                            tm = 30
+                        }
+                        else{
+                            tm = duration - scheduled
+                            scheduled = duration
+                        }
+                        tasks.queue({
+                            name: header,
+                            desc: whatis,
+                            priority: data[i]['priority'],
+                            duration: tm,
+                            due: data[i]['due'],
+                            height: Math.max(60, Math.floor(tm)),
+                            id: "Task - " + data[i]['id'].toString() + TaskInd.toString(),
+                            die: data[i]['id'] / ((data[i]['priority'] + 1) * data[i]['duration'])
+                        });
+                    }
                 }
             });
         }
@@ -180,7 +205,11 @@ export default class AgendaScreen extends Component {
         this.setState({
             items: it,
             markedDays: markedD
-        })
+        }) 
+    }
+
+    updateData(){
+        this.render()
     }
 
     renderItem(item) {
@@ -189,7 +218,7 @@ export default class AgendaScreen extends Component {
         const b = Boolean(letter == "T")
         if (b) {
             return (
-                <TouchableHighlight onPress={() => this.seeEvent(item)}>
+                <TouchableHighlight onPress={() => {this.seeEvent(item); this.updateData(); this.render()}}>
                     <View style={[styles.task, {height: item.height}]}><Text>{item.name}</Text>
                     </View>
                 </TouchableHighlight>
@@ -197,7 +226,7 @@ export default class AgendaScreen extends Component {
         }
         else {
             return (
-                <TouchableHighlight onPress={() => this.seeEvent(item)}>
+                <TouchableHighlight onPress={() => {this.seeEvent(item); this.updateData(); this.render()}}>
                     <View style={[styles.item, {height: item.height}]}><Text>{item.name}</Text>
                     </View>
                 </TouchableHighlight>
@@ -230,6 +259,13 @@ export default class AgendaScreen extends Component {
                     for (var j = 0; j < items[key].length; j++) {
                         if (items[key][j]["id"] == t.id) {
                             dupe = true
+                            items[key][j]["name"] = t.name
+                            items[key][j]["startTime"] = ""
+                            items[key][j]["endTime"] = ""
+                            items[key][j]["desc"] = t.description
+                            items[key][j]["loc"] = ""
+                            items[key][j]["height"] = t.height
+                            items[key][j]["duration"] = t.duration
                         }
                     }
                 }
@@ -289,7 +325,7 @@ export default class AgendaScreen extends Component {
 
     renderEmptyDate(day) {
         return (
-            <TouchableHighlight onPress={() => this.GameOrNah()}>
+            <TouchableHighlight onPress={() => this.updateData()}>
                 <View style={styles.emptyDate}><Text>Nothing scheduled - Go feed ducks!</Text></View>
             </TouchableHighlight>
 

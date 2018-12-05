@@ -145,6 +145,20 @@ export default class todolist extends React.Component {
             });
     }
 
+    updateDat = () => {
+        return fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/?format=json')
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    isLoading: false,
+                    dataSource: responseJson
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
     seeTask(task) {
         Actions.editTask({
             header: task.header,
@@ -157,6 +171,7 @@ export default class todolist extends React.Component {
         });
 
     }
+    
     render() {
 
         if (this.state.isLoading) {
@@ -188,7 +203,7 @@ export default class todolist extends React.Component {
                         config={config}
                         >
                     <StatusBar barStyle="light-content" />
-                    <Text style={styles.title}>To Do</Text>
+                    <TouchableOpacity onPress={this.updateDat}><Text style={styles.title}>To Do</Text></TouchableOpacity>
                     <Text style={styles.time}>{this.state.curTime}</Text>
                 </GestureRecognizer>
 

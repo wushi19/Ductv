@@ -75,7 +75,8 @@ export default class editEvent extends React.Component {
                 Alert.alert("Please enter valid start/end time");
             }else {
                 this.tasktesttask();
-                this.deleteData(parseInt(this.state.id.substring(7)))
+                this.deleteData(parseInt(this.state.id.substring(7, 10)));
+                Actions.userhome();
             }
         }
     }
@@ -113,7 +114,6 @@ export default class editEvent extends React.Component {
             .catch((error) => {
                 console.error(error);
             });
-        Actions.userhome();
     }
 
     tasktest = () => {

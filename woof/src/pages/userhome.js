@@ -21,6 +21,7 @@ import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import bgImage from '../images/purpleuserhome.jpg';
 import logo from '../images/logo.png';
+import PriorityQueue from "js-priority-queue";
 import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 
 const { width: WIDTH } = Dimensions.get('window');
@@ -34,7 +35,7 @@ export default class Login extends React.Component {
             email: "",
             hour: null,
             minute: null,
-            quote: "\"I exist as I am, that is enough.\" - Walt Whitman",
+            quote: "\"A goal should scare you a little and excite you a lot.\" - Joe Vitale",
         }
     }
 
@@ -74,7 +75,7 @@ export default class Login extends React.Component {
             velocityThreshold: 0.3,
             directionalOffsetThreshold: 80
         };
-
+        
         return (
             <GestureRecognizer
                 onSwipeRight={(state) => Actions.todolist()}
@@ -87,7 +88,7 @@ export default class Login extends React.Component {
             >
 
                 <ImageBackground source={bgImage} style={styles.backgroundContainer}>
-
+                    
                     <View style={styles.textContainer}>
                         <Text style={styles.timeText}>{this.state.hour}</Text>
                         <Text style={styles.nameText}>Good Morning, Dorian.</Text>
@@ -100,6 +101,7 @@ export default class Login extends React.Component {
             </GestureRecognizer>
 
         );
+            
     }
 }
 

@@ -23,6 +23,7 @@ import {
 import DatePicker from 'react-native-datepicker'
 import bkg from '../images/loginbkg.jpg'
 
+
 const { width: WIDTH } = Dimensions.get('window');
 
 var moment = require('moment');

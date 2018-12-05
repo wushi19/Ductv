@@ -86,6 +86,8 @@ export default class signUp extends React.Component {
     this.state = {
       username: "",
       email: "",
+      password: "",
+      confirmPassword: ""
     }
   }
 
@@ -158,10 +160,7 @@ export default class signUp extends React.Component {
 
     if(password != confirmPassword){
       alert("Passwords need to match");
-    }
-
-    // perform all necessary validations
-    if (username == '' || password == '' || confirmPassword ==''|| email =='') {
+    } else if (username == '' || password == '' || confirmPassword ==''|| email =='') {
       alert("All fields must be included.")
     }
     else {
