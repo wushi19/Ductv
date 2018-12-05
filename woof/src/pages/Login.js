@@ -82,7 +82,7 @@ export default class Login extends React.Component {
             answer = AsyncStorage.setItem('user', user);
             Actions.userhome();
           } catch (error) {
-            Alert.alert("oh shit waddup");
+            Alert.alert("Error");
           }
           //Alert.alert(user);
           //usr = JSON.parse(usr);

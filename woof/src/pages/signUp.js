@@ -177,7 +177,7 @@ export default class signUp extends React.Component {
             answer = AsyncStorage.setItem('user', usr);
             Actions.home();
           } catch (error) {
-            Alert.alert("oh shit waddup");
+            Alert.alert("Error");
           }
         })
         .catch((error) => {
