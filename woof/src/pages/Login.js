@@ -39,9 +39,9 @@ export default class Login extends React.Component {
         }
     }
 
-    signUp() {
-		Actions.signUp()
-    }
+    // signUp() {
+	// 	Actions.signUp()
+    // }
 
     validHome = () => {
       const { email } = this.state;
@@ -126,7 +126,7 @@ export default class Login extends React.Component {
                 </View>
 
                 <TouchableOpacity
-                    onPress={this.goHome}
+                    onPress={this.validHome}
                     style={styles.btnLogin}
                 >
                 <Text style = {styles.btnLoginText}> Log in </Text>
