@@ -14,6 +14,7 @@ import PriorityQueue from "js-priority-queue";
 export default class AgendaScreen extends Component {
     constructor(props) {
         super(props);
+        this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
         this.state = {
             first: true,
             items: {},
@@ -25,8 +26,12 @@ export default class AgendaScreen extends Component {
         };
     }
 
+    forceUpdateHandler(){
+        this.forceUpdate();
+      };
+
     render() {
-        //setInterval(function () { this.setState({ loadItemsForMonth={this.loadItems.bind(this)}) }); }.bind(this), 1000);
+        
         return (
             <Agenda
                 //minDate={'2018-01-01'}
