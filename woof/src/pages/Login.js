@@ -39,9 +39,9 @@ export default class Login extends React.Component {
         }
     }
 
-    // signUp() {
-	// 	Actions.signUp()
-    // }
+    signUp() {
+		Actions.signUp()
+    }
 
     validHome = () => {
       const { email } = this.state;
