@@ -8,6 +8,9 @@ THIS CODE IS OUR OWN WORK, IT WAS WRITTEN WITHOUT CONSULTING
 A TUTOR OR CODE WRITTEN BY OTHER STUDENTS OUTSIDE OF OUR TEAM.
 - Bryan Deleon-Vargas, Nandar Soe, Jonathon Gomez, Alvin Choi, Sage Ono, Yibo Wang
 
+App built in woof directory with react native
+Django API is in prod directory
+
 Instructions(Run on Android):
 1. To run our app, open the Ductv.zip folder in the directory of your choice
 2. Install android studio & set up an emulator SDK (we tested with Android Studio 6.0 - Marshmallow)
