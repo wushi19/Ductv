@@ -1,12 +1,13 @@
 branch-defaults:
   default:
-    environment: null
+    environment: djangotutorial-env
+    group_suffix: null
 global:
-  application_name: django-env
+  application_name: django-tutorial
   branch: null
   default_ec2_keyname: null
-  default_platform: Python 3.6
-  default_region: us-east-1
+  default_platform: python-3.6
+  default_region: us-west-2
   include_git_submodules: true
   instance_profile: null
   platform_name: null

@@ -44,32 +44,33 @@ export default class Login extends React.Component {
     }
 
     validHome = () => {
-      const { email } = this.state;
-      response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/')
-        .then(function(response) {
-          return response.json()
-        })
-        .then(function(myJson){
-          users =JSON.stringify(myJson);
-          users = JSON.parse(users);
-          loggedInUser = null;
-          for(var i = 0; i<users.length;i++){
-            if (users[i].email == email){
-              loggedInUser = users[i];
-            }
-          }
-          //Alert.alert()
-          if (loggedInUser != null){
-            try {
-              loggedInUser = JSON.stringify(loggedInUser);
-              answer = AsyncStorage.setItem('user', loggedInUser);
-              Actions.userhome();
-            } catch (error) {
-              Alert.alert("oh shit waddup");
-            }
-          } else { Alert.alert("Invalid Email")}
-      });
-    }
+      // const { email } = this.state;
+      // response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/')
+      //   .then(function(response) {
+      //     return response.json()
+      //   })
+      //   .then(function(myJson){
+      //     users =JSON.stringify(myJson);
+      //     users = JSON.parse(users);
+      //     loggedInUser = null;
+      //     for(var i = 0; i<users.length;i++){
+      //       if (users[i].email == email){
+      //         loggedInUser = users[i];
+      //       }
+      //     }
+      //     //Alert.alert()
+      //     if (loggedInUser != null){
+      //       try {
+      //         loggedInUser = JSON.stringify(loggedInUser);
+      //         answer = AsyncStorage.setItem('user', loggedInUser);
+      //         Actions.userhome();
+      //       } catch (error) {
+      //         Alert.alert("oh shit waddup");
+      //       }
+      //     } else { Alert.alert("Invalid Email")}
+      // });
+        Actions.userhome();
+    };
 
     goHome(){
       fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/3/')
@@ -212,5 +213,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingVertical: 16,
     },
-
 });
