@@ -137,7 +137,6 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-gesture-handler')
     compile project(':react-native-calendar-events')
     compile project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])
