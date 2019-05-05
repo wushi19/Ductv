@@ -92,7 +92,7 @@ export default class editTask extends React.Component {
                 priority: this.state.priority,
                 duration: (parseInt(this.state.durationFormat.substring(3, 5), 10) + (parseInt(this.state.durationFormat.substring(0, 2), 10) * 60)),
                 due: this.state.due,
-                owner: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/profile/1/"
+                owner: "http://127.0.0.1:8000/profile/3/"
             }),
         })
             .then((response) => response.json())

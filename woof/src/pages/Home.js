@@ -57,7 +57,7 @@ export default class Home extends React.Component {
 
 
   tasktest = () => {
-    fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/', {
+    fetch('http://127.0.0.1:8000/task/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ export default class Home extends React.Component {
       body: JSON.stringify({
         header: 'Post Task 3',
         description: 'AAAAAAAAAAAAAAAAAAAAA',
-        owner: 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/profile/1/',
+        owner: 'http://127.0.0.1:8000/profile/3',
       }),
     })
       .then((response) => response.json())

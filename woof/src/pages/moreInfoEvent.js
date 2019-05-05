@@ -15,7 +15,7 @@ export default class moreInfoEvent extends React.Component {
         this.state = {
 
             id: this.props.id,
-            url: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/" + this.props.id + "/",
+            url: "http://127.0.0.1:8000/event/" + this.props.id + "/",
             header: this.props.header,
             startTime: (parseInt(this.props.startTime.split(":")[0], 10) - 5) + ":" + this.props.startTime.split(":")[1],
             endTime: (parseInt(this.props.endTime.split(":")[0], 10) - 5) + ":" + this.props.endTime.split(":")[1],
@@ -29,7 +29,7 @@ export default class moreInfoEvent extends React.Component {
             // endtime: "",
             // recurring: null,
             // p: null, //private is res
-            calendar: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/calendar/1/",
+            calendar: "http://127.0.0.1:8000/calendar/1/",
             // created: "",
             // updated: "",
             // location: "",
@@ -61,7 +61,7 @@ export default class moreInfoEvent extends React.Component {
     // }
 
     componentDidMount() {
-        return fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/?format=json')
+        return fetch('http://127.0.0.1:8000/event/?format=json')
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({

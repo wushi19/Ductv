@@ -45,7 +45,7 @@ export default class Login extends React.Component {
 
     validHome = () => {
       const { email } = this.state;
-      response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/')
+      response = fetch('http://127.0.0.1:8000/user/')
         .then(function(response) {
           return response.json()
         })
@@ -72,7 +72,7 @@ export default class Login extends React.Component {
     }
 
     goHome(){
-      fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/3/')
+      fetch('http://127.0.0.1:8000/user/3/')
         .then(function(response) {
           return response.json()
         })

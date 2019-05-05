@@ -51,7 +51,7 @@ export default class editEvent extends React.Component {
     // }
 
     componentDidMount() {
-        return fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/?format=json')
+        return fetch('http://127.0.0.1:8000/event/?format=json')
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
@@ -82,14 +82,14 @@ export default class editEvent extends React.Component {
     }
 
     deleteData(taskId) {
-        var url = "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/";
+        var url = "http://127.0.0.1:8000/task/";
         return fetch(url + '/' + taskId + '/', {
             method: 'DELETE'
         })
     }
 
     tasktesttask = () =>{
-        fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/', {
+        fetch('http://127.0.0.1:8000/event/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -144,7 +144,7 @@ export default class editEvent extends React.Component {
     }
 
     deleteEvnt = () => {
-        var url = "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/";
+        var url = "http://127.0.0.1:8000/event/";
         return fetch(url + '/' + this.state.id + '/', {
             method: 'DELETE'
         })

@@ -43,7 +43,7 @@ export default class TaskClass extends React.Component {
             userId: null,
             duration: null,
             due: null,
-            owner: 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/profile/2/',
+            owner: 'http://127.0.0.1:8000/profile/3',
             task: null,
             number: null,
 
@@ -78,7 +78,7 @@ export default class TaskClass extends React.Component {
 
     getEvent = (number) => {
         const { data } = this.state;
-        response = fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/')
+        response = fetch('http://127.0.0.1:8000/task/')
             .then(function (response) {
                 return response.json()
             })

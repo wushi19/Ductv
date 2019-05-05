@@ -47,7 +47,7 @@ export default class todolist extends React.Component {
             userId: null,
             duration: null,
             due: null,
-            owner: 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/profile/2/',
+            owner: 'http://127.0.0.1:8000/profile/2/',
             task: null,
             curTime: null,
             item: null,
@@ -57,7 +57,7 @@ export default class todolist extends React.Component {
 
     componentDidMount() {
         setInterval(function () { this.setState({ curTime: new Date().toLocaleString() }); }.bind(this), 1000);
-        return fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/?format=json')
+        return fetch('http://127.0.0.1:8000/task/?format=json')
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
@@ -125,14 +125,14 @@ export default class todolist extends React.Component {
     // }
 
     deleteData(taskId) {
-        var url = "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/";
-        return fetch(url + '/' + taskId + '/', {
+        var url = "http://127.0.0.1:8000/task/";
+        return fetch(url + taskId + '/', {
             method: 'DELETE'
         })
     }
 
     updateData() {
-        return fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/?format=json')
+        return fetch('http://127.0.0.1:8000/task/?format=json')
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
@@ -146,7 +146,7 @@ export default class todolist extends React.Component {
     }
 
     updateDat = () => {
-        return fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/?format=json')
+        return fetch('http://127.0.0.1:8000/task/?format=json')
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
@@ -167,7 +167,7 @@ export default class todolist extends React.Component {
             duration: task.duration,
             due: task.due,
             id: task.id,
-            url: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/" + task.id + "/"
+            url: "http://127.0.0.1:8000/task/?format=json" + task.id + "/"
         });
 
     }

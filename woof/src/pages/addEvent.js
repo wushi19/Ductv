@@ -51,7 +51,7 @@ export default class addEvent extends React.Component {
       due: null,
       updated: moment(new Date()).format("YYYY-MM-DD") + "T" + moment(new Date()).format("hh:mm:ss"),
       duration: '00:30',
-      calendar: "http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/calendar/1/",
+      calendar: "http://127.0.0.1:8000/calendar/1/",
       chosendur: '30',
       chosendue: null,
       checkdur: false,
@@ -79,7 +79,7 @@ export default class addEvent extends React.Component {
   };
 
   tasktest = () =>{
-    fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/', {
+    fetch('http://127.0.0.1:8000/event/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

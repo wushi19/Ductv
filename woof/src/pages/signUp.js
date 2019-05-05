@@ -92,7 +92,7 @@ export default class signUp extends React.Component {
   }
 
   createUser = (username, email) => {
-    fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/', {
+    fetch('http://127.0.0.1:8000/user/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -164,7 +164,7 @@ export default class signUp extends React.Component {
       alert("All fields must be included.")
     }
     else {
-      fetch('http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/user/', {
+      fetch('http://127.0.0.1:8000/user/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

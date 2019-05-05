@@ -79,7 +79,7 @@ export default class AgendaScreen extends Component {
         const {items} = this.state
         const {tasks} = this.state
         if (this.state.first) {
-            const AWS = 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/event/'
+            const AWS = 'http://127.0.0.1:8000/event/'
             const Heroku = 'https://ductv.herokuapp.com/event/'
             fetch(AWS).then(function (response) {
                 return response.json()
@@ -168,7 +168,7 @@ export default class AgendaScreen extends Component {
                     }
                 }
             });
-            const AWS2 = 'http://durian-django-env.nihngkspzc.us-east-1.elasticbeanstalk.com/task/?format=json'
+            const AWS2 = 'http://127.0.0.1:8000/task/?format=json'
             const Heroku2 = 'https://ductv.herokuapp.com/task/'
             fetch(AWS2).then(function (response) {
                 return response.json()
