@@ -61,7 +61,7 @@ padme==1.1.1
 
 pexpect==4.0.1
 
-Pillow==3.1.2
+Pillow==6.2.0
 
 pipenv==2018.5.18
 
