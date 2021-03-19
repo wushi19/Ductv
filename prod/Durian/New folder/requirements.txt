@@ -23,7 +23,7 @@ django-rest-framework==0.1.0
 
 django-user-agents==0.3.2
 
-djangorestframework==3.8.2
+djangorestframework==3.11.2
 
 feedparser==5.1.3
 
