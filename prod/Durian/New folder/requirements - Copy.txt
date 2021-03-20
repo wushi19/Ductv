@@ -41,7 +41,7 @@ httplib2==0.9.1
 
 idna==2.0
 
-Jinja2==2.8
+Jinja2==2.11.3
 
 language-selector==0.1
 
