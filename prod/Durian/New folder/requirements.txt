@@ -81,7 +81,7 @@ ua-parser==0.8.0
 
 ufw==0.35
 
-urllib3==1.23
+urllib3==1.26.5
 user-agents==1.1.0
 
 virtualenv==16.0.0
