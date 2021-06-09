@@ -1,4 +1,4 @@
-pip==18.0
+pip==19.2
 beautifulsoup4==4.4.1
 
 blinker==1.3
