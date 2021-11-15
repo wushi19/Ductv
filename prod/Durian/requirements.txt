@@ -1,4 +1,4 @@
-pip==18.0
+pip==21.1
 
 dj-database-url==0.5.0
 
