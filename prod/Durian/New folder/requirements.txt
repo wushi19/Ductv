@@ -39,7 +39,7 @@ Jinja2==2.8
 
 lxml==3.5.0
 
-Mako==1.0.3
+Mako==1.2.2
 
 MarkupSafe==0.23
 
